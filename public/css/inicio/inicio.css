@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "fuentePrincipal";
+  src: url("/fonts/Expressa-DemiBold.otf") format("opentype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "fuenteSubTitulos";
+  src: url("/fonts/walbaum.otf") format("opentype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "fuenteParrafos";
+  src: url("/fonts/GHEA Zartonk W05 ExtraBold.ttf") format("truetype");
+  font-style: italic;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: "fuentePrincipal";
+}
+
+/*# sourceMappingURL=inicio.css.map */
