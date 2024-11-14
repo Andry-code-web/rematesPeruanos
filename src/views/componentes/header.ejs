@@ -1,0 +1,43 @@
+<header class="navbar">
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="img/logo1.png" alt="">
+            <!-- <span class="logo-icon">🌊</span> -->
+        </div>
+
+        <!-- Enlaces de navegación -->
+        <nav class="nav-links">
+            <a href="#">Inicio</a>
+            <a href="#">Comprar</a>
+            <a href="#">Vender</a>
+            <a href="#">Iniciar sesión</a>
+        </nav>
+
+        <!-- Botón de menú responsive -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
+    </div>
+</header>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobileMenu">
+    <a class="letras" href="#">Inicio</a>
+    <a class="letras" href="#">Comprar</a>
+    <a class="letras" href="#">Vender</a>
+    <a class="letras" href="#">Iniciar sesión</a>
+</div>
+
+<!-- JavaScript directamente en el HTML -->
+<script>
+    document.getElementById('menuToggle').addEventListener('click', function () {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('show');
+    });
+
+    // Cerrar el menú móvil al hacer clic en un enlace
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.remove('show');
+        });
+    });
+</script>

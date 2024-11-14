@@ -1,7 +1,8 @@
 @use 'variables' as *;
 
 *{
-    background-color: $colorprimario;
+  /*  background-color: $colorprimario; */  /* no deja cmabiar de color a mi footer aunque lo oblige a cambiar de color al footer
+    */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
