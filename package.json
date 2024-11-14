@@ -9,15 +9,14 @@
     
     "watch:css": "sass --watch public/styles:public/css",
     
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:header && npm run build:footer && npm run build:botones",
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales",
     
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
     "build:contactos": "sass public/styles/contactos.scss public/css/contactos/contactos.css",
     
-    "build:header": "sass public/styles/partials/header.scss public/css/partials/header/header.css",
-    "build:footer": "sass public/styles/partials/footer.scss public/css/partials/footer/footer.css",
-    "build:botones": "sass public/styles/partials/botones.scss public/css/partials/botones/botones.css",
+    
+    "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",
 
     "dev:server": "nodemon app.js",
     "start": "npm run build:all && node app.js"
