@@ -1,12 +1,221 @@
 @use 'variables' as *;
 
-*{
-    background-color: $colorprimario;
+body,
+html {
+    height: 100%;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: $fuenteParrafos;
+    /* Cambia 'Bellefair' por la fuente que prefieras */
+    overflow-x: hidden;
 }
 
-h1{
+
+
+.banner {
+    height: 100vh;
+    background: rgb(255, 63, 63);
+    background: radial-gradient(circle, rgba(255, 63, 63, 1) 0%, rgba(255, 14, 14, 1) 65%, rgba(208, 0, 0, 1) 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: $colorsecundario;
+    padding: 20px;
+    position: relative;
+    animation: flash 1s ease;
+    /* Duración aumentada para suavizar */
+}
+@keyframes flash {
+    0% {
+        opacity: 0;
+        /* Fondo inicial */
+    }
+    100% {
+        opacity: 1;
+        /* Regresa al fondo original */
+    }
+}
+
+
+
+.titulo,
+.subtitulo,
+.slogan,
+.explore-btn {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+
+
+.titulo {
+    color: $colorsecundario;
+    font-family: $fuenteSecundaria;
+    /* Cambia a Bellefair */
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: 20px;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+
+
+.subtitulo {
+    color: $colorsecundario;
     font-family: $fuentePrincipal;
+    /* Cambia a GHEA Zartonk */
+    font-size: clamp(4rem, 5vw, 2rem);
+    margin-bottom: 30px;
+    animation: fadeInUp 0.6s ease 0.5s forwards;
+}
+
+
+
+.slogan {
+    color: $colorsecundario;
+    font-family: $fuenteSecundaria;
+    /* Cambia a Walbaum */
+    font-size: clamp(1rem, 4vw, 3rem);
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s ease 1s forwards;
+}
+
+
+
+
+.explore-btn {
+    right: 50px;
+    font-family: $fuenteSecundaria;
+    font-size: clamp(1.5rem, 2vw, 1.2rem);
+    font-weight: 800;
+    padding: 10px 25px;
+    background-color: $colorsecundario;
+    color: $colorterciario;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    animation: fadeInUp 1s ease 1.5s forwards;
+}
+
+
+
+.explore-btn:hover {
+    background-color: $colorterciario;
+    transform: scale(1.05);
+    color: $colorsecundario;
+}
+
+
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+@keyframes zoomBackground {
+    from {
+        transform: scale(1.1);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.bg {
+    background-color: $complemento1;
+}
+
+
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    animation: zoomBackground 1.5s ease-out forwards;
+    z-index: -1;
+}
+
+
+
+@media (max-width: 768px) {
+    .banner {
+        background-attachment: scroll;
+    }
+
+    .explore-btn {
+        padding: 10px 20px;
+    }
+}
+
+
+@media (max-height: 500px) {
+    .banner {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.property-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.property-card:hover {
+    transform: scale(1.05);
+}
+
+
+
+.text-small {
+    font-size: 1rem;
+    /* Ajusta el tamaño según prefieras */
+    line-height: 1.75rem;
+}
+
+.font-bold {
+    font-weight: 700;
+    /* Peso de la fuente para texto en negrita */
+}
+
+
+.text-center {
+    text-align: center;
+    /* Centra el texto */
+}
+
+.mb-8 {
+    margin-bottom: 3rem;
+    /* Margen inferior */
+}
+
+
+.aspect-w-16{
+    width: 100%;
+    height: 50%;
 }

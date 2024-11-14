@@ -1,15 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remates Peru || INICIO</title>
 
     <!-- ESTILOS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/inicio/inicio.css">
-
-    <title>Remates Peru || INICIO</title>
 </head>
+
 <body>
-    <h1>Hola mundo</h1>
+    <div class="banner">
+        <h1 class="titulo">Precios de remate</h1>
+        <h2 class="subtitulo">R E M A J U D</h2>
+        <p class="slogan">Invierte en tu futuro hoy</p>
+        <button class="explore-btn">Explorar mas inmuebles</button>
+    </div>
+
+    <div class="bg-gray-100">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="text-small font-bold text-center mb-8">Propiedades Destacadas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- Propiedad 1 -->
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#" class="block relative">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="/img/_3d__miniature__house-removebg-preview.png" alt="Propiedad 1"
+                                class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2">TERRENOS</h3>
+                            <p class="text-gray-600">Click aqui para encontrar mas terrenos</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Propiedad 2 -->
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#" class="block relative">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="/img/Blender_course_for_designers_and_illustrators-removebg-preview.png"
+                                alt="Propiedad 2" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2">Departamentos</h3>
+                            <p class="text-gray-600">Click acá para encontrar mas inmuebles</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Propiedad 3 -->
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#" class="block relative">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="/img/Minimal_house_01-removebg-preview.png" alt="Propiedad 3"
+                                class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2">Casas de dos pisos</h3>
+                            <p class="text-gray-600">Exclusiva propiedad con vistas panorámicas</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Propiedad 4 -->
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#" class="block relative">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="/img/3D_Cartoon_Garage_Low_poly_Game_Ready_3D_model-removebg-preview.png"
+                                alt="Propiedad 4" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2">Cocheras</h3>
+                            <p class="text-gray-600">Explorar mas cocheras</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Propiedad 5 -->
+                <div class="property-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#" class="block relative">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="/img/descarga__1_-removebg-preview.png" alt="Propiedad 5"
+                                class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-2">Casas de campo</h3>
+                            <p class="text-gray-600">Explorar mas casas</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const titulo = document.querySelector(".subtitulo");
+            const texto = titulo.textContent;
+            titulo.innerHTML = "";
+
+            // Agrega un <span> a cada letra
+            texto.split("").forEach((letra, i) => {
+                const span = document.createElement("span");
+                span.textContent = letra;
+                span.style.opacity = 0;
+                span.style.transform = "translateY(20px)";
+                span.style.display = "inline-block";
+                span.style.animation = `fadeInUp 0.9s forwards ${i * 0.1}s`;
+                titulo.appendChild(span);
+            });
+        });
+
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            body.classList.add('flash');
+            setTimeout(() => {
+                body.classList.remove('flash');
+            }, 100); // 50 milisegundos
+        });
+
+    </script>
 </body>
+
 </html>
