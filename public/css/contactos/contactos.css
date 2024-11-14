@@ -1,3 +1,134 @@
+@font-face {
+  font-family: "fuentePrincipal";
+  src: url("/fonts/Expressa-DemiBold.otf") format("opentype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "fuenteSecundaria";
+  src: url("/fonts/font_sang/SangBleuKingdomTrial-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: "fuenteParrafos";
+  src: url("/fonts/GHEA Zartonk W05 ExtraBold.ttf") format("truetype");
+  font-style: italic;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.contenedor_contacto {
+  width: 100%;
+  min-width: 100vh;
+  overflow: hidden;
+  background-color: #fffcfc;
+}
+
+.banner {
+  text-align: center;
+  margin-top: 15rem;
+}
+
+.titulo {
+  font-size: 7em;
+  font-family: "fuenteSecundaria";
+  font-weight: 200;
+}
+
+.mensaje {
+  max-width: 41vw;
+  font-size: 1.3em;
+  padding: 0 5.5555555556vw;
+  margin: 0 auto 2.2222222222vw;
+  font-family: "fuenteSecundaria";
+  font-weight: 100;
+}
+
+.contenedor_boton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* margin-top: 8vw; */
+}
+
+.contenedor_boton a {
+  width: max-content;
+  padding: 0 1em;
+  height: 2.5em;
+  background-color: white;
+  color: #0a0000;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1019607843);
+  border-radius: 2.5em;
+  font-family: "fuenteSecundaria";
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: 1rem;
+  transition: background 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95), color 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95), box-shadow 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95), transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.contenedor_boton a:hover {
+  transform: translateY(2px);
+}
+
+.contenedor_boton a span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* */
+.sliders_casa {
+  width: 100%;
+  height: 100vh;
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub_titulo {
+  text-align: center;
+  font-size: 6.2vw;
+  font-family: "fuenteSecundaria";
+  font-weight: 100;
+  margin-bottom: 3vw;
+}
+
+.contenedor_galeria {
+  width: 90%;
+  min-height: 90%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.div_img {
+  width: 33.33%;
+  height: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.div_img .img {
+  width: 100%;
+  height: 90%;
+  background-color: azure;
+}
+
+.div_img .descripcion {
+  font-size: 1vw;
+  text-align: start;
+}
 
 /*# sourceMappingURL=contactos.css.map */
