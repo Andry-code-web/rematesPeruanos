@@ -1,20 +1,29 @@
-
 <nav class="styles_container_01" role="navigation" style="opacity: 1;">
     <div class="styles_container_02" style="transform: translateX(0px) translateY(0px) translateZ(0px);">
-        <div class="styles_container_03">
-            <button id="menu_toggle" type="button" aria-expanded="false">
+        <div class="styles_container_03" style="position: relative;">
+            <button class="container_buton" id="menu_toggle" type="button" aria-expanded="false">
                 <img class="imagen_boton" src="img/button.png" width="100" height="100" alt="Menu Button">
                 <span class="text_buton">MENU</span>
             </button>
+                <!-- Card visible -->
+                <div id="tablero" class="card">
+                    <div class="barra_busqueda">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for products, stories, ...">
+                    </div>
+                    <div class="main_menu">
+                        <div>Products</div>
+                        <div>Stories</div>
+                        <div>Gift guide</div>
+                    </div>
+                    <div class="sub_menu">
+                        <div>HOME</div>
+                        <div>ABOUT US</div>
+                        <div>STORE LOCATOR</div>
+                        <div>LOGIN</div>
+                        <div>CONTACT</div>
+                    </div>
+                </div>
         </div>
     </div>
 </nav>
-<script>
-    gsap.to('#menu_toggle', {
-boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
-duration: 1,
-repeat: -1,
-yoyo: true
-    });
-    
-

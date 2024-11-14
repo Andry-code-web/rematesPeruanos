@@ -7,10 +7,21 @@
     <!-- ESTILOS -->
     <link rel="stylesheet" href="/css/inicio/inicio.css">
     <link rel="stylesheet" href="/css/globales/globales.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <title>Remates Peru || INICIO</title>
 </head>
 <body>
-    <h1>Hola mundo</h1>
+    <%- include("componentes/btn_menu.ejs") %>  
+    <script src="/js/componentes/script_btn_menu.js"></script>
+    <script src="/public/js/componentes/tablero_btn_menu.js"></script>
+    <script>
+        gsap.to('#menu_toggle', {
+    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
+    duration: 1,
+    repeat: -1,
+    yoyo: true
+        });
+    </script>
 </body>
 </html>
