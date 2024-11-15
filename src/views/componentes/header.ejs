@@ -1,9 +1,9 @@
-<header class="navbar">
+ <!-- Header -->
+ <header class="navbar">
     <div class="container">
         <!-- Logo -->
         <div class="logo">
-            <img src="img/logo1.png" alt="">
-            <!-- <span class="logo-icon">🌊</span> -->
+            <img src="img/logo1.png" alt="Logo">
         </div>
 
         <!-- Enlaces de navegación -->
@@ -39,5 +39,17 @@
         link.addEventListener('click', () => {
             document.getElementById('mobileMenu').classList.remove('show');
         });
+    });
+
+    // Interactividad del header
+    let lastScrollPosition = window.pageYOffset;
+    window.addEventListener('scroll', function () {
+        const currentScrollPosition = window.pageYOffset;
+        if (currentScrollPosition > lastScrollPosition) {
+            document.querySelector('.navbar').classList.add('hidden');
+        } else {
+            document.querySelector('.navbar').classList.remove('hidden');
+        }
+        lastScrollPosition = currentScrollPosition;
     });
 </script>
