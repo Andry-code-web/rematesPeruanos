@@ -37,10 +37,14 @@
   line-height: 2;
 }
 
+.footer-list{
+  font-size: 1.5rem;
+}
+
 /* Alineación de elementos del footer */
 .footer-content {
   display: grid;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .footer-content{
@@ -60,9 +64,9 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-top: 1px solid #333333; 
+/*   border-top: 1px solid #333333;  */
   padding-top: 1rem;
-  margin-top: 2rem;
+  margin-top: 12rem;
   margin-right: 2%;
 }
 
@@ -74,11 +78,15 @@
 }
 
 .policy-links{
+  font-size: 1rem;
+}
+
+.policy-links{
   column-gap: 3rem;
 }
 
 .policy-links a {
-  color: #00665e;
+  color: #00665ea6;
   text-decoration: none;
   transition: color 0.3s ease;
 }
@@ -114,6 +122,7 @@
 
 
 /* jeff header */
+
 
 /* Navbar */
 .navbar {
