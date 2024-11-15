@@ -10,7 +10,6 @@
 @font-face {
   font-family: "fuenteParrafos";
   src: url("/fonts/GHEA Zartonk W05 ExtraBold.ttf") format("truetype");
-  font-style: italic;
 }
 * {
   background-color: #d00000;
