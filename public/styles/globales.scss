@@ -43,11 +43,15 @@
   gap: 2rem;
 }
 
+.footer-content{
+  margin-right: 50%;
+}
+
 /* Contenedor del footer */
 .container_footer {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 35px;
 }
 
 /* Sección de política */
@@ -56,9 +60,10 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-top: 1px solid #333333;
+  border-top: 1px solid #333333; 
   padding-top: 1rem;
   margin-top: 2rem;
+  margin-right: 2%;
 }
 
 /* Política de links */
@@ -66,6 +71,10 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.policy-links{
+  column-gap: 3rem;
 }
 
 .policy-links a {
@@ -79,20 +88,12 @@
 }
 
 /* Redes sociales */
+
 .social-media {
   display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.social-media a {
-  margin: 0 10px;
-}
-
-.social-media img {
-  width: 20px;
-  height: 20px;
-}
+  column-gap: 30%;
+  margin-left: 1.5%;
+} 
 
 /* Responsivo para pantallas grandes */
 @media (min-width: 768px) {
@@ -119,7 +120,7 @@
   background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   padding: 15px 20px;
-  transition: opacity 0.3s ease;
+  transition: opacity 2s ease;
 }
 
 .navbar.hidden {
@@ -156,7 +157,7 @@ a {
 
 .logo-icon {
   font-size: 28px;
-  color: #4f46e5;
+  color: #00665e;
 }
 
 /* Links de navegación */
@@ -188,7 +189,7 @@ a {
 }
 
 .menu-toggle:hover {
-  color: #4f46e5;
+  color: #00665e;
 }
 
 /* Menú móvil */
@@ -213,7 +214,7 @@ a {
 }
 
 .mobile-menu a:hover {
-  color: #4f46e5;
+  color: #00665e;
 }
 
 /* Estilos para dispositivos móviles */
