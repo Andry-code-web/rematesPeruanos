@@ -1,5 +1,6 @@
 const button = document.getElementById('menu_toggle');
 const tablero = document.getElementById('tablero');
+const closeButton = document.getElementById('close_button'); // Botón de cierre flotante
 const textButton = button.querySelector('.text_buton');
 
 let isTableroVisible = false;
@@ -51,6 +52,8 @@ button.addEventListener('click', function () {
 
     if (isTableroVisible) {
         positionTablero();
+    } else {
+        closeButton.style.display = 'none'; // Oculta el botón de cierre cuando se cierra el tablero
     }
 });
 
@@ -97,4 +100,31 @@ document.addEventListener('mouseup', () => {
         button.style.left = closestPosition.left + 'px';
         button.style.top = closestPosition.top + 'px';
     }
+});
+
+// Mostrar el botón de cierre flotante cuando el mouse esté fuera del tablero
+document.addEventListener('mousemove', (e) => {
+    if (isTableroVisible) {
+        const tableroRect = tablero.getBoundingClientRect();
+        if (
+            e.clientX < tableroRect.left || 
+            e.clientX > tableroRect.right || 
+            e.clientY < tableroRect.top || 
+            e.clientY > tableroRect.bottom
+        ) {
+            closeButton.style.display = 'block';
+            closeButton.style.left = e.clientX + 'px';
+            closeButton.style.top = e.clientY + 'px';
+        } else {
+            closeButton.style.display = 'none';
+        }
+    }
+});
+
+// Cerrar el tablero cuando el botón de cierre flotante sea clickeado
+closeButton.addEventListener('click', () => {
+    isTableroVisible = false;
+    tablero.style.display = 'none';
+    textButton.textContent = 'MENU';
+    closeButton.style.display = 'none'; // Ocultar el botón de cierre flotante después de cerrar el tablero
 });
