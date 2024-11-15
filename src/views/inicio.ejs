@@ -26,10 +26,12 @@
 
     <!-- banner remajud -->
     <div class="banner">
+        <div class=""></div>
         <h1 class="titulo">Precios de remate</h1>
-        <h2 class="subtitulo">S U B A S T A S I N M O B I L I A R I A S</h2>
+        <h2 class="subtitulo">Subastas inmobiliarias</h2>
         <p class="slogan">Invierte en tu futuro hoy</p>
-        <button class="explore-btn">Explorar mas inmuebles</button>
+        <button class="explore-btn">Explorar mas inmuebles</button> 
+       
     </div>
 
     <div class="container">
@@ -190,27 +192,6 @@
         });
     </script>
 
-    <!-- spam letra por letra subtitulo -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const titulo = document.querySelector(".subtitulo");
-            const texto = titulo.textContent;
-            titulo.innerHTML = "";
-
-            // Agrega un <span> a cada letra
-            texto.split("").forEach((letra, i) => {
-                const span = document.createElement("span");
-                span.textContent = letra;
-                span.style.opacity = 0;
-                span.style.transform = "translateY(20px)";
-                span.style.display = "inline-block";
-                span.style.animation = `fadeInUp 0.9s forwards ${i * 0.1}s`;
-                titulo.appendChild(span);
-            });
-        });
-
-    </script>
-
     <!-- flash al cargar la pagina  -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -222,42 +203,7 @@
         });
 
     </script>
-    <!-- transicion de letra por letra y imagen de la seccion  -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const elementos = document.querySelectorAll("h2, p");  // Seleccionamos h2 y p
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const texto = entry.target.textContent;
-                        entry.target.innerHTML = "";  // Limpiar el contenido para agregar los spans
-
-                        // Dividir el texto en letras y agregar un <span> para cada una
-                        texto.split("").forEach((letra, i) => {
-                            const span = document.createElement("span");
-                            span.textContent = letra;
-                            span.style.opacity = 0;
-                            span.style.transform = "translateY(20px)";
-                            span.style.animation = `fadeInUp 0.3s forwards ${i * 0.05}s`;  // Animación rápida
-                            entry.target.appendChild(span);
-                        });
-
-                        entry.target.classList.add("visible");  // Añadimos la clase visible
-                        observer.unobserve(entry.target);  // Deja de observar el elemento una vez que se ha animado
-                    }
-                });
-            }, {
-                threshold: 0.1  // Detectar cuando el 10% del elemento sea visible
-            });
-
-            // Observamos cada h2 y p
-            elementos.forEach(elemento => {
-                observer.observe(elemento);
-            });
-        });
-
-    </script>
 
 </body>
 

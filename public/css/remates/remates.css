@@ -4,14 +4,12 @@
   font-weight: normal;
 }
 @font-face {
-  font-family: "fuenteSubTitulos";
-  src: url("/fonts/walbaum.otf") format("opentype");
-  font-weight: bold;
+  font-family: "fuenteSecundaria";
+  src: url("/fonts/font_sang/SangBleuKingdomTrial-Light.otf") format("opentype");
 }
 @font-face {
   font-family: "fuenteParrafos";
   src: url("/fonts/GHEA Zartonk W05 ExtraBold.ttf") format("truetype");
-  font-style: italic;
 }
 * {
   background-color: #d00000;
