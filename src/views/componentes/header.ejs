@@ -1,5 +1,4 @@
- <!-- Header -->
- <header class="navbar">
+<header class="navbar">
     <div class="container">
         <!-- Logo -->
         <div class="logo">
@@ -27,7 +26,6 @@
     <a class="letras" href="#">Iniciar sesión</a>
 </div>
 
-<!-- JavaScript directamente en el HTML -->
 <script>
     document.getElementById('menuToggle').addEventListener('click', function () {
         const mobileMenu = document.getElementById('mobileMenu');
@@ -41,17 +39,18 @@
         });
     });
 
-    // Interactividad del header
+    let lastScrollPosition = 0;
+    const navbar = document.querySelector('.navbar');
 
-    
-     let lastScrollPosition = window.pageYOffset;
     window.addEventListener('scroll', function () {
         const currentScrollPosition = window.pageYOffset;
+
         if (currentScrollPosition > lastScrollPosition) {
-            document.querySelector('.navbar').classList.add('hidden');
+            navbar.classList.add('hidden');
         } else {
-            document.querySelector('.navbar').classList.remove('hidden');
+            navbar.classList.remove('hidden');
         }
+
         lastScrollPosition = currentScrollPosition;
-    }); 
+    });
 </script>
