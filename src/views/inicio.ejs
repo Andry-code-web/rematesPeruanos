@@ -4,207 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remates Peru || INICIO</title>
 
-    <!-- ESTILOS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ESTILOS DE INICIO-->
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- ESTILOS DE INICIO-->
+
     <link rel="stylesheet" href="/css/inicio/inicio.css">
+
+    <title>Remates Peru || INICIO</title>
 </head>
 
 <body>
-
-    <!-- Loader superpuesto -->
-    <div class="loader" id="loader">
-        <span style="--i: 0">R</span>
-        <span style="--i: 1">E</span>
-        <span style="--i: 2">M</span>
-        <span style="--i: 3">A</span>
-        <span style="--i: 4">J</span>
-        <span style="--i: 5">U</span>
-        <span style="--i: 6">D</span>
+    <!-- Cargador -->
+    <div class="cargador">
+        <span class="cargador__letra">R</span>
+        <span class="cargador__letra">E</span>
+        <span class="cargador__letra">M</span>
+        <span class="cargador__letra">A</span>
+        <span class="cargador__letra">J</span>
+        <span class="cargador__letra">U</span>
+        <span class="cargador__letra">D</span>
     </div>
 
-    <!-- banner remajud -->
-    <div class="banner">
-        <div class=""></div>
-        <h1 class="titulo">Precios de remate</h1>
-        <h2 class="subtitulo">Subastas inmobiliarias</h2>
-        <p class="slogan">Invierte en tu futuro hoy</p>
-        <button class="explore-btn">Explorar mas inmuebles</button> 
-       
-    </div>
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner__contenido">
+            <h1 class="banner__titulo">Precios de remate</h1>
+            <h2 class="banner__subtitulo">Subastas inmobiliarias</h2>
+            <button class="banner__boton">Explorar más inmuebles</button>
+        </div>
+        <div class="banner__imagen-container">
+            <img src="/img/_3d__miniature__house-removebg-preview.png" alt="Casa en subasta" class="banner__imagen">
+        </div>
+    </section>
 
-    <div class="container">
-        <h2 class="section-title">Propiedades Destacadas</h2>
-        <div class="property-grid">
-            <!-- Propiedad 1 -->
-            <div class="property-card">
-                <a href="#" class="property-link">
-                    <div class="image-container">
-                        <img src="/img/Vende-se_terreno_vazio___Vetor_Premium-removebg-preview.png " alt="Propiedad 1"
-                            class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">TERRENOS</h3>
-                        <!-- <p class="property-description">Click aquí para encontrar más terrenos</p> -->
-                    </div>
-                </a>
-            </div>
-
-            <!-- Propiedad 2 -->
-            <div class="property-card">
-                <a href="#" class="property-link">
-                    <div class="image-container">
-                        <img src="/img/Blender_course_for_designers_and_illustrators-removebg-preview.png"
-                            alt="Propiedad 2" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">Departamentos</h3>
-                        <!-- <p class="property-description">Click acá para encontrar más inmuebles</p> -->
-                    </div>
-                </a>
-            </div>
-
-            <!-- Propiedad 3 -->
-            <div class="property-card">
-                <a href="#" class="property-link">
-                    <div class="image-container">
-                        <img src="/img/Minimal_house_01-removebg-preview.png" alt="Propiedad 3" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">Casas de dos pisos</h3>
-                        <!-- <p class="property-description">Exclusiva propiedad con vistas panorámicas</p> -->
-                    </div>
-                </a>
-            </div>
-
-            <!-- Propiedad 4 -->
-            <div class="property-card">
-                <a href="#" class="property-link">
-                    <div class="image-container">
-                        <img src="/img/3D_Cartoon_Garage_Low_poly_Game_Ready_3D_model-removebg-preview.png"
-                            alt="Propiedad 4" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">Cocheras</h3>
-                        <!--  <p class="property-description">Explorar más cocheras</p> -->
-                    </div>
-                </a>
-            </div>
-
-            <!-- Propiedad 5 -->
-            <div class="property-card">
-                <a href="#" class="property-link">
-                    <div class="image-container">
-                        <img src="/img/descarga__1_-removebg-preview.png" alt="Propiedad 5" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3 class="property-title">Casas de campo</h3>
-                        <!--  <p class="property-description">Explorar más casas</p> -->
-                    </div>
-                </a>
-            </div>
+    <!-- Cuadros de subastas -->
+    <h2 class="section-title">Propiedades Destacadas</h2>
+    <div class="cuadricula-subastas">
+        <div class="item-subasta">
+            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 1">
+            <h3 class="item-subasta__titulo">Subasta 1</h3>
+        </div>
+        <div class="item-subasta">
+            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 2">
+            <h3 class="item-subasta__titulo">Subasta 2</h3>
+        </div>
+        <div class="item-subasta">
+            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 3">
+            <h3 class="item-subasta__titulo">Subasta 3</h3>
+        </div>
+        <div class="item-subasta">
+            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 4">
+            <h3 class="item-subasta__titulo">Subasta 4</h3>
+        </div>
+        <div class="item-subasta">
+            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 5">
+            <h3 class="item-subasta__titulo">Subasta 5</h3>
         </div>
     </div>
 
-    <!-- cuadros con  texto a los lados  -->
+    <!-- Secciones de información -->
+    <section class="seccion-info">
+        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
+        <div class="seccion-info__texto">
+            <h3 class="seccion-info__titulo">Título pequeño</h3>
+            <h4 class="seccion-info__subtitulo">Subtítulo grande</h4>
+            <p class="seccion-info__parrafo">Una pequeña oración informativa.</p>
+        </div>
+    </section>
 
+    <section class="seccion-info">
+        <div class="seccion-info__texto">
+            <h3 class="seccion-info__titulo">Otro título pequeño</h3>
+            <h4 class="seccion-info__subtitulo">Otro subtítulo grande</h4>
+            <p class="seccion-info__parrafo">Otra pequeña oración informativa.</p>
+        </div>
+        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
+    </section>
 
-    <main class="contenedor-principal">
-        <section class="seccion-contenido">
-            <div class="contenedor-imagen">
-                <img src="/img/casa1.jpg" alt="" class="imagen-seccion" width="600" height="600">
+    <!-- Sección de imagen completa -->
+    <section class="seccion-imagen-completa" style="background-image: url('/img/fondo_negro_brillo.jpg');">
+        <div class="seccion-imagen-completa__contenido">
+            <h3 class="seccion-imagen-completa__titulo">Mini título</h3>
+            <h4 class="seccion-imagen-completa__subtitulo">Subtítulo grande</h4>
+            <p class="seccion-imagen-completa__parrafo">Subtítulo algo pequeño</p>
+            <button class="seccion-imagen-completa__boton">Explorar más subastas</button>
+        </div>
+    </section>
 
-            </div>
-            <div class="contenedor-texto">
-                <h2>Título 1</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit totam porro minus reiciendis, ducimus
-                    nulla, rem qui, rerum illum facilis suscipit maiores ullam! Illo corrupti nesciunt expedita. Sunt,
-                    facere nulla.</p>
-            </div>
-        </section>
-
-        <section class="seccion-contenido">
-            <div class="contenedor-imagen">
-                <img src="/img/casa2.jpg" alt="Imagen 2" class="imagen-seccion" width="600" height="600">
-            </div>
-            <div class="contenedor-texto">
-                <h2>Título 2</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit cumque repellat quibusdam earum,
-                    nostrum nulla dolorum iusto at, quis impedit provident odit omnis alias ratione, aut cupiditate
-                    pariatur. Harum, quae?</p>
-            </div>
-        </section>
-
-        <section class="seccion-contenido">
-            <div class="contenedor-imagen">
-                <img src="/img/casa3.jpg" alt="Imagen 2" class="imagen-seccion" width="600" height="600">
-            </div>
-            <div class="contenedor-texto">
-                <h2>Título 3</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, quibusdam. Accusamus eius
-                    recusandae distinctio provident omnis quidem repudiandae voluptates ullam officiis, ut hic,
-                    doloribus dicta consequatur odio veniam iste eligendi!</p>
-            </div>
-        </section>
-
-        <section> <!-- /placeholder.svg?height=600&width=1200" -->
-            <img src="/img/fondo_negro_brillo.jpg" alt="Imagen 2" class="imagen-seccion" width="1200" height="600">
-
-        </section>
-
-        <section class="seccion-contenido">
-            <div class="contenedor-imagen">
-                <img src="/img/casa4.jpeg" alt="Imagen 2" class="imagen-seccion" width="600" height="600">
-            </div>
-            <div class="contenedor-texto">
-                <h2>Título 4</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptate voluptatum reiciendis
-                    totam, quod ab in soluta fugit dicta nostrum et saepe quae nihil, tenetur harum eaque quaerat quia
-                    distinctio.</p>
-            </div>
-        </section>
-
-        <section class="seccion-contenido">
-            <div class="contenedor-imagen">
-                <img src="/img/Inmobiliaria-La-venta-de-Inmuebles-4.0.jpg" alt="Imagen 2" class="imagen-seccion"
-                    width="600" height="600">
-            </div>
-            <div class="contenedor-texto">
-                <h2>Título 5</h2>
-                <p>Descripción de la imagen 5. Este es el último ejemplo de la alternancia entre imagen y texto.</p>
-            </div>
-        </section>
-    </main>
-
-
-    <!--loader al cargar la pagina solo por dos segundos  -->
-
-    <script>
-        // Ocultar el loader después de 2 segundos
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.display = 'none';
-                // Eliminar el desenfoque del banner
-                document.getElementById('banner').classList.remove('blurred');
-            }, 1500); //LOGICA PARA LOS TIEMPO : 1000ms = 1 segundos
-        });
-    </script>
-
-    <!-- flash al cargar la pagina  -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const body = document.body;
-            body.classList.add('flash');
-            setTimeout(() => {
-                body.classList.remove('flash');
-            }, 100); // 50 milisegundos
-        });
-
-    </script>
-
-
+    <!-- Última sección de información -->
+    <section class="seccion-info">
+        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
+        <div class="seccion-info__texto">
+            <h3 class="seccion-info__titulo">Último título pequeño</h3>
+            <h4 class="seccion-info__subtitulo">Último subtítulo grande</h4>
+            <p class="seccion-info__parrafo">Última pequeña oración informativa.</p>
+        </div>
+    </section>
 </body>
 
 </html>

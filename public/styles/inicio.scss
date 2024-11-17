@@ -1,72 +1,64 @@
 @use 'variables' as *;
 
+/* Estilos generales */
 body,
 html {
-    height: 100%;
     margin: 0;
+    padding: 0;
     font-family: $fuenteParrafos;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
+   /*  background-color: #2a0202; */
 }
 
-/* Loader superpuesto */
-
-.loader {
-    /* Más espacio entre las letras */
-    letter-spacing: 0.2em;
+/* Cargador */
+.cargador {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(29, 0, 0, 0.937);
-    /* Fondo semitransparente */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 4rem;
-    font-family: $fuentePrincipal;
     color: $colorsecundario;
     z-index: 1000;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    /* Compatibilidad con Safari */
+    animation: desaparecer 1s forwards;
+    animation-delay: 1.2s;
 }
 
-
-.loader span {
+.cargador__letra {
     display: inline-block;
-    animation: bounce 1s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.1s);
-    /* Retraso escalonado */
+    animation: rebotar 1s ease-in-out infinite;
     letter-spacing: 0.2em;
-    /* Ajusta el espaciado entre las letras */
 }
 
-/* Animación de rebote */
-
-@keyframes bounce {
+@keyframes rebotar {
 
     0%,
     100% {
         transform: scale(1);
-        /* Tamaño normal */
     }
 
     50% {
         transform: scale(1.3);
-        /* Escala mayor */
     }
 }
 
+@keyframes desaparecer {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
 
-//banner:
-
+/* Banner */
 .banner {
     height: 100vh;
     background: radial-gradient(circle, rgba(255, 63, 63, 1) 0%, rgba(255, 14, 14, 1) 65%, rgba(208, 0, 0, 1) 100%);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,13 +67,11 @@ html {
     color: $colorsecundario;
     padding: 20px;
     position: relative;
-    animation: flash 1s ease;
-    transition: filter 0.5s ease;
+    animation: destello 1s ease;
+    overflow: hidden;
 }
 
-//animación
-
-@keyframes flash {
+@keyframes destello {
     from {
         opacity: 0;
     }
@@ -89,192 +79,6 @@ html {
     to {
         opacity: 1;
     }
-}
-/* Estilo para la imagen de fondo */
-.bannercasa {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/img/casaroja.png');
-    background-size: 40%;  /* Tamaño de la imagen */
-    background-position: center;
-    background-repeat: no-repeat;  /* Evita que se repita */
-    background-attachment: fixed;
-    z-index: -1;  /* Coloca la imagen al fondo */
-}
-
-.titulo,
-.subtitulo,
-.slogan,
-.explore-btn {
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-
-//estilos para cada parte de : 
-
-
-.titulo {
-    color: $colorsecundario;
-    font-family: $fuenteParrafos;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    margin-bottom: 20px;
-    animation: fadeInUp 0.5s ease forwards;
-}
-
-
-.subtitulo {
-    color: $colorsecundario;
-    font-family: $fuenteSecundaria;
-    font-size: clamp(4rem, 5vw, 2rem);
-    margin-bottom: 30px;
-    letter-spacing: .01em;
-    /* Ajusta el valor según tu preferencia */
-    animation: fadeInUp 0.6s ease 0.5s forwards;
-}
-
-.slogan {
-    color: $colorsecundario;
-    font-family: $fuenteParrafos;
-    font-size: clamp(1rem, 4vw, 3rem);
-    margin-bottom: 40px;
-    animation: fadeInUp 0.5s ease 1s forwards;
-}
-
-.explore-btn {
-    font-family: $fuenteParrafos;
-    font-size: clamp(1.5rem, 2vw, 1.2rem);
-    font-weight: 800;
-    padding: 10px 25px;
-    background-color: $colorsecundario;
-    color: $colorterciario;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: background-color 0.5s ease, transform 0.5s ease;
-    animation: fadeInUp 1s ease 1.5s forwards;
-
-    &:hover {
-        background-color: $colorterciario;
-        transform: scale(1.05);
-        color: $colorsecundario;
-    }
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes zoomBackground {
-    from {
-        transform: scale(1.1);
-    }
-
-    to {
-        transform: scale(1);
-    }
-}
-
-.bg {
-    background-color: $complemento1;
-}
-
-.banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    animation: zoomBackground 1.5s ease-out forwards;
-    z-index: -1;
-}
-
-.property-image {
-    width: 100;
-    height: 140;
-    /* ancho: 100;
-    altura: 100; */
-}
-
-.contenedor-principal {
-    width: 100%;
-}
-
-.seccion-contenido {
-    display: flex;
-    min-height: 100vh;
-    width: 100vw;
-
-    &:nth-child(even) {
-        flex-direction: row-reverse;
-    }
-}
-
-.contenedor-imagen,
-.contenedor-texto {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    width: 50vw;
-    height: 100vh;
-}
-
-.imagen-seccion,
-.imagen-completa {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.imagen-completa {
-    width: 100vw;
-}
-
-h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-p {
-    font-size: 1.2rem;
-}
-
-.text-small {
-    font-size: 1rem;
-    line-height: 1.75rem;
-}
-
-.font-bold {
-    font-weight: 700;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.mb-8 {
-    margin-bottom: 3rem;
-}
-
-.aspect-w-16 {
-    width: 100%;
-    height: 50%;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px;
-    background-color: #f7f7f7;
 }
 
 .section-title {
@@ -284,92 +88,315 @@ p {
     margin-bottom: 32px;
 }
 
-.property-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
+.banner__contenido {
+    position: relative;
+    z-index: 2;
 }
 
-.property-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
+.banner__titulo {
+    color: $colorsecundario;
+    font-family: $fuentePrincipal;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: 20px;
+    animation: caerDesdeArriba 1s ease forwards;
+}
+
+.banner__subtitulo {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: $colorsecundario;
+    font-family: $fuenteSecundaria;
+    margin-bottom: 30px;
+    animation: caerDesdeArriba 1s ease 0.2s forwards;
+}
+
+.banner__slogan {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    animation: caerDesdeArriba 1s ease 0.3s forwards;
+}
+
+.banner__boton {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: $colorsecundario;
+    color: $colorprimario;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    animation: caerDesdeArriba 1s ease 0.4s forwards;
 
     &:hover {
-        transform: translateY(-4px);
+        background-color: $colorterciario;
+        transform: scale(1.05);
+        color: $colorsecundario;
     }
 }
 
-.property-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-}
 
-@media (max-width: 768px) {
-    .banner {
-        background-attachment: scroll;
+@keyframes caerDesdeArriba {
+    from {
+        transform: translateY(-100vh);
+        opacity: 0;
     }
 
-    .explore-btn {
-        padding: 10px 20px;
-    }
-
-    .seccion-contenido {
-        flex-direction: column;
-        height: auto;
-
-        &:nth-child(even) {
-            flex-direction: column;
-        }
-    }
-
-    .contenedor-imagen,
-    .contenedor-texto {
-        width: 100vw;
-        height: 50vh;
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-@media (max-height: 500px) {
-    .banner {
-        height: auto;
-        min-height: 100vh;
-    }
+.banner__imagen-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
-//transicion de letra y imagen 
-/* 
+.banner__imagen {
+    max-width: 300px;
+    height: auto;
+    animation: aparecerYBrillar 2s ease-in-out forwards;
+    opacity: 0;
+}
 
-
-@keyframes fadeInUp {
+@keyframes aparecerYBrillar {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        filter: brightness(100%);
+    }
+
+    50% {
+        opacity: 0.7;
+        filter: brightness(150%);
     }
 
     100% {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 0.5;
+        filter: brightness(120%);
     }
 }
 
-h2 span,
-p span {
-    display: inline-block;
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .banner__titulo {
+        font-size: 1.2em;
+    }
+
+    .banner__subtitulo {
+        font-size: 2em;
+    }
+
+    .banner__imagen {
+        max-width: 200px;
+    }
+}
+
+/* Cuadros de subastas */
+.cuadricula-subastas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.item-subasta {
+    background-color: $colorsecundario;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: aparecer 1s ease forwards;
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s forwards;
 }
 
-h2 span:nth-child(odd),
-p span:nth-child(odd) {
-    animation-delay: 0.2s;
+.item-subasta:hover {
+    transform: scale(1.05);
 }
 
-h2 span:nth-child(even),
-p span:nth-child(even) {
-    animation-delay: 0.4s;
-} */
+.item-subasta__imagen {
+    max-width: 100%;
+    height: auto;
+}
+
+.item-subasta__titulo {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Secciones de información */
+.seccion-info {
+    display: flex;
+    min-height: 50vh;
+}
+
+.seccion-info__imagen {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+}
+
+.seccion-info__texto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background-color: $colorsecundario;
+    animation: deslizarDesdeIzquierda 1s ease forwards;
+    opacity: 0;
+}
+
+.seccion-info__titulo {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.seccion-info__subtitulo {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.seccion-info__parrafo {
+    font-size: 1.2em;
+}
+
+@keyframes deslizarDesdeIzquierda {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Sección de imagen completa */
+.seccion-imagen-completa {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $colorsecundario;
+    text-align: center;
+    padding: 20px;
+}
+
+.seccion-imagen-completa__contenido {
+    /* background-color: $colorterciario; */
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.seccion-imagen-completa__titulo {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.seccion-imagen-completa__subtitulo {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.seccion-imagen-completa__parrafo {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.seccion-imagen-completa__boton {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: $colorsecundario;
+    color: $colorterciario;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $colorterciario;
+        transform: scale(1.05);
+        color: $colorsecundario;
+    }
+
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .banner__titulo {
+        font-size: 1.5em;
+    }
+
+    .banner__subtitulo {
+        font-size: 2.5em;
+    }
+
+    .seccion-info {
+        flex-direction: column;
+    }
+
+    .seccion-info__imagen,
+    .seccion-info__texto {
+        width: 100%;
+    }
+
+    .seccion-info__imagen {
+        height: 300px;
+    }
+
+    .seccion-info__texto {
+        padding: 20px;
+    }
+
+    .seccion-info__titulo {
+        font-size: 1.2em;
+    }
+
+    .seccion-info__subtitulo {
+        font-size: 2em;
+    }
+
+    .seccion-info__parrafo {
+        font-size: 1em;
+    }
+
+    .seccion-imagen-completa__titulo {
+        font-size: 1.2em;
+    }
+
+    .seccion-imagen-completa__subtitulo {
+        font-size: 2em;
+    }
+
+    .seccion-imagen-completa__parrafo {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner__titulo {
+        font-size: 1.2em;
+    }
+
+    .banner__subtitulo {
+        font-size: 2em;
+    }
+
+    .cuadricula-subastas {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-imagen-completa__contenido {
+        padding: 20px;
+    }
+}
