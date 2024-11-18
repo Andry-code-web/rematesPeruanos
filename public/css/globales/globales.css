@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "fuentePrincipal";
   src: url("/fonts/Expressa-DemiBold.otf") format("opentype");
@@ -12,6 +13,112 @@
   src: url("/fonts/GHEA Zartonk W05 ExtraBold.ttf") format("truetype");
 }
 /* HEADER */
+/* Navbar */
+.navbar {
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+/* Enlaces */
+a.letras {
+  font-family: "fuentePrincipal";
+}
+
+a {
+  font-size: 165%;
+}
+
+/* Contenedor */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-icon {
+  font-size: 28px;
+  color: #00665e;
+}
+
+.titulo_logo {
+  font-family: "fuentePrincipal";
+  font-size: 2.8rem;
+}
+
+.iconos_header {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Botón del menú */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111827;
+  transition: color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  color: #00665e;
+}
+
+/* Menú móvil */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 15px 20px;
+}
+
+.mobile-menu.show {
+  display: flex;
+}
+
+.mobile-menu a {
+  padding: 10px 0;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: #00665e;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .mobile-menu.show {
+    display: flex;
+  }
+}
 /* BOTON MENU */
 /* FOOTER */
 footer {

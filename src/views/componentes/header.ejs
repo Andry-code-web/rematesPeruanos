@@ -1,16 +1,17 @@
-<header class="navbar">
+<header id="header" class="navbar">
     <div class="container">
         <!-- Logo -->
         <div class="logo">
-            <img src="img/logo1.png" alt="Logo">
+            <h1 class="titulo_logo">remajud</h1>
         </div>
 
         <!-- Enlaces de navegación -->
-        <nav class="nav-links">
-            <a href="#">Inicio</a>
-            <a href="#">Comprar</a>
-            <a href="#">Vender</a>
-            <a href="#">Iniciar sesión</a>
+        <nav class="nav-links ">
+            <div class="iconos_header" style="font-size: 2rem;">
+                <i class="ri-home-line"></i>
+                <i class="ri-book-shelf-line"></i>
+                <i class="ri-customer-service-2-line"></i>
+            </div>
         </nav>
 
         <!-- Botón de menú responsive -->
@@ -20,10 +21,9 @@
 
 <!-- Menú móvil -->
 <div class="mobile-menu" id="mobileMenu">
-    <a class="letras" href="#">Inicio</a>
-    <a class="letras" href="#">Comprar</a>
-    <a class="letras" href="#">Vender</a>
-    <a class="letras" href="#">Iniciar sesión</a>
+    <i class="ri-home-line"></i>
+    <i class="ri-book-shelf-line"></i>
+    <i class="ri-customer-service-2-line"></i>
 </div>
 
 <script>
@@ -53,4 +53,5 @@
 
         lastScrollPosition = currentScrollPosition;
     });
+
 </script>
