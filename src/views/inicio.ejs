@@ -17,28 +17,20 @@
 </head>
 
 <body>
-    <!-- Cargador -->
-    <div class="cargador">
-        <span class="cargador__letra">R</span>
-        <span class="cargador__letra">E</span>
-        <span class="cargador__letra">M</span>
-        <span class="cargador__letra">A</span>
-        <span class="cargador__letra">J</span>
-        <span class="cargador__letra">U</span>
-        <span class="cargador__letra">D</span>
-    </div>
-
     <!-- Banner -->
     <section class="banner">
-        <div class="banner__contenido">
-            <h1 class="banner__titulo">Precios de remate</h1>
-            <h2 class="banner__subtitulo">Subastas inmobiliarias</h2>
+        <div class="contenedor-banner-contenido">
+            <div class="banner__contenido">
+                <h1 class="banner__titulo">Precios de remate</h1>
+                <h2 class="banner__subtitulo">Remates inmobiliarios a nivel nacional</h2>
+            </div>
             <button class="banner__boton">Explorar más inmuebles</button>
-        </div>
-        <div class="banner__imagen-container">
-            <img src="/img/_3d__miniature__house-removebg-preview.png" alt="Casa en subasta" class="banner__imagen">
+            <div class="banner__imagen-container">
+                <img src="/img/Comedor_6_Personas_Rectangular.png" alt="Casa en subasta" class="banner__imagen">
+            </div>
         </div>
     </section>
+
 
     <!-- Cuadros de subastas -->
     <h2 class="section-title">Propiedades Destacadas</h2>
@@ -64,45 +56,13 @@
             <h3 class="item-subasta__titulo">Subasta 5</h3>
         </div>
     </div>
-
-    <!-- Secciones de información -->
-    <section class="seccion-info">
-        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
-        <div class="seccion-info__texto">
-            <h3 class="seccion-info__titulo">Título pequeño</h3>
-            <h4 class="seccion-info__subtitulo">Subtítulo grande</h4>
-            <p class="seccion-info__parrafo">Una pequeña oración informativa.</p>
-        </div>
     </section>
-
-    <section class="seccion-info">
-        <div class="seccion-info__texto">
-            <h3 class="seccion-info__titulo">Otro título pequeño</h3>
-            <h4 class="seccion-info__subtitulo">Otro subtítulo grande</h4>
-            <p class="seccion-info__parrafo">Otra pequeña oración informativa.</p>
-        </div>
-        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
-    </section>
-
-    <!-- Sección de imagen completa -->
-    <section class="seccion-imagen-completa" style="background-image: url('/img/fondo_negro_brillo.jpg');">
-        <div class="seccion-imagen-completa__contenido">
-            <h3 class="seccion-imagen-completa__titulo">Mini título</h3>
-            <h4 class="seccion-imagen-completa__subtitulo">Subtítulo grande</h4>
-            <p class="seccion-imagen-completa__parrafo">Subtítulo algo pequeño</p>
-            <button class="seccion-imagen-completa__boton">Explorar más subastas</button>
-        </div>
-    </section>
-
-    <!-- Última sección de información -->
-    <section class="seccion-info">
-        <div class="seccion-info__imagen" style="background-image: url('/img/_3d__miniature__house-removebg-preview.png');"></div>
-        <div class="seccion-info__texto">
-            <h3 class="seccion-info__titulo">Último título pequeño</h3>
-            <h4 class="seccion-info__subtitulo">Último subtítulo grande</h4>
-            <p class="seccion-info__parrafo">Última pequeña oración informativa.</p>
-        </div>
-    </section>
+    <script>
+        history.scrollRestoration = "manual";
+        window.onload = function () {
+            window.scrollTo(0, 0);
+        };
+    </script>
 </body>
 
 </html>
