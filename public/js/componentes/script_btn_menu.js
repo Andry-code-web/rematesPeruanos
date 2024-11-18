@@ -1,130 +1,184 @@
-const button = document.getElementById('menu_toggle');
-const tablero = document.getElementById('tablero');
-const closeButton = document.getElementById('close_button'); // Botón de cierre flotante
-const textButton = button.querySelector('.text_buton');
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener los elementos del DOM
+    const button = document.getElementById('menu_toggle');
+    const tablero = document.getElementById('tablero');
+    const textButton = button.querySelector('.text_buton');
+    const tableroTitulo = document.getElementById('tablero_titulo'); // Título del tablero
+    const flechaRegreso = document.getElementById('flecha_regreso'); // Flecha de regreso
+    const formularioLogin = document.getElementById('formulario_login'); // Formulario de login
+    const subMenu = document.querySelector('.sub_menu'); // Menú secundario (LOGIN, INICIO, etc.)
+    const loginLink = document.getElementById('login_link'); // Enlace LOGIN
 
-let isTableroVisible = false;
-let isDragging = false;
-let wasDragging = false; // Nueva bandera para diferenciar clic y arrastre
-let offsetX, offsetY;
+    let isTableroVisible = false; 
+    let isDragging = false;
+    let wasDragging = false; // Nueva bandera para diferenciar clic y arrastre
+    let offsetX, offsetY; 
 
-// Definimos solo las posiciones permitidas en los costados y abajo 
-const allowedPositions = [
-    { left: 20, top: (window.innerHeight - button.offsetHeight) / 2 }, // Lado izquierdo 
-    { left: window.innerWidth - button.offsetWidth - 20, top: (window.innerHeight - button.offsetHeight) / 2 }, // Lado derecho 
-    { left: (window.innerWidth - button.offsetWidth) / 2, top: window.innerHeight - button.offsetHeight - 30 } // Centro inferior
-];
+    // Mostrar el formulario de login cuando se hace clic en "LOGIN"
+    loginLink.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
 
-// Posición inicial en el centro inferior 
-let currentPosition = allowedPositions[2];
-button.style.left = currentPosition.left + 'px';
-button.style.top = currentPosition.top + 'px';
+        // Cambiar el título grande a "INICIO DE SESIÓN"
+        cambiarTitulo('INICIO DE SESIÓN');
 
-// Posiciona el tablero en función de la posición del botón
-function positionTablero() {
-    const buttonRect = button.getBoundingClientRect();
-    const tableroWidth = tablero.offsetWidth;
-    const tableroHeight = tablero.offsetHeight;
+        // Mostrar el formulario de login
+        formularioLogin.style.display = 'block';
 
-    if (buttonRect.left < window.innerWidth / 3) {
-        tablero.style.left = buttonRect.right + 10 + 'px';
-        tablero.style.top = buttonRect.top + (buttonRect.height / 2) - (tableroHeight / 2) + 'px';
-    } else if (buttonRect.left > (window.innerWidth * 2) / 3) {
-        tablero.style.left = buttonRect.left - tableroWidth - 10 + 'px';
-        tablero.style.top = buttonRect.top + (buttonRect.height / 2) - (tableroHeight / 2) + 'px';
-    } else {
-        tablero.style.left = buttonRect.left + (buttonRect.width / 2) - (tableroWidth / 2) + 'px';
-        tablero.style.top = buttonRect.top - tableroHeight - 10 + 'px';
+        // Ocultar otras partes del tablero si es necesario
+        subMenu.style.display = 'none';
+
+        // Mostrar la flecha de regreso
+        flechaRegreso.style.display = 'block';
+    });
+
+    // Función para cambiar el título dinámicamente con clases
+    function cambiarTitulo(nuevoTitulo) { 
+        tableroTitulo.classList.remove('inicio_sesion'); // Eliminar la clase si la tiene
+
+        // Cambiar el texto y agregar la nueva clase
+        tableroTitulo.innerHTML = nuevoTitulo; 
+        if (nuevoTitulo === 'INICIO DE SESIÓN') { 
+            tableroTitulo.classList.add('inicio_sesion'); // Añadir la clase cuando el título sea 'INICIO DE SESIÓN'
+        }
     }
 
-    tablero.style.transition = 'all 0.3s ease';
-}
+    // Cuando la flecha de regreso se hace clic
+    flechaRegreso.addEventListener('click', function() { 
+        // Desplazarse suavemente al inicio del tablero
+        tablero.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-// Mostrar u ocultar el tablero con clic
-button.addEventListener('click', function () {
-    if (wasDragging) {
+        // Ocultar la flecha de regreso después de hacer clic
+        flechaRegreso.style.display = 'none';
+
+        // Ocultar el formulario de login
+        formularioLogin.style.display = 'none';
+
+        // Volver a mostrar el menú
+        subMenu.style.display = 'block';
+
+        // Restaurar el título al original cuando se cierra el formulario
+        tableroTitulo.innerHTML = 'Remajud <br> Subastas';
+        tableroTitulo.classList.remove('inicio_sesion');
+    });
+
+    // Cuando se comienza a arrastrar el botón
+    button.addEventListener('mousedown', (e) => {
+        isDragging = true;
         wasDragging = false;
-        return;
+        offsetX = e.clientX - button.offsetLeft;
+        offsetY = e.clientY - button.offsetTop;
+        button.style.transition = 'none';
+    });
+
+    // Mientras se arrastra el botón
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+
+            newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - button.offsetWidth));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - button.offsetHeight));
+
+            button.style.left = newLeft + 'px';
+            button.style.top = newTop + 'px';
+            wasDragging = true;
+        }
+    });
+
+    // Cuando se deja de arrastrar el botón
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+
+            let closestPosition = allowedPositions[0];
+            let minDistance = Infinity;
+            allowedPositions.forEach(position => {
+                const distance = Math.sqrt(Math.pow(button.offsetLeft - position.left, 2) + Math.pow(button.offsetTop - position.top, 2));
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestPosition = position;
+                }
+            });
+            button.style.transition = 'left 1.2s cubic-bezier(0.25, 1.5, 0.5, 1), top 1.2s cubic-bezier(0.25, 1.5, 0.5, 1)';
+            button.style.left = closestPosition.left + 'px';
+            button.style.top = closestPosition.top + 'px';
+        }
+    });
+
+    // Mostrar u ocultar el tablero con clic en el botón
+    button.addEventListener('click', function () {
+        if (wasDragging) {
+            wasDragging = false;
+            return;
+        }
+
+        // Alterna la visibilidad del tablero
+        isTableroVisible = !isTableroVisible;
+        tablero.style.display = isTableroVisible ? 'block' : 'none';
+        textButton.textContent = isTableroVisible ? 'CLOSE' : 'MENU';
+
+        if (isTableroVisible) {
+            positionTablero();
+        }
+    });
+
+    // Posiciona el tablero en función de la posición del botón
+    function positionTablero() {
+        const buttonRect = button.getBoundingClientRect();
+        const tableroWidth = tablero.offsetWidth;
+        const tableroHeight = tablero.offsetHeight;
+
+        if (buttonRect.left < window.innerWidth / 3) {
+            tablero.style.left = buttonRect.right + 10 + 'px';
+            tablero.style.top = buttonRect.top + (buttonRect.height / 2) - (tableroHeight / 2) + 'px';
+        } else if (buttonRect.left > (window.innerWidth * 2) / 3) {
+            tablero.style.left = buttonRect.left - tableroWidth - 10 + 'px';
+            tablero.style.top = buttonRect.top + (buttonRect.height / 2) - (tableroHeight / 2) + 'px';
+        } else {
+            tablero.style.left = buttonRect.left + (buttonRect.width / 2) - (tableroWidth / 2) + 'px';
+            tablero.style.top = buttonRect.top - tableroHeight - 10 + 'px';
+        }
+        tablero.style.transition = 'all 0.3s ease';
     }
-    isTableroVisible = !isTableroVisible;
-    tablero.style.display = isTableroVisible ? 'block' : 'none';
-    textButton.textContent = isTableroVisible ? 'CLOSE' : 'MENU';
 
-    if (isTableroVisible) {
-        positionTablero();
-    } else {
-        closeButton.style.display = 'none'; // Oculta el botón de cierre cuando se cierra el tablero
-    }
-});
+    // Define las posiciones permitidas para el botón
+    const allowedPositions = [
+        { left: 20, top: (window.innerHeight - button.offsetHeight) / 2 }, // Lado izquierdo
+        { left: window.innerWidth - button.offsetWidth - 20, top: (window.innerHeight - button.offsetHeight) / 2 }, // Lado derecho
+        { left: (window.innerWidth - button.offsetWidth) / 2, top: window.innerHeight - button.offsetHeight - 30 } // Centro inferior
+    ];
 
-// Cuando se comienza a arrastrar el botón
-button.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    wasDragging = false;
-    offsetX = e.clientX - button.offsetLeft;
-    offsetY = e.clientY - button.offsetTop;
-    button.style.transition = 'none';
-});
+    // Posición inicial en el centro inferior
+    let currentPosition = allowedPositions[2];
+    button.style.left = currentPosition.left + 'px';
+    button.style.top = currentPosition.top + 'px';
 
-// Mientras se arrastra el botón
-document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-        let newLeft = e.clientX - offsetX;
-        let newTop = e.clientY - offsetY;
+    // Actualiza las posiciones permitidas en el redimensionamiento de la ventana
+    window.addEventListener('resize', () => {
+        allowedPositions.forEach(position => {
+            position.left = Math.max(0, Math.min(position.left, window.innerWidth - button.offsetWidth));
+            position.top = Math.max(0, Math.min(position.top, window.innerHeight - button.offsetHeight));
+        });
 
-        newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - button.offsetWidth));
-        newTop = Math.max(0, Math.min(newTop, window.innerHeight - button.offsetHeight));
+        const closestPosition = findClosestPosition(button.offsetLeft, button.offsetTop);
+        button.style.left = closestPosition.left + 'px';
+        button.style.top = closestPosition.top + 'px';
+        if (isTableroVisible) {
+            positionTablero();
+        }
+    });
 
-        button.style.left = newLeft + 'px';
-        button.style.top = newTop + 'px';
-        wasDragging = true;
-    }
-});
-
-// Cuando se deja de arrastrar el botón
-document.addEventListener('mouseup', () => {
-    if (isDragging) {
-        isDragging = false;
-
+    // Encuentra la posición más cercana entre las posiciones permitidas
+    function findClosestPosition(x, y) {
         let closestPosition = allowedPositions[0];
         let minDistance = Infinity;
         allowedPositions.forEach(position => {
-            const distance = Math.sqrt(Math.pow(button.offsetLeft - position.left, 2) + Math.pow(button.offsetTop - position.top, 2));
+            const distance = Math.sqrt(Math.pow(x - position.left, 2) + Math.pow(y - position.top, 2));
             if (distance < minDistance) {
                 minDistance = distance;
                 closestPosition = position;
             }
         });
-
-        button.style.transition = 'left 1.2s cubic-bezier(0.25, 1.5, 0.5, 1), top 1.2s cubic-bezier(0.25, 1.5, 0.5, 1)';
-        button.style.left = closestPosition.left + 'px';
-        button.style.top = closestPosition.top + 'px';
+        return closestPosition;
     }
-});
-
-// Mostrar el botón de cierre flotante cuando el mouse esté fuera del tablero
-document.addEventListener('mousemove', (e) => {
-    if (isTableroVisible) {
-        const tableroRect = tablero.getBoundingClientRect();
-        if (
-            e.clientX < tableroRect.left || 
-            e.clientX > tableroRect.right || 
-            e.clientY < tableroRect.top || 
-            e.clientY > tableroRect.bottom
-        ) {
-            closeButton.style.display = 'block';
-            closeButton.style.left = e.clientX + 'px';
-            closeButton.style.top = e.clientY + 'px';
-        } else {
-            closeButton.style.display = 'none';
-        }
-    }
-});
-
-// Cerrar el tablero cuando el botón de cierre flotante sea clickeado
-closeButton.addEventListener('click', () => {
-    isTableroVisible = false;
-    tablero.style.display = 'none';
-    textButton.textContent = 'MENU';
-    closeButton.style.display = 'none'; // Ocultar el botón de cierre flotante después de cerrar el tablero
 });

@@ -19,23 +19,47 @@
   padding: 0;
 }
 
-#menu_toggle {
+/* Container fixed */
+.styles_container_01 {
   position: fixed;
-  background-color: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite hacer clic a través del contenedor */
+  z-index: 9999; /* Asegura que esté sobre todo el contenido */
+}
+
+.styles_container_02 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.styles_container_03 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilo del botón flotante */
+#menu_toggle {
+  position: fixed; /* Fijo para que no se mueva mientras haces scroll */
+  pointer-events: auto; /* Rehabilitar los eventos de puntero */
+  background: none;
   border: none;
   border-radius: 50%;
-  position: absolute;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 8px 15px rgba(255, 255, 255, 0.1);
   transition: left 0.5s ease, top 0.5s ease, box-shadow 0.3s ease-in-out;
   animation: glow 1.5s ease-in-out infinite alternate;
-  z-index: 2;
-  margin: 0;
-  padding: 0;
+  z-index: 1000;
   opacity: 1;
   outline: none;
   overflow: hidden;
 }
 
+/* Texto del botón */
 .text_buton {
   font-family: "fuenteSecundaria";
   color: white;
@@ -47,6 +71,7 @@
   z-index: 3;
 }
 
+/* Animación de brillo del botón */
 @keyframes glow {
   0% {
     box-shadow: 0 0 5px rgba(14, 2, 2, 0.4), 0 0 10px rgba(57, 61, 61, 0.5), 0 0 15px rgba(130, 150, 150, 0.7);
@@ -55,31 +80,32 @@
     box-shadow: 0 0 10px rgba(46, 43, 43, 0.4), 0 0 20px rgba(59, 66, 66, 0.8), 0 0 30px rgba(75, 65, 65, 0.986);
   }
 }
+/* Hover del botón */
 #menu_toggle:hover {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3), 0px 12px 20px rgba(43, 39, 39, 0.2);
 }
 
+/* Imágenes dentro del botón */
 #menu_toggle img {
   pointer-events: none;
 }
 
-/* Estilo para el tablero */
+/* Estilo de la card */
 .card {
+  position: fixed; /* Cambiado a fijo */
+  pointer-events: auto; /* Rehabilitar eventos */
   width: 350px;
   height: 700px;
   border-radius: 0.5rem;
   background: #212121;
   box-shadow: 5px 5px 15px rgba(25, 25, 25, 0.788);
   padding: 20px;
-  position: absolute;
   display: none;
-  z-index: 1;
+  z-index: 999; /* Justo debajo del botón */
   color: white;
   font-family: "Arial", sans-serif;
   transition: opacity 0.5s ease-in-out, left 0.3s ease, top 0.3s ease;
-  /* Efecto de brillo en el lado izquierdo */
-  /*     background-image: radial-gradient(circle at left, rgba(255, 255, 255, 0.2), transparent); /* Gradiente sutil a la izquierda */
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent); /* Gradiente recto hacia la derecha */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
 }
 
 /* Botón de cierre flotante */
@@ -95,25 +121,23 @@
   transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-/* Estilo para la animación de cierre */
+/* Hover en el botón de cierre */
 .close_button:hover {
   background-color: #c0392b;
   transform: scale(1.1);
 }
 
-/*TITULO_TABLERO*/
+/* Título del tablero */
 .titulo_tablero {
   font-family: "fuenteSecundaria";
   font-size: 3.1vw;
   font-weight: 500;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
 
 /* Menú principal */
 .main_menu {
   font-family: "fuenteSecundaria";
-  /* font-weight: 100; */
-  /* width: 20px; */
   font-size: 35px;
   line-height: 1;
   margin-bottom: 1px;
@@ -126,8 +150,8 @@
   cursor: pointer;
   padding: 5px 5px;
   border-radius: 5px;
-  position: relative; /* Para posicionar el puntito */
-  transition: color 0.3s ease; /* Para suavizar el cambio de color */
+  position: relative;
+  transition: color 0.3s ease;
 }
 
 /* Menú secundario */
@@ -146,12 +170,13 @@
 .sub_menu a {
   margin-bottom: 5px;
   cursor: pointer;
-  padding: 5px 5px;
+  padding: 15px 10px;
   border-radius: 5px;
-  position: relative; /* Para posicionar el puntito */
-  transition: color 0.3s ease; /* Para suavizar el cambio de color */
-  color: #fff; /* Color de texto blanco */
+  position: relative;
+  transition: color 0.3s ease;
+  color: #fff;
   text-decoration: none;
+  display: block;
 }
 
 /* Puntito blanco (pseudoelemento) */
@@ -171,8 +196,168 @@
 
 /* Puntito visible al pasar el mouse */
 .sub_menu a:hover::before {
-  opacity: 1; /* Puntito visible */
-  transform: translateY(-50%) scale(1.15); /* Suave aumento del tamaño */
+  opacity: 1;
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* Estilo para el formulario */
+.login_formulario {
+  color: #888; /* Gris suave que combine con el tablero */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+}
+
+.card_formulario {
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  width: 300px;
+  flex-direction: column;
+  gap: 45px;
+  background: transparent;
+  border-radius: 8px;
+  padding: 1px;
+  border: none;
+  margin-top: -3rem;
+  display: flex;
+}
+
+.inputBox {
+  position: relative;
+  width: 250px;
+}
+
+.inputBox input {
+  width: 100%;
+  height: 50px;
+  padding: 12px;
+  outline: none;
+  border: none;
+  color: #fffcfc;
+  font-size: 1em;
+  background: transparent;
+  border-left: 2px solid #fffcfc;
+  border-bottom: 2px solid #fffcfc;
+  transition: 0.1s;
+  border-radius: 8px;
+}
+
+.inputBox span {
+  font-family: "fuenteparrafos";
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  transform: translateY(-4px);
+  margin-left: 10px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 12px;
+  color: #fffcfc;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border-radius: 8px;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  font-family: "fuenteparrafos";
+  transform: translateX(113px) translateY(-15px);
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  background: #fffcfc;
+  letter-spacing: 0.2em;
+  color: #0a0000;
+  background-color: #fffcfc;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+  border: 2px solid #888;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.enlace_subrayado {
+  font-family: "fuenteparrafos";
+  font-size: 16px;
+  color: #fffcfc;
+  text-decoration: none;
+  position: relative;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: -30px;
+}
+
+.enlace_subrayado::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #fffcfc;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+  margin-top: -0.9rem;
+}
+
+.enlace_subrayado:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.enter {
+  display: none;
+}
+
+.card_formulario .enlace_subrayado + .enlace_subrayado {
+  margin-top: 1em;
+}
+
+.titulo_dinamico {
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.inicio_sesion {
+  font-family: "fuenteSecundaria";
+  font-size: 50px;
+  color: #fffcfc;
+  margin-bottom: 3.5rem;
+}
+
+.flecha-regreso {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: none;
+}
+
+.flecha-regreso:hover {
+  color: #fffcfc;
+}
+
+.card_formulario {
+  position: relative;
+}
+
+#flecha_regreso svg {
+  transition: transform 0.6s ease;
+}
+
+#flecha_regreso:hover svg {
+  transform: scale(1.1);
+  stroke: #fffcfc;
 }
 
 /*# sourceMappingURL=globales.css.map */
