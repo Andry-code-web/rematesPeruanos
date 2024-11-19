@@ -5,14 +5,14 @@
             <h1 class="titulo_logo">remajud</h1>
         </div>
         <!-- Navegación -->
-        <div class="breadcrumb" id="breadcrumb">
+       <!--  <div class="breadcrumb" id="breadcrumb">
             <div class="breadcrumb-item">
                 <a href="/inicio">home</a>
             </div>
             <div class="breadcrumb-item">
                 <span id="currentPage">Contacto</span>
             </div>
-        </div>
+        </div> -->
         <!-- Enlaces de navegación -->
         <nav class="nav-links ">
             <div class="iconos_header" style="font-size: 2rem;">
@@ -65,19 +65,19 @@
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
+   /*  document.addEventListener('DOMContentLoaded', () => {
         const header = document.getElementById('header');
         const breadcrumb = document.getElementById('breadcrumb');
         const currentPage = document.getElementById('currentPage');
-        const currentPath = window.location.pathname.split('/').pop(); // Mostrar el breadcrumb si no estamos en la página principal 
+        const currentPath = window.location.pathname.split('/').pop(); 
         if (currentPath !== 'index.html' && currentPath !== '') {
-            breadcrumb.style.display = 'flex'; // Configurar el breadcrumb según la página actual 
+            breadcrumb.style.display = 'flex';  
             if (currentPath === 'contact.html') {
                 currentPage.textContent = 'Contacto';
             } else if (currentPath === 'about.html') {
                 currentPage.textContent = 'Acerca de';
-            } // Añade más condiciones aquí según sea necesario para otras páginas 
+            }  
         } else { breadcrumb.style.display = 'none'; }
-    });
+    }); */
 
 </script>

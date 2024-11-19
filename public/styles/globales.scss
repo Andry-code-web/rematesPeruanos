@@ -33,14 +33,14 @@ a {
   flex-direction: row-reverse;
 }
 /* ruta problemas */
-/* .logo{ 
+.logo{ 
   left: 10%;
-} */
+}
 /* Logo */
 .logo {
   position: absolute;
-   left: 50%; 
-  transform: translateX(-50%);
+  left: 50%;  
+  transform: translateX(-50%); 
 }
 
 .logo-icon {
@@ -53,11 +53,11 @@ a {
   font-size: 2.8rem;
 }
 
-.breadcrumb {
+/* .breadcrumb {
   display: flex;
   position: absolute;
   left: 50%;
-}
+} */
 
 .iconos_header {
   display: flex;
