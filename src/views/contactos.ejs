@@ -20,7 +20,7 @@
 <body>
   <!-- COMPONENTE HEADER -->
   <%- include('componentes/header') %>
-
+   
     <main class="contenedor_contacto">
       <!-- BANER CONTACTO -->
       <div id="banner" class="banner">
@@ -155,9 +155,11 @@
           else if (cartasBottom > 0) { header.style.color = '#fffcfc'; }
           else if (contactosTop < window.innerHeight) { header.style.color = '#0a0000'; }
           else {
-            header.style.color = 'black'; // Color predeterminado cuando no se está en ninguna de las secciones 
+            header.style.color = 'black';
           }
         });
+
+       
       </script>
 
 </body>

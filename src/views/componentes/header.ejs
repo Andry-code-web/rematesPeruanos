@@ -4,18 +4,27 @@
         <div class="logo">
             <h1 class="titulo_logo">remajud</h1>
         </div>
-
+        <!-- Navegación -->
+        <div class="breadcrumb" id="breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="/inicio">home</a>
+            </div>
+            <div class="breadcrumb-item">
+                <span id="currentPage">Contacto</span>
+            </div>
+        </div>
         <!-- Enlaces de navegación -->
         <nav class="nav-links ">
             <div class="iconos_header" style="font-size: 2rem;">
                 <i class="ri-home-line"></i>
+
                 <i class="ri-book-shelf-line"></i>
                 <i class="ri-customer-service-2-line"></i>
             </div>
-        </nav>
 
-        <!-- Botón de menú responsive -->
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
+
+            <!-- Botón de menú responsive -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
     </div>
 </header>
 
@@ -52,6 +61,23 @@
         }
 
         lastScrollPosition = currentScrollPosition;
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.getElementById('header');
+        const breadcrumb = document.getElementById('breadcrumb');
+        const currentPage = document.getElementById('currentPage');
+        const currentPath = window.location.pathname.split('/').pop(); // Mostrar el breadcrumb si no estamos en la página principal 
+        if (currentPath !== 'index.html' && currentPath !== '') {
+            breadcrumb.style.display = 'flex'; // Configurar el breadcrumb según la página actual 
+            if (currentPath === 'contact.html') {
+                currentPage.textContent = 'Contacto';
+            } else if (currentPath === 'about.html') {
+                currentPage.textContent = 'Acerca de';
+            } // Añade más condiciones aquí según sea necesario para otras páginas 
+        } else { breadcrumb.style.display = 'none'; }
     });
 
 </script>
