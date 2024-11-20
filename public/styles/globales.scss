@@ -7,15 +7,67 @@
   padding: 0;
 }
 
-/* Container fixed */
+/* HEADER */
+.navbar {
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+.links_redireccion {
+  color: inherit; /* Hereda el color del contenedor */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Suaviza el cambio */
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo-icon {
+  font-size: 28px;
+  color: #00665e;
+}
+
+.titulo_logo {
+  font-family: $fuentePrincipal;
+  font-size: 2.8rem;
+}
+
+.iconos_header {
+  display: flex;
+  gap: 2rem;
+}
+
+
+/* BOTON MENU */
+
 .styles_container_01 {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Permite hacer clic a través del contenedor */
-  z-index: 9999; /* Asegura que esté sobre todo el contenido */
+  pointer-events: none;
+  z-index: 9999;
 }
 
 .styles_container_02 {
@@ -31,7 +83,6 @@
   height: 100%;
 }
 
-/* Estilo del botón flotante */
 #menu_toggle {
   width: 100px;
   height: 100px;
@@ -51,7 +102,6 @@
   cursor: pointer;
 }
 
-/* Texto del botón */
 .text_buton {
   font-family: $fuenteSecundaria;
   color: white;
@@ -63,32 +113,29 @@
   z-index: 3;
 }
 
-/* Animación de brillo del botón */
 @keyframes glow {
   0% {
     box-shadow: 0 0 5px rgba(14, 2, 2, 0.4), 0 0 10px rgba(57, 61, 61, 0.5), 0 0 15px rgba(130, 150, 150, 0.7);
   }
+
   100% {
     box-shadow: 0 0 10px rgba(46, 43, 43, 0.4), 0 0 20px rgba(59, 66, 66, 0.8), 0 0 30px rgba(75, 65, 65, 0.986);
   }
 }
 
-/* Hover del botón */
 #menu_toggle:hover {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3), 0px 12px 20px rgba(43, 39, 39, 0.2);
 }
 
-/* Imágenes dentro del botón */
 #menu_toggle img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
-/* Estilo de la card */
 .card {
-  position: fixed; /* Cambiado a fijo */
-  pointer-events: auto; /* Rehabilitar eventos */
+  position: fixed;
+  pointer-events: auto;
   width: 350px;
   height: 700px;
   border-radius: 0.5rem;
@@ -96,14 +143,13 @@
   box-shadow: 5px 5px 15px rgba(25, 25, 25, 0.788);
   padding: 20px;
   display: none;
-  z-index: 999; /* Justo debajo del botón */
+  z-index: 999;
   color: white;
   font-family: 'Arial', sans-serif;
   transition: opacity 0.5s ease-in-out, left 0.3s ease, top 0.3s ease;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
 }
 
-/* Botón de cierre flotante */
 .close_button {
   position: absolute;
   background-color: #e74c3c;
@@ -116,13 +162,11 @@
   transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-/* Hover en el botón de cierre */
 .close_button:hover {
   background-color: #c0392b;
   transform: scale(1.1);
 }
 
-/* Título del tablero */
 .titulo_tablero {
   font-family: $fuenteSecundaria;
   font-size: 3.1vw;
@@ -130,7 +174,6 @@
   margin-top: 5rem;
 }
 
-/* Menú principal */
 .main_menu {
   font-family: $fuenteSecundaria;
   font-size: 35px;
@@ -149,7 +192,6 @@
   transition: color 0.3s ease;
 }
 
-/* Menú secundario */
 .sub_menu {
   font-family: "fuenteparrafos";
   font-size: 20px;
@@ -172,9 +214,9 @@
   color: #fff;
   text-decoration: none;
   display: block;
+  font-size: 1.1rem;
 }
 
-/* Puntito blanco (pseudoelemento) */
 .sub_menu a::before {
   content: '';
   position: absolute;
@@ -189,15 +231,13 @@
   transition: opacity 0.6s ease, transform 0.4s ease;
 }
 
-/* Puntito visible al pasar el mouse */
 .sub_menu a:hover::before {
   opacity: 1;
   transform: translateY(-50%) scale(1.15);
 }
 
-/* Estilo para el formulario */
 .login_formulario {
-  color: #888;  /* Gris suave que combine con el tablero */
+  color: #888;
   text-transform: uppercase;
   letter-spacing: 2px;
   display: block;
@@ -258,7 +298,7 @@
   border-radius: 8px;
 }
 
-.inputBox input:valid~span, 
+.inputBox input:valid~span,
 .inputBox input:focus~span {
   font-family: $fuenteParrafos;
   transform: translateX(113px) translateY(-15px);
@@ -276,77 +316,73 @@
   border-radius: 8px;
   background: transparent;
 }
-/* Estilos de enlace */
+
 .enlace_subrayado {
-    font-family: $fuenteParrafos; /* Asegúrate de que $fuenteParrafos esté bien definido */
-    font-size: 16px;
-    color: $colorsecundario; /* Asegúrate de definir $colorsecundario o reemplázalo por un color */
-    text-decoration: none;
-    position: relative;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: -30px; /* Ajuste de margen para separar un poco las líneas */
-    display: inline-block; /* Para que el subrayado se ajuste al tamaño del texto */
+  font-family: $fuenteParrafos;
+  font-size: 16px;
+  color: $colorsecundario;
+  text-decoration: none;
+  position: relative;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: -30px;
+  display: inline-block;
+}
+
+.enlace_subrayado::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 50%;
+  height: 1px;
+  background-color: $colorsecundario;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.enlace_subrayado::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: 0;
+  width: 50%;
+  height: 1px;
+  background-color: $colorsecundario;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+}
+
+.enlace_subrayado:hover::after,
+.enlace_subrayado:hover::before {
+  transform: scaleX(1);
+  transform-origin: center center;
+}
+
+.card_formulario .enlace_subrayado+.enlace_subrayado {
+  margin-top: 1em;
+}
+
+.enlace_subrayado:hover::after {
+  animation: growLine 0.5s forwards;
+}
+
+.enlace_subrayado:hover::before {
+  animation: growLine 0.5s forwards;
+}
+
+@keyframes growLine {
+  from {
+    width: 0;
   }
-  
-  /* Subrayado doble con separación y estilo más delgado */
-  .enlace_subrayado::after {
-    content: "";
-    position: absolute;
-    bottom: -3px; /* Ajusta la distancia desde el texto */
-    left: 0;
-    width: 50%; /* Subrayado más corto, puedes ajustar el tamaño */
-    height: 1px; /* Línea fina */
-    background-color: $colorsecundario; /* Color del subrayado */
-    transform: scaleX(0); /* Comienza invisibile */
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
+
+  to {
+    width: 50%;
   }
-  
-  .enlace_subrayado::before {
-    content: "";
-    position: absolute;
-    bottom: -3px; /* Igual que el de abajo */
-    right: 0;
-    width: 50%; /* Subrayado corto a la derecha */
-    height: 1px; /* Línea fina */
-    background-color: $colorsecundario;
-    transform: scaleX(0); /* Comienza invisibile */
-    transform-origin: bottom left;
-    transition: transform 0.3s ease-out;
-  }
-  
-  /* Efecto en hover, el subrayado aparece con separación */
-  .enlace_subrayado:hover::after,
-  .enlace_subrayado:hover::before {
-    transform: scaleX(1); /* Hace que la línea aparezca */
-    transform-origin: center center;
-  }
-  
-  /* Para separar los enlaces y darles un margen entre ellos */
-  .card_formulario .enlace_subrayado + .enlace_subrayado {
-    margin-top: 1em; /* Ajusta el espacio entre enlaces */
-  }
-  
-  /* Opcional: Animación de los subrayados */
-  .enlace_subrayado:hover::after {
-    animation: growLine 0.5s forwards;
-  }
-  
-  .enlace_subrayado:hover::before {
-    animation: growLine 0.5s forwards;
-  }
-  
-  /* Animación que hace crecer la línea */
-  @keyframes growLine {
-    from {
-      width: 0;
-    }
-    to {
-      width: 50%; /* El subrayado crece hacia el centro */
-    }
-  }
-  
+}
+
 .titulo_dinamico {
   transition: all 0.3s ease-in-out;
   text-align: center;
@@ -388,107 +424,110 @@
 }
 
 .g-recaptcha {
-    margin-top: 20px; /* Espacio superior */
-    margin-bottom: 20px; /* Espacio inferior */
-    display: block;
-    transform: scale(0.9); /* Reducir tamaño del reCAPTCHA si es necesario */
-    transform-origin: 0 0; /* Alineación desde la esquina superior izquierda */
-    margin-left: auto;
-    z-index: 2;
-    margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  transform: scale(0.9);
+  transform-origin: 0 0;
+  margin-left: auto;
+  z-index: 2;
+  margin-right: auto;
 }
 
-/* HEADER */
-
-
-/* BOTON MENU */
 
 
 /* FOOTER */
 
 footer {
-    width: 100%;
-    height: 70vh;
-    padding: 5.1666666667vw 2.7777777778vw 30px;
-    background-color: $colorterciario;
-    color: $colorsecundario;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  height: 70vh;
+  padding: 5.1666666667vw 2.7777777778vw 30px;
+  background-color: $colorterciario;
+  color: $colorsecundario;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .contenedor_links {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .paginas_navegacion {
-    column-gap: 2.7777777778vw;
-    width: 55.5555555556vw;
-    margin-bottom: calc(5.5555555556vw - .32em);
-    columns: 26.3888888889vw 2;
+  column-gap: 2.7777777778vw;
+  width: 55.5555555556vw;
+  margin-bottom: calc(5.5555555556vw - .32em);
+  columns: 26.3888888889vw 2;
 }
 
-.paginas_navegacion li{
-    list-style: none;
-    margin-bottom: 1rem;
+.paginas_navegacion li {
+  list-style: none;
+  margin-bottom: 1rem;
 }
 
 .paginas_navegacion li a {
-    text-decoration: none;
-    color: $colorsecundario;
-    font-family: $fuenteSecundaria;
-    font-size: 1.7vw;
+  text-decoration: none;
+  color: $colorsecundario;
+  font-family: $fuenteSecundaria;
+  font-size: 1.7vw;
 }
 
 .btn_subir {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    background: none;
-    border: none;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
 }
 
-.btn_subir i{
-    color: $colorsecundario;
-    font-size: 3rem;
+.btn_subir i {
+  color: $colorsecundario;
+  font-size: 3rem;
 }
 
 .contenedor_redes {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.div_redes{
-    display: flex;
-    gap: 2.5rem;
+.div_redes {
+  display: flex;
+  gap: 2.5rem;
 }
 
-.div_redes a{
-    text-decoration: none;
+.div_redes a {
+  text-decoration: none;
 }
 
-.div_redes a i{
-    font-size: 3.5rem;
-    color: $colorsecundario;
+.div_redes a i {
+  font-size: 3.5rem;
+  color: $colorsecundario;
 
 }
 
-.politicas{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0 1em;
-    justify-content: flex-end;
-    max-width: calc(50% - 45px - 30px);
+.politicas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 1em;
+  justify-content: flex-end;
+  max-width: calc(50% - 45px - 30px);
 }
 
-.politicas a{
-    font-size: 1.5rem;
-    color: $colorsecundario;
-    font-family: $fuenteSecundaria;
-    text-decoration: none;
+.politicas a {
+  font-size: 1.5rem;
+  color: $colorsecundario;
+  font-family: $fuenteSecundaria;
+  text-decoration: none;
+}
+
+.politicas a {
+  font-size: 1.5rem;
+  color: $colorsecundario;
+  font-family: $fuenteSecundaria;
+  text-decoration: none;
 }
