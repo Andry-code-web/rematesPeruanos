@@ -317,96 +317,11 @@ html {
     }
 }
 
-
-//buscador 
-
-
-.banner-buscador {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    animation: caerDesdeArriba 1s ease 0.15s forwards;
-    opacity: 0;
-}
-
-.buscador {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-}
-
-.buscador::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.buscador:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.boton-buscador {
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.boton-buscador:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Ajustes responsive */
-@media (max-width: 768px) {
-    .banner-buscador {
-        max-width: 90%;
-    }
-    
-    .buscador {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-    }
-    
-    .boton-buscador {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-buscador {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .boton-buscador {
-        width: 100%;
-    }
-}
-
-
 .carta {
     width: 450px;
     /* border-radius: 8px; */
     overflow: hidden;
-    background: white;
+    background: $colorsecundario;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
     animation: caerDesdeArriba 1s ease 0.2s forwards;
@@ -421,6 +336,9 @@ html {
         transform: translateY(0);
         opacity: 1;
     }
+}
+.carta:hover {
+    transform: scale(1.2);
 }
 
 
@@ -458,18 +376,21 @@ html {
 }
 
 .label {
+    font-family: $fuentePrincipal;
     color: #666;
     font-size: 14px;
     margin-bottom: 4px;
 }
 
 .nombre_proyecto {
+    font-family: $fuenteSecundaria;
     color: #001529;
     font-size: 24px;
     margin-bottom: 16px;
 }
 
 .direccion {
+    font-family: $fuenteParrafos;
     color: #001529;
     font-size: 16px;
     margin-bottom: 24px;
@@ -496,6 +417,7 @@ html {
 }
 
 .precio  {
+    font-family: $fuenteParrafos;
     color: #000329;
     font-size: 24px;
     font-weight: 600;
