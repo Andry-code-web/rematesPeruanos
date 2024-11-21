@@ -1,83 +1,22 @@
 <header id="header" class="navbar">
     <div class="container">
-        <!-- Logo -->
-        <div class="logo">
-            <h1 class="titulo_logo">remajud</h1>
+      <!-- Logo -->
+      <div class="logo">
+        <h1 class="titulo_logo">remajud</h1>
+      </div>
+      <!-- Enlaces de navegación -->
+      <nav class="nav-links">
+        <div class="iconos_header" style="font-size: 2rem;">
+          <a href="" class="links_redireccion">
+            <i class="ri-home-line"></i>
+          </a>
+          <a href="" class="links_redireccion">
+            <i class="ri-book-shelf-line"></i>
+          </a>
+          <a href="" class="links_redireccion">
+            <i class="ri-customer-service-2-line"></i>
+          </a>
         </div>
-        <!-- Navegación -->
-       <!--  <div class="breadcrumb" id="breadcrumb">
-            <div class="breadcrumb-item">
-                <a href="/inicio">home</a>
-            </div>
-            <div class="breadcrumb-item">
-                <span id="currentPage">Contacto</span>
-            </div>
-        </div> -->
-        <!-- Enlaces de navegación -->
-        <nav class="nav-links ">
-            <div class="iconos_header" style="font-size: 2rem;">
-                <i class="ri-home-line"></i>
-
-                <i class="ri-book-shelf-line"></i>
-                <i class="ri-customer-service-2-line"></i>
-            </div>
-
-
-            <!-- Botón de menú responsive -->
-            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación">☰</button>
+      </nav>
     </div>
-</header>
-
-<!-- Menú móvil -->
-<div class="mobile-menu" id="mobileMenu">
-    <i class="ri-home-line"></i>
-    <i class="ri-book-shelf-line"></i>
-    <i class="ri-customer-service-2-line"></i>
-</div>
-
-<script>
-    document.getElementById('menuToggle').addEventListener('click', function () {
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenu.classList.toggle('show');
-    });
-
-    // Cerrar el menú móvil al hacer clic en un enlace
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.remove('show');
-        });
-    });
-
-    let lastScrollPosition = 0;
-    const navbar = document.querySelector('.navbar');
-
-    window.addEventListener('scroll', function () {
-        const currentScrollPosition = window.pageYOffset;
-
-        if (currentScrollPosition > lastScrollPosition) {
-            navbar.classList.add('hidden');
-        } else {
-            navbar.classList.remove('hidden');
-        }
-
-        lastScrollPosition = currentScrollPosition;
-    });
-
-
-
-   /*  document.addEventListener('DOMContentLoaded', () => {
-        const header = document.getElementById('header');
-        const breadcrumb = document.getElementById('breadcrumb');
-        const currentPage = document.getElementById('currentPage');
-        const currentPath = window.location.pathname.split('/').pop(); 
-        if (currentPath !== 'index.html' && currentPath !== '') {
-            breadcrumb.style.display = 'flex';  
-            if (currentPath === 'contact.html') {
-                currentPage.textContent = 'Contacto';
-            } else if (currentPath === 'about.html') {
-                currentPage.textContent = 'Acerca de';
-            }  
-        } else { breadcrumb.style.display = 'none'; }
-    }); */
-
-</script>
+  </header>

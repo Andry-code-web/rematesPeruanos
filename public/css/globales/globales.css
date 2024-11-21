@@ -48,6 +48,10 @@
 }
 
 /* ruta problemas */
+/* .logo{ 
+  left: 10%;
+} */
+/* Logo */
 .logo {
   position: absolute;
   left: 50%;
@@ -64,11 +68,12 @@
   font-size: 2.8rem;
 }
 
-/* .breadcrumb {
+.breadcrumb {
   display: flex;
   position: absolute;
   left: 50%;
-} */
+}
+
 .iconos_header {
   display: flex;
   gap: 2rem;
