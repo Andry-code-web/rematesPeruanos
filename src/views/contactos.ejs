@@ -10,6 +10,7 @@
 
   <!-- ESTILOS DE CONTACTOS -->
   <link rel="stylesheet" href="/css/contactos/contactos.css">
+  <link rel="stylesheet" href="/css/globales/globales.css">
 
   <!-- ESTILOS GLOBALES -->
   <link rel="stylesheet" href="/css/globales/globales.css">
@@ -20,147 +21,139 @@
 <body>
   <!-- COMPONENTE HEADER -->
   <%- include('componentes/header') %>
-   
-    <main class="contenedor_contacto">
-      <!-- BANER CONTACTO -->
-      <div id="banner" class="banner">
-        <div class="contenedor_titulo">
-          <h1 class="titulo">
-            <span>
-              Contacto
-            </span>
-          </h1>
+  <!-- BOTON NAVEGADOR -->
+  <%- include("componentes/btn_menu.ejs") %>
+
+  <main class="contenedor_contacto">
+    <!-- BANER CONTACTO -->
+    <div id="banner" class="banner">
+      <div class="contenedor_titulo">
+        <h1 class="titulo">
+          <span>
+            Contacto
+          </span>
+        </h1>
+      </div>
+      <div class="contenedor_mensaje">
+        <div class="mensaje">
+          ¿Quieres saber más sobre nuestras subastas o los inmuebles disponibles? ¡Estamos aquí para ayudarte y
+          resolver cualquier duda!
         </div>
-        <div class="contenedor_mensaje">
-          <div class="mensaje">
-            ¿Quieres saber más sobre nuestras subastas o los inmuebles disponibles? ¡Estamos aquí para ayudarte y
-            resolver cualquier duda!
+
+      </div>
+      <div class="contenedor_boton">
+        <a href="">
+          <i class="ri-mail-line"></i>
+          <span>
+            Envíanos un correo electrónico
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SLIDER INMUEBLES -->
+    <div id="cartas" class="sliders_casa">
+      <div class="titulo_slider">
+        <h2 class="sub_titulo">Remajud subastas</h2>
+      </div>
+
+      <div class="contenedor_galeria">
+        <div class="div_img ">
+          <span class="img">
+            <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
+          </span>
+          <h4 class="descripcion">
+            <i class="ri-map-pin-2-fill"></i>
+            Arequipa Peru
+          </h4>
+        </div>
+        <div class="div_img ">
+          <span class="img">
+            <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
+          </span>
+          <h4 class="descripcion">
+            <i class="ri-map-pin-2-fill"></i>
+            Arequipa Peru
+          </h4>
+        </div>
+        <div class="div_img ">
+          <span class="img">
+            <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
+          </span>
+          <h4 class="descripcion">
+            <i class="ri-map-pin-2-fill"></i>
+            Arequipa Peru
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACTOS -->
+    <div id="contactos" class="contacto">
+      <h2 class="titulo_contactos">
+        Remajud
+      </h2>
+
+      <div class="subtitulo_contacto">
+        <p>Subastas</p>
+      </div>
+
+      <ul class="contactos">
+        <li class="items_contactos">
+          <h3 class="sub_titulo_contactos">Oficina central</h3>
+          <div class="info_contacto">
+            <a href="" class="ubicacion">
+              <i class="ri-map-pin-2-fill"></i>
+              Av. Ejercito 906 <br> Piso Cayma Arequipa
+            </a>
+            <a href="" class="telefono">
+              <i class="ri-phone-fill"></i>
+              999999999
+            </a>
+            <a href="" class="correo">
+              <i class="ri-mail-line"></i>
+              soporte@subastasur.com
+            </a>
           </div>
 
-        </div>
-        <div class="contenedor_boton">
-          <a href="">
-            <i class="ri-mail-line"></i>
+          <a href="" class="btn_direcion">
+            <i class="ri-direction-fill"></i>
             <span>
-              Envíanos un correo electrónico
+              Obtener dirección
             </span>
           </a>
-        </div>
-      </div>
-
-      <!-- SLIDER INMUEBLES -->
-      <div id="cartas" class="sliders_casa">
-        <div class="titulo_slider">
-          <h2 class="sub_titulo">Remajud subastas</h2>
-        </div>
-
-        <div class="contenedor_galeria">
-          <div class="div_img ">
-            <span class="img">
-              <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
-            </span>
-            <h4 class="descripcion">
-              <i class="ri-map-pin-2-fill"></i>
-              Arequipa Peru
-            </h4>
-          </div>
-          <div class="div_img ">
-            <span class="img">
-              <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
-            </span>
-            <h4 class="descripcion">
-              <i class="ri-map-pin-2-fill"></i>
-              Arequipa Peru
-            </h4>
-          </div>
-          <div class="div_img ">
-            <span class="img">
-              <img src="/img/WhatsApp Image 2024-11-15 at 9.39.04 AM.jpeg" alt="">
-            </span>
-            <h4 class="descripcion">
-              <i class="ri-map-pin-2-fill"></i>
-              Arequipa Peru
-            </h4>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTACTOS -->
-      <div id="contactos" class="contacto">
-        <h2 class="titulo_contactos">
-          Remajud
-        </h2>
-
-        <div class="subtitulo_contacto">
-          <p>Subastas</p>
-        </div>
-
-        <ul class="contactos">
-          <li class="items_contactos">
-            <h3 class="sub_titulo_contactos">Oficina central</h3>
-            <div class="info_contacto">
-              <a href="" class="ubicacion">
-                <i class="ri-map-pin-2-fill"></i>
-                Av. Ejercito 906 <br> Piso Cayma Arequipa
-              </a>
-              <a href="" class="telefono">
-                <i class="ri-phone-fill"></i>
-                999999999
-              </a>
-              <a href="" class="correo">
-                <i class="ri-mail-line"></i>
-                soporte@subastasur.com
-              </a>
-            </div>
-
-            <a href="" class="btn_direcion">
-              <i class="ri-direction-fill"></i>
-              <span>
-                Obtener dirección
-              </span>
-            </a>
-          </li>
-          <!--  <li class="items_contactos">
-          <h3 class="sub_titulo">Oficina</h3>
-          <div class="info_contacto">
-            <a href="" class="link"></a>
-          </div>
         </li>
-        <li class="items_contactos">
-          <h3 class="sub_titulo">Correos</h3>
-          <div class="info_contacto">
-            <a href="" class="link"></a>
-            <a href="" class="link"></a>
-            <a href="" class="link"></a>
-          </div>
-        </li> -->
-        </ul>
-      </div>
-    </main>
+      </ul>
+    </div>
+  </main>
+
+  <!-- COMPONENTE FOOTER -->
+  <%- include('componentes/footer') %>
+
+  <script src="/js/componentes/script_btn_menu.js"></script>
+  <script src="/js/componentes/header_ocultar.js"></script>
 
 
-    <!-- COMPONENTE FOOTER -->
-    <%- include('componentes/footer') %>
-
-      <script>
-        window.addEventListener('scroll', () => {
-          const header = document.getElementById('header');
-          const banner = document.getElementById('banner');
-          const cartas = document.getElementById('cartas');
-          const contactos = document.getElementById('contactos');
-          const bannerBottom = banner.getBoundingClientRect().bottom;
-          const cartasBottom = cartas.getBoundingClientRect().bottom;
-          const contactosTop = contactos.getBoundingClientRect().top;
-          if (bannerBottom > 0) { header.style.color = '#0a0000'; }
-          else if (cartasBottom > 0) { header.style.color = '#fffcfc'; }
-          else if (contactosTop < window.innerHeight) { header.style.color = '#0a0000'; }
-          else {
-            header.style.color = 'black';
-          }
-        });
-
-       
-      </script>
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      const banner = document.getElementById('banner');
+      const cartas = document.getElementById('cartas');
+      const contactos = document.getElementById('contactos');
+      const bannerBottom = banner.getBoundingClientRect().bottom;
+      const cartasBottom = cartas.getBoundingClientRect().bottom;
+      const contactosTop = contactos.getBoundingClientRect().top;
+      if (bannerBottom > 0) {
+        header.style.color = '#0a0000';
+      } else if (cartasBottom > 0) {
+        header.style.color = '#fffcfc';
+      } else if (contactosTop < window.innerHeight) {
+        header.style.color = '#0a0000';
+      } else {
+        header.style.color = 'black';
+      }
+    });
+  </script>
 
 </body>
 
