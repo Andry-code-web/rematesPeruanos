@@ -9,11 +9,12 @@
     
     "watch:css": "sass --watch public/styles:public/css",
     
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales",
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:registro",
     
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
     "build:contactos": "sass public/styles/contactos.scss public/css/contactos/contactos.css",
+    "build:registro": "sass public/styles/registro.scss public/css/registro/registro.css",
     
     
     "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",

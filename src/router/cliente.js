@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 
+/* RUTA REGISTRO*/ 
+router.get('/registro', (req, res) => {
+    res.render("registros");
+    });
+
 /* RUTA INICIO */
 router.get('/', (req, res) =>{
     res.render("inicio");
