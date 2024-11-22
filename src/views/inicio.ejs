@@ -4,107 +4,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ESTILOS DE INICIO-->
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-
-    <!-- ESTILOS DE INICIO-->
-
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="/css/inicio/inicio.css">
+    <link rel="stylesheet" href="/css/globales/globales.css">
+
+    <!-- CDN DE ICONOS REMIX -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
     <title>Remates Peru || INICIO</title>
 </head>
 
 <body>
-    <!-- Banner -->
-    <section class="banner">
-        <div class="banner__imagen-container">
-            <img src="/img/Blender_course_for_designers_and_illustrators-removebg-preview.png" alt="Casa en subasta"
-                class="banner__imagen">
-        </div>
-        <div class="contenedor-banner-contenido">
-            <div class="banner__contenido">
-                <h1 class="banner__titulo">Precios de remate</h1>
-                <h2 class="banner__subtitulo">Remates inmobiliarios a nivel nacional</h2>
-            </div>
-            <!-- Buscador integrado -->
-            <div class="banner-buscador">
-                <input type="text" class="buscador" placeholder="Buscar propiedades en remate...">
-                <button type="submit" class="boton-buscador">
-                    <i class="ri-search-line"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+    <!-- HEADER COMPONENTE -->
+    <%- include('componentes/header') %>
+        <!-- BOTON MENU -->
+        <%- include("componentes/btn_menu.ejs") %>
 
-    <!-- Cuadros de subastas -->
-    <h2 class="section-title">Propiedades Destacadas</h2>
-    <div class="cuadricula-subastas">
-        <div class="item-subasta">
-            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 1">
-            <h3 class="item-subasta__titulo">Subasta 1</h3>
-        </div>
-        <div class="item-subasta">
-            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 2">
-            <h3 class="item-subasta__titulo">Subasta 2</h3>
-        </div>
-        <div class="item-subasta">
-            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 3">
-            <h3 class="item-subasta__titulo">Subasta 3</h3>
-        </div>
-        <div class="item-subasta">
-            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 4">
-            <h3 class="item-subasta__titulo">Subasta 4</h3>
-        </div>
-        <div class="item-subasta">
-            <img class="item-subasta__imagen" src="/img/_3d__miniature__house-removebg-preview.png" alt="Subasta 5">
-            <h3 class="item-subasta__titulo">Subasta 5</h3>
-        </div>
-    </div>
+            <main>
+                <section class="banner" id="banner">
+                    <div class="banner_contenedor">
+                        <div class="banner_video">
+                            <video src="/img/video1.mp4" autoplay muted loop></video>
+                        </div>
+                        <div class="banner_info_filtro">
+                            <div class="banner_info">
+                                <h1>Remajud remates inmobiliarios</h1>
+                                <p>Remates en todo el Perú</p>
+                            </div>
+                            <div class="banner_filtro">
+                                <div class="contenedor_filtro">
+                                    <form action="" method="post">
 
+                                        <div class="parent">
+                                            <div class="div1">
+                                                <p>
+                                                    ENCUENTRA TU REMATE MAS RAPIDO
+                                                </p>
+                                            </div>
+                                            <div class="div2 contenedor_inputs">
+                                                <label for="">
+                                                    <i class="ri-map-line"></i>
+                                                    Ciudad
+                                                </label>
+                                                <input type="text">
+                                            </div>
+                                            <div class="div3 contenedor_inputs">
+                                                <label for="">
+                                                    <i class="ri-map-pin-2-line"></i>
+                                                    Departamanto
+                                                </label>
+                                                <input type="text">
+                                            </div>
+                                            <div class="div4 contenedor_inputs">
+                                                <label for="">
+                                                    <i class="ri-map-pin-user-line"></i>
+                                                    Distrito
+                                                </label>
+                                                <input type="text">
+                                            </div>
+                                            <div class="div5 contenedor_inputs">
+                                                <label for="">
+                                                    <i class="ri-money-dollar-circle-line"></i>
+                                                    Precio
+                                                </label>
+                                                <input type="number">
+                                            </div>
+                                            <div class="div6 contenedor_inputs">
+                                                <label for="">
+                                                    <i class="ri-menu-search-line"></i>
+                                                    Categoria
+                                                </label>
+                                                <input type="text">
+                                            </div>
+                                            <div class="div7">
+                                                <button type="submit">
+                                                    <i class="ri-search-2-line"></i>
+                                                </button>
+                                            </div>
+                                        </div>
 
-    
-    <div class="carta">
-        <div class="imagen-contenedor">
-            <img src="/img/Inmobiliaria-La-venta-de-Inmuebles-4.0.jpg" alt="Edificio del Sol" class="imagen-propiedad">
-            <a href="www.google.com" class="renta-button">Renta +</a>
-        </div>
-        <div class="contenido">
-            <div class="label">Nombre del inmueble</div>
-            <h2 class="nombre_proyecto">Edificio los canarios</h2>
-            
-            <div class="label">Dirección</div>
-            <p class="direccion">Av. Arequipa 502 , arancota</p>
-            
-            <div class="detalles">
-                <div class="detalles-item">
-                    <div class="label">M2</div>
-                    <div class="detalles-valor">450</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="categoria" id="categorias">
+                    <div class="contenedor_categorias">
+                        <h2>NUESTRAS CATEGORIAS</h2>
+                        <div class="categorias">
+                            <div class="cate_remates">
+                                <img src="/img/casa2.jfif" alt="">
+                                <p>categoria</p>
+                            </div>
+                            <div class="cate_remates">
+                                <img src="/img/casa2.jfif" alt="">
+                                <p>categoria</p>
+                            </div>
+                            <div class="cate_remates">
+                                <img src="/img/casa2.jfif" alt="">
+                                <p>categoria</p>
+                            </div>
+                            <div class="cate_remates">
+                                <img src="/img/casa2.jfif" alt="">
+                                <p>categoria</p>
+                            </div>
+                            <div class="cate_remates">
+                                <img src="/img/casa2.jfif" alt="">
+                                <p>categoria</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="subastas" id="subastas"></section>
+                <div class="carta">
+                    <div class="imagen-contenedor">
+                        <img src="/img/Inmobiliaria-La-venta-de-Inmuebles-4.0.jpg" alt="Edificio del Sol"
+                            class="imagen-propiedad">
+                        <a href="www.google.com" class="renta-button">Renta +</a>
+                    </div>
+                    <div class="contenido">
+                        <div class="label"><h2>Nombre del inmueble</h2></div>
+                        <p class="nombre_proyecto">Edificio los canarios</p>
+
+                        <div class="label"><h2>Dirección</h2></div>
+                        <p class="direccion">Av. Arequipa 502 , arancota</p>
+
+                        <div class="detalles">
+                            <div class="detalles-item">
+                                <div class="label"><h2>M2</h2></div>
+                                <div class="detalles-valor"><p>450</p></div>
+                            </div>
+                            <div class="detalles-item">
+                                <div class="label"><h2>N° pisos</h2></div>
+                                <div class="detalles-valor"><p>3</p></div>
+                            </div>
+                            <div class="detalles-item">
+                                <div class="label"><h2>N° de espacios</h2></div>
+                                <div class="detalles-valor"><p>5</p></div>
+                            </div>
+                        </div>
+
+                        <div class="label"><h2>Precio</h2></div>
+                        <div class="precio"><p>S/ 49,200</p></div>
+                    </div>
                 </div>
-                <div class="detalles-item">
-                    <div class="label">N° Pisos</div>
-                    <div class="detalles-valor">3</div>
-                </div>
-                <div class="detalles-item">
-                    <div class="label">N° de espacios</div>
-                    <div class="detalles-valor">5</div>
-                </div>
-            </div>
-            
-            <div class="label">Precio</div>
-            <div class="precio">S/ 49,200</div>
-        </div>
-    </div>
-    </section>
+            </main>
 
 
-    <script>
-        history.scrollRestoration = "manual";
-        window.onload = function () {
-            window.scrollTo(0, 0);
-        };
-    </script>
+
+            <!-- FOOTER COMPONETE -->
+            <%- include('componentes/footer') %>
+
+                <!-- SCRIPTS JS -->
+                <script src="/js/componentes/script_btn_menu.js"></script>
+                <script src="/js/componentes/header_ocultar.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+                <script>
+                    gsap.to('#menu_toggle', {
+                        boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
+                        duration: 1,
+                        repeat: -1,
+                        yoyo: true
+                    });
+                </script>
+
+                <script>
+                    window.addEventListener('scroll', () => {
+                        const header = document.getElementById('header');
+                        const banner = document.getElementById('banner');
+                        const categorias = document.getElementById('categorias');
+                        const subastas = document.getElementById('subastas');
+                        const bannerBottom = banner.getBoundingClientRect().bottom;
+                        const categoriasBottom = categorias.getBoundingClientRect().bottom;
+                        const subastasTop = subastas.getBoundingClientRect().top;
+                        if (bannerBottom > 0) {
+                            header.style.color = '#fffcfc';
+                        } else if (categoriasBottom > 0) {
+                            header.style.color = '#0a0000';
+                        } else if (subastasTop < window.innerHeight) {
+                            header.style.color = '#fffcfc';
+                        } else {
+                            header.style.color = 'black';
+                        }
+                    });
+                </script>
+
+
 </body>
 
 </html>
