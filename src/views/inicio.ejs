@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ESTILOS -->
   <link rel="stylesheet" href="/css/inicio/inicio.css">
+  <!-- COMPONENTES -->
   <link rel="stylesheet" href="/css/globales/globales.css">
 
   <!-- CDN DE ICONOS REMIX -->
@@ -116,7 +117,37 @@
         </div>
       </div>
     </section>
-    <section class="subastas" id="subastas"></section>
+
+    <section class="subastas" id="subastas">
+      <h1>Lista de Remates</h1>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ubicación</th>
+            <th>Precio</th>
+            <th>Fecha de Activación</th>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% remates.forEach(remate => { %>
+          <tr>
+            <td><%= remate.id %></td>
+            <td><%= remate.ubicacion %></td>
+            <td><%= remate.precios %></td>
+            <td><%= remate.fecha_activacion %></td>
+            <td><%= remate.estado %></td>
+            <td><%= remate.descripcion %></td>
+            <td><%= remate.categoria %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </section>
+
   </main>
 
 
