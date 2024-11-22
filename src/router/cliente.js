@@ -22,4 +22,9 @@ router.get('/contacto', (req, res) =>{
     res.render("contactos");
 });
 
+/* RUTA ADMIN */
+router.get('/admin',(req, res) =>{
+    res.render("admin");
+})
+
 module.exports = router;
