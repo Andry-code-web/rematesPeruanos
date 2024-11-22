@@ -19,18 +19,18 @@
   box-sizing: border-box;
 }
 
-h1 {
-  color: #d00000;
-  font-family: "fuenteparrafos";
+/* h1 {
+    color: $colorprimario;
+    font-family: $fuenteParrafos;
 }
 
 body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
-
+ */
 .banner_remates {
   position: relative;
   width: 100%;
@@ -198,6 +198,14 @@ form {
   color: white; /* Color del texto al pasar el cursor */
 }
 
+.enlaces_carta {
+  text-decoration: none;
+}
+
+.card-content h2 {
+  color: #0a0000;
+}
+
 .info_img {
   position: absolute;
   z-index: 1;
@@ -256,5 +264,7 @@ form {
 .card-content .view-detail:hover {
   background-color: #004d40;
 }
+
+/* filtro_v1 */
 
 /*# sourceMappingURL=remates.css.map */
