@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ESTILOS -->
     <link rel="stylesheet" href="/css/inicio/inicio.css">
+    <!-- COMPONENTES -->
     <link rel="stylesheet" href="/css/globales/globales.css">
 
     <!-- CDN DE ICONOS REMIX -->
@@ -89,6 +90,7 @@
                         </div>
                     </div>
                 </section>
+
                 <section class="categoria" id="categorias">
                     <div class="contenedor_categorias">
                         <h2>NUESTRAS CATEGORIAS</h2>
@@ -116,39 +118,121 @@
                         </div>
                     </div>
                 </section>
-                <section class="subastas" id="subastas"></section>
-                <div class="carta">
-                    <div class="imagen-contenedor">
-                        <img src="/img/Inmobiliaria-La-venta-de-Inmuebles-4.0.jpg" alt="Edificio del Sol"
-                            class="imagen-propiedad">
-                        <a href="www.google.com" class="renta-button">Renta +</a>
-                    </div>
-                    <div class="contenido">
-                        <div class="label"><h2>Nombre del inmueble</h2></div>
-                        <p class="nombre_proyecto">Edificio los canarios</p>
 
-                        <div class="label"><h2>Dirección</h2></div>
-                        <p class="direccion">Av. Arequipa 502 , arancota</p>
+                <section class="subastas" id="subastas">
+                    <h1>Lista de Remates</h1>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ubicación</th>
+                                <th>Precio</th>
+                                <th>Fecha de Activación</th>
+                                <th>Estado</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% remates.forEach(remate=> { %>
+                                <tr>
+                                    <td>
+                                        <%= remate.id %>
+                                    </td>
+                                    <td>
+                                        <%= remate.ubicacion %>
+                                    </td>
+                                    <td>
+                                        <%= remate.precios %>
+                                    </td>
+                                    <td>
+                                        <%= remate.fecha_activacion %>
+                                    </td>
+                                    <td>
+                                        <%= remate.estado %>
+                                    </td>
+                                    <td>
+                                        <%= remate.descripcion %>
+                                    </td>
+                                    <td>
+                                        <%= remate.categoria %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </section>
 
-                        <div class="detalles">
-                            <div class="detalles-item">
-                                <div class="label"><h2>M2</h2></div>
-                                <div class="detalles-valor"><p>450</p></div>
-                            </div>
-                            <div class="detalles-item">
-                                <div class="label"><h2>N° pisos</h2></div>
-                                <div class="detalles-valor"><p>3</p></div>
-                            </div>
-                            <div class="detalles-item">
-                                <div class="label"><h2>N° de espacios</h2></div>
-                                <div class="detalles-valor"><p>5</p></div>
-                            </div>
-                        </div>
+                <tbody>
+                    <% remates.forEach(remate=> { %>
+                        <tr>
+                            <td>
+                                <section class="tarjeta_subastas">
+                                    <div class="carta">
+                                        <div class="imagen-contenedor">
+                                            <img src="" alt="<%= remate.nombre %>"
+                                                class="imagen-propiedad">
+                                            <a href="" class="renta-button">Renta +</a>
+                                        </div>
+                                        <div class="contenido">
+                                            <div class="label">
+                                                <h2>Ubicacion</h2>
+                                            </div>
+                                            <p class="descripcion">
+                                                <%= remate.ubicacion %>
+                                            </p>
 
-                        <div class="label"><h2>Precio</h2></div>
-                        <div class="precio"><p>S/ 49,200</p></div>
-                    </div>
-                </div>
+                                            <div class="label">
+                                            </div>
+
+                                            <div class="detalles">
+                                                <div class="detalles-item">
+                                                    <div class="label">
+                                                        <h2>Estado</h2>
+                                                    </div>
+                                                    <div class="detalles-valor">
+                                                        <p>
+                                                            <%= remate.estado %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="detalles-item">
+                                                    <div class="label">
+                                                        <h2>Fecha de activacion</h2>
+                                                    </div>
+                                                    <div class="detalles-valor">
+                                                        <p>
+                                                            <%= remate.fecha_activacion %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="detalles-item">
+                                                    <div class="label">
+                                                        <h2>Categoria</h2>
+                                                    </div>
+                                                    <div class="detalles-valor">
+                                                        <p>
+                                                            <%= remate.categoria %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="label">
+                                                <h2>Precio</h2>
+                                            </div>
+                                            <div class="precio">
+                                                <p>S/ <%= remate.precios %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+
             </main>
 
 

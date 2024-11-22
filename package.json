@@ -4,14 +4,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+
     "dev": "concurrently \"npm run build:all\" \"npm run dev:server\"",
+
     "watch:css": "sass --watch public/styles:public/css",
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas",
+
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas && npm run build:subastas",
+
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
     "build:contactos": "sass public/styles/contactos.scss public/css/contactos/contactos.css",
     "build:mapas": "sass public/styles/mapas.scss public/css/mapas/mapas.css",
+    "build:subastas": "sass public/styles/subastas.scss public/css/subasta/subastas.css",
+
     "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",
+
     "dev:server": "nodemon app.js",
     "start": "npm run build:all && node app.js"
   },
