@@ -13,18 +13,20 @@
   <link rel="stylesheet" href="/css/globales/globales.css">
 
   <!-- ESTILOS GLOBALES -->
-   <link rel="stylesheet" href="/css/globales/globales.css">
+  <link rel="stylesheet" href="/css/globales/globales.css">
 
   <title>Remates Peru || CONTACTOS</title>
 </head>
 
 <body>
+  <!-- COMPONENTE HEADER -->
+  <%- include('componentes/header') %>
   <!-- BOTON NAVEGADOR -->
   <%- include("componentes/btn_menu.ejs") %>
-  <main class="contenedor_contacto">
 
+  <main class="contenedor_contacto">
     <!-- BANER CONTACTO -->
-    <div class="banner">
+    <div id="banner" class="banner">
       <div class="contenedor_titulo">
         <h1 class="titulo">
           <span>
@@ -34,7 +36,8 @@
       </div>
       <div class="contenedor_mensaje">
         <div class="mensaje">
-          ¿Quieres saber más sobre nuestras subastas o los inmuebles disponibles? ¡Estamos aquí para ayudarte y resolver cualquier duda!
+          ¿Quieres saber más sobre nuestras subastas o los inmuebles disponibles? ¡Estamos aquí para ayudarte y
+          resolver cualquier duda!
         </div>
 
       </div>
@@ -49,7 +52,7 @@
     </div>
 
     <!-- SLIDER INMUEBLES -->
-    <div class="sliders_casa">
+    <div id="cartas" class="sliders_casa">
       <div class="titulo_slider">
         <h2 class="sub_titulo">Remajud subastas</h2>
       </div>
@@ -86,7 +89,7 @@
     </div>
 
     <!-- CONTACTOS -->
-    <div class="contacto">
+    <div id="contactos" class="contacto">
       <h2 class="titulo_contactos">
         Remajud
       </h2>
@@ -120,27 +123,38 @@
             </span>
           </a>
         </li>
-        <!--  <li class="items_contactos">
-          <h3 class="sub_titulo">Oficina</h3>
-          <div class="info_contacto">
-            <a href="" class="link"></a>
-          </div>
-        </li>
-        <li class="items_contactos">
-          <h3 class="sub_titulo">Correos</h3>
-          <div class="info_contacto">
-            <a href="" class="link"></a>
-            <a href="" class="link"></a>
-            <a href="" class="link"></a>
-          </div>
-        </li> -->
       </ul>
     </div>
   </main>
-        <script src="/js/componentes/script_btn_menu.js"></script>
 
-<!-- COMPONENTE FOOTER -->
- <%- include('componentes/footer') %>
+  <!-- COMPONENTE FOOTER -->
+  <%- include('componentes/footer') %>
+
+  <script src="/js/componentes/script_btn_menu.js"></script>
+  <script src="/js/componentes/header_ocultar.js"></script>
+
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      const banner = document.getElementById('banner');
+      const cartas = document.getElementById('cartas');
+      const contactos = document.getElementById('contactos');
+      const bannerBottom = banner.getBoundingClientRect().bottom;
+      const cartasBottom = cartas.getBoundingClientRect().bottom;
+      const contactosTop = contactos.getBoundingClientRect().top;
+      if (bannerBottom > 0) {
+        header.style.color = '#0a0000';
+      } else if (cartasBottom > 0) {
+        header.style.color = '#fffcfc';
+      } else if (contactosTop < window.innerHeight) {
+        header.style.color = '#0a0000';
+      } else {
+        header.style.color = 'black';
+      }
+    });
+  </script>
+
 </body>
 
 </html>

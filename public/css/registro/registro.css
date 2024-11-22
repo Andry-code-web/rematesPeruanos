@@ -64,7 +64,6 @@ body {
   line-height: 1.1;
   transition: all 0.5s ease;
   margin-left: 3rem;
-  color: linear-gradient(45deg, #FFE5D0, #FFB27F);
 }
 
 .container_formulario {

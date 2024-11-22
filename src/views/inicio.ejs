@@ -1,30 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ESTILOS -->
-    <link rel="stylesheet" href="/css/inicio/inicio.css">
-    <link rel="stylesheet" href="/css/globales/globales.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- CDN DE ICONOS REMIX -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-    <title>Remates Peru || INICIO</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="/css/inicio/inicio.css">
+  <!-- COMPONENTES -->
+  <link rel="stylesheet" href="/css/globales/globales.css">
+
+  <!-- CDN DE ICONOS REMIX -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <title>Remates Peru || INICIO</title>
 </head>
+
 <body>
-    <%- include("componentes/btn_menu.ejs") %>
-    <div class="hola" style="height: 5000px;">
-        hola
-    </div>
-    <script src="/js/componentes/script_btn_menu.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script>
-        gsap.to('#menu_toggle', {
-    boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
-    duration: 1,
-    repeat: -1,
-    yoyo: true
-        });
-    </script>
+  <!-- HEADER COMPONENTE -->
+  <%- include('componentes/header') %>
+  <!-- BOTON MENU -->
+  <%- include("componentes/btn_menu.ejs") %>
+
+  <main>
+    <section class="banner" id="banner">
+      <div class="banner_contenedor">
+        <div class="banner_video">
+          <video src="/img/video1.mp4" autoplay muted loop></video>
+        </div>
+        <div class="banner_info_filtro">
+          <div class="banner_info">
+            <h1>Remajud remates inmobiliarios</h1>
+            <p>Remates en todo el Perú</p>
+          </div>
+          <div class="banner_filtro">
+            <div class="contenedor_filtro">
+              <form action="" method="post">
+
+                <div class="parent">
+                  <div class="div1">
+                    <p>
+                      ENCUENTRA TU REMATE MAS RAPIDO
+                    </p>
+                  </div>
+                  <div class="div2 contenedor_inputs">
+                    <label for="">
+                      <i class="ri-map-line"></i>
+                      Ciudad
+                    </label>
+                    <input type="text">
+                  </div>
+                  <div class="div3 contenedor_inputs">
+                    <label for="">
+                      <i class="ri-map-pin-2-line"></i>
+                      Departamanto
+                    </label>
+                    <input type="text">
+                  </div>
+                  <div class="div4 contenedor_inputs">
+                    <label for="">
+                      <i class="ri-map-pin-user-line"></i>
+                      Distrito
+                    </label>
+                    <input type="text">
+                  </div>
+                  <div class="div5 contenedor_inputs">
+                    <label for="">
+                      <i class="ri-money-dollar-circle-line"></i>
+                      Precio
+                    </label>
+                    <input type="number">
+                  </div>
+                  <div class="div6 contenedor_inputs">
+                    <label for="">
+                      <i class="ri-menu-search-line"></i>
+                      Categoria
+                    </label>
+                    <input type="text">
+                  </div>
+                  <div class="div7">
+                    <button type="submit">
+                      <i class="ri-search-2-line"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="categoria" id="categorias">
+      <div class="contenedor_categorias">
+        <h2>NUESTRAS CATEGORIAS</h2>
+        <div class="categorias">
+          <div class="cate_remates">
+            <img src="/img/casa2.jfif" alt="">
+            <p>categoria</p>
+          </div>
+          <div class="cate_remates">
+            <img src="/img/casa2.jfif" alt="">
+            <p>categoria</p>
+          </div>
+          <div class="cate_remates">
+            <img src="/img/casa2.jfif" alt="">
+            <p>categoria</p>
+          </div>
+          <div class="cate_remates">
+            <img src="/img/casa2.jfif" alt="">
+            <p>categoria</p>
+          </div>
+          <div class="cate_remates">
+            <img src="/img/casa2.jfif" alt="">
+            <p>categoria</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="subastas" id="subastas">
+      <h1>Lista de Remates</h1>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ubicación</th>
+            <th>Precio</th>
+            <th>Fecha de Activación</th>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% remates.forEach(remate => { %>
+          <tr>
+            <td><%= remate.id %></td>
+            <td><%= remate.ubicacion %></td>
+            <td><%= remate.precios %></td>
+            <td><%= remate.fecha_activacion %></td>
+            <td><%= remate.estado %></td>
+            <td><%= remate.descripcion %></td>
+            <td><%= remate.categoria %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+
+
+  <!-- FOOTER COMPONETE -->
+  <%- include('componentes/footer') %>
+
+  <!-- SCRIPTS JS -->
+  <script src="/js/componentes/script_btn_menu.js"></script>
+  <script src="/js/componentes/header_ocultar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <script>
+    gsap.to('#menu_toggle', {
+      boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.4)',
+      duration: 1,
+      repeat: -1,
+      yoyo: true
+    });
+  </script>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      const banner = document.getElementById('banner');
+      const categorias = document.getElementById('categorias');
+      const subastas = document.getElementById('subastas');
+      const bannerBottom = banner.getBoundingClientRect().bottom;
+      const categoriasBottom = categorias.getBoundingClientRect().bottom;
+      const subastasTop = subastas.getBoundingClientRect().top;
+      if (bannerBottom > 0) {
+        header.style.color = '#fffcfc';
+      } else if (categoriasBottom > 0) {
+        header.style.color = '#0a0000';
+      } else if (subastasTop < window.innerHeight) {
+        header.style.color = '#fffcfc';
+      } else {
+        header.style.color = 'black';
+      }
+    });
+  </script>
+
+
 </body>
+
 </html>
