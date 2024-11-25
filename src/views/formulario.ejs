@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remates Peru || FORMULARIO</title>
     <link rel="stylesheet" href="/css/formulario/formulario.css">
 </head>
-
 <body>
     <div id="formContainer" class="edit-form">
         <h2 id="formTitle">Formulario Remate</h2>
         <form id="remateForm">
             <input type="hidden" id="formId">
             <label for="formUbicacion">Ubicación:</label>
-            <input type="text" id="formUbicacion" placeholder="ingresa la Ubicación">
+            <input type="text" id="formUbicacion" placeholder="Ingresa la ubicación">
             <label for="formPrecio">Precio:</label>
-            <input type="text" id="formPrecio" placeholder="ingresa el precio de venta">
+            <input type="text" id="formPrecio" placeholder="Ingresa el precio de venta">
             <label for="formDescripcion">Descripción:</label>
-            <input type="text" id="formDescripcion" placeholder="ingresa una breve descripción">
+            <input type="text" id="formDescripcion" placeholder="Ingresa una breve descripción">
             <label for="formCategoria">Categoría:</label>
-            <input type="text" id="formCategoria" placeholder="">
+            <input type="text" id="formCategoria" placeholder="Ingresa la categoría">
             <label for="formNBanos">Número de Baños:</label>
-            <input type="text" id="formNBanos" placeholder="ingresa el nuemro de baños">
+            <input type="text" id="formNBanos" placeholder="Ingresa el número de baños">
             <label for="formNHabitaciones">Número de Habitaciones:</label>
-            <input type="text" id="formNHabitaciones" placeholder="ingresa el nuemro de habitaciones">
+            <input type="text" id="formNHabitaciones" placeholder="Ingresa el número de habitaciones">
             <label for="formPiscina">Piscina:</label>
-            <input type="text" id="formPiscina" placeholder="ingresa el numero de piscina">
+            <input type="text" id="formPiscina" placeholder="Ingresa si tiene piscina">
             <label for="formPatio">Patio:</label>
-            <input type="text" id="formPatio">
+            <input type="text" id="formPatio" placeholder="Ingresa si tiene patio">
             <label for="formCocina">Cocina:</label>
-            <input type="text" id="formCocina" placeholder="ingresa el numero de cocinas">
+            <input type="text" id="formCocina" placeholder="Ingresa si tiene cocina">
             <label for="formCochera">Cochera:</label>
-            <input type="text" id="formCochera" placeholder="ingresa el numero de Cocheras">
+            <input type="text" id="formCochera" placeholder="Ingresa si tiene cochera">
             <label for="formBalcon">Balcón:</label>
-            <input type="text" id="formBalcon" placeholder="ingresa el numero de Balcónes">
+            <input type="text" id="formBalcon" placeholder="Ingresa si tiene balcón">
             <label for="formJardin">Jardín:</label>
-            <input type="text" id="formJardin">
+            <input type="text" id="formJardin" placeholder="Ingresa si tiene jardín">
             <label for="formPisos">Pisos:</label>
-            <input type="text" id="formPisos" placeholder="ingresa el numero de Pisos">
+            <input type="text" id="formPisos" placeholder="Ingresa el número de pisos">
             <label for="formComedor">Comedor:</label>
-            <input type="text" id="formComedor">
+            <input type="text" id="formComedor" placeholder="Ingresa si tiene comedor">
             <label for="formSalaEstar">Sala de Estar:</label>
-            <input type="text" id="formSalaEstar" placeholder="ingresa una breve descripción">
+            <input type="text" id="formSalaEstar" placeholder="Ingresa si tiene sala de estar">
             <label for="formEstudio">Estudio:</label>
-            <input type="text" id="formEstudio" placeholder="ingresa una breve">
+            <input type="text" id="formEstudio" placeholder="Ingresa si tiene estudio">
             <label for="formLavanderia">Lavandería:</label>
-            <input type="text" id="formLavanderia" placeholder="ingresa una breve descripción">
+            <input type="text" id="formLavanderia" placeholder="Ingresa si tiene lavandería">
             <div class="subir_img">
-                <label for="file-upload" class="custom-file-upload">Agrega una foto</label>
-                <input type="file" id="file-upload" name="photo" accept="image/*"><br>
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fas fa-upload"></i> Agrega una foto
+                </label>
+                <input type="file" id="file-upload" name="photo" accept="image/*" multiple>
             </div>
-            <div id="image-preview"> <img id="preview-img" src="#" alt="Vista previa de la imagen"
-                    style="display: none;">
-                <p id="image-description" style="display: none;">Descripción de la imagen seleccionada.</p>
+            <div id="image-preview">
+                <div id="image-preview-container"></div>
             </div>
             <div class="btn_fin">
                 <button type="button" id="saveBtn">Enviar</button>
@@ -64,23 +63,9 @@
 
     <script>
         document.getElementById('file-upload').addEventListener('change', function (event) {
-            const [file] = event.target.files;
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('preview-img').src = e.target.result;
-                    document.getElementById('preview-img').style.display = 'block';
-                    document.getElementById('image-description').style.display = 'block';
-                    document.getElementById('image-description').innerText = `Nombre del archivo: ${file.name}`;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('file-upload').addEventListener('change', function (event) {
-            const minFiles = 2; // Límite mínimo de archivos
-            const maxFiles = 5; // Límite máximo de archivos
             const files = event.target.files;
+            const minFiles = 1; // Límite mínimo de archivos
+            const maxFiles = 10; // Límite máximo de archivos
 
             if (files.length < minFiles || files.length > maxFiles) {
                 alert(`Debes subir entre ${minFiles} y ${maxFiles} fotos.`);
@@ -105,9 +90,6 @@
                 reader.readAsDataURL(file);
             }
         });
-
-
     </script>
 </body>
-
 </html>
