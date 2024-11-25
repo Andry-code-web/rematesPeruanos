@@ -66,63 +66,93 @@ router.get('/contacto', (req, res) => {
 router.get('/mapa', (req, res) => {
     res.render("mapa");
 });
-
-/* RUTA ADMIN VER USUARIOS */
+/* RUTA ADMIN VER REMATES */
 router.get('/admin', async (req, res) => {
     try {
-        const [usuarios] = await pool.query(`
+        const [remates] = await pool.query(`
         SELECT
             r.id AS id,
-            r.dni,
-            r.nombres_apellidos,
-            r.correo,
-            r.fecha_nacimiento,
-            r.sexo,
-            r.celular,
-            r.departamento,
-            r.provincia,
-            r.distrito,
-            r.direccion,
-            r.usuario,
-            r.oportunidades
-        FROM usuarios r
+            r.ubicacion,
+            r.precios,
+            r.descripcion,
+            r.categoria,
+            r.N_baños,
+            r.N_habitacion,
+            r.pisina,
+            r.patio,
+            r.cocina,
+            r.cochera,
+            r.balcon,
+            r.jardin,
+            r.pisos,
+            r.comedor,
+            r.sala_start,
+            r.studio,
+            r.lavanderia,
+            r.fecha_activacion,
+            r.fecha_remate,
+            r.hora_remate,
+            r.usuario_admin_id,
+            r.ganador,
+            r.like_count,
+            r.monto_venta,
+            r.estado
+        FROM remates r
         `);
 
-        console.log("Datos de usuarios obtenidos:", usuarios);
+        console.log("Datos de remates obtenidos:", remates);
 
-        if (Array.isArray(usuarios)) {
-            console.log(`Se obtuvieron ${usuarios.length} usuarios`);
+        if (Array.isArray(remates)) {
+            console.log(`Se obtuvieron ${remates.length} remates`);
         } else {
-            console.log("Los datos de usuarios no están en el formato esperado.");
+            console.log("Los datos de remates no están en el formato esperado.");
         }
 
-        // Pasar los usuarios a la vista
-        res.render('admin', { usuarios });
+        // Pasar los remates a la vista
+        res.render('admin', { remates });
     } catch (error) {
-        console.error('Error fetching usuarios:', error);
+        console.error('Error fetching remates:', error);
         res.status(500).send('Error al cargar los datos');
     }
 });
 
-// Ruta para eliminar un usuario
-router.delete('/admin/eliminar-usuario', async (req, res) => {
-    const { deleteId } = req.query;  // Obtenemos el ID del usuario a eliminar
+// Ruta para eliminar un remate
+router.delete('/admin/eliminar-remate', async (req, res) => {
+    const { deleteId } = req.query;  // Obtenemos el ID del remate a eliminar
     if (deleteId) {
         try {
-            // Eliminamos el usuario de la tabla 'usuarios'
-            const result = await pool.query('DELETE FROM usuarios WHERE id = ?', [deleteId]);
+            // Eliminamos el remate de la tabla 'remates'
+            const result = await pool.query('DELETE FROM remates WHERE id = ?', [deleteId]);
             if (result.affectedRows > 0) {
                 return res.json({ success: true });  // Respuesta de éxito en formato JSON
             } else {
-                return res.json({ success: false, error: 'Usuario eliminado.' });
+                return res.json({ success: false, success: 'Remate eliminado.' });
             }
         } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
+            console.error('Error al eliminar el remate:', error);
             return res.json({ success: false, error: error.message });
         }
     } else {
-        return res.json({ success: false, error: 'ID de usuario no proporcionado.' });
+        return res.json({ success: false, error: 'ID de remate no proporcionado.' });
     }
 });
+
+//editar remates   
+router.get('/admin/editar-remate/:id', async (req, res) => {
+    const { id } = req.query;
+    try {
+        const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
+        if (remates.length > 0) {
+            res.json({ success: true, remate: remates[0] });
+        } else {
+            res.json({ success: false, error: 'Remate no encontrado' });
+        }
+    } catch (error) {
+        console.error('Error al obtener el remate:', error);
+        res.json({ success: false, error: error.message });
+    }
+});
+
+
 
 module.exports = router;
