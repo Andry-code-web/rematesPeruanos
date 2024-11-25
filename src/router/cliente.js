@@ -69,4 +69,9 @@ router.get('/admin',(req, res) =>{
     res.render("admin");
 })
 
+/* RUTA FOMULARIO ADMIN */
+router.get('/formulario',(req, res) =>{
+    res.render("formulario");
+})
+
 module.exports = router;
