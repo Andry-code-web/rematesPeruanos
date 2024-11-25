@@ -114,7 +114,7 @@ router.get('/admin', async (req, res) => {
         console.error('Error fetching remates:', error);
         res.status(500).send('Error al cargar los datos');
     }
-});
+}); 
 
 // Ruta para eliminar un remate
 router.delete('/admin/eliminar-remate', async (req, res) => {
