@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* Estilo para el buscador */
+        #buscador {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        /* Estilo del botón de búsqueda cuando está en uso */
+        #buscador:focus {
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="bi bi-people-fill me-2"></i>Gestión de Usuarios</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Formulario de búsqueda -->
+                        <div class="mb-3">
+                            <label for="buscador" class="form-label">Buscar usuario</label>
+                            <input type="text" id="buscador" class="form-control"
+                                placeholder="Buscar por nombre, correo, etc." onkeyup="buscarUsuario()">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>DNI</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Fecha Nac.</th>
+                                        <th>Sexo</th>
+                                        <th>Celular</th>
+                                        <th>Departamento</th>
+                                        <th>Provincia</th>
+                                        <th>Distrito</th>
+                                        <th>Dirección</th>
+                                        <th>Usuario</th>
+                                        <th>Oportunidades</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usuariosTableBody">
+                                    <!-- Los datos de los usuarios se insertarán aquí dinámicamente -->
+                                    <% usuarios.forEach(function(usuario) { %>
+                                        <tr>
+                                            <td>
+                                                <%= usuario.id %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.dni %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.nombres_apellidos %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.correo %>
+                                            </td>
+                                            <td>
+                                                <%= new Date(usuario.fecha_nacimiento).toLocaleDateString() %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.sexo %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.celular %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.departamento %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.provincia %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.distrito %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.direccion %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.usuario %>
+                                            </td>
+                                            <td>
+                                                <%= usuario.oportunidades %>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger btn-action"
+                                                    onclick="eliminarUsuario(<%= usuario.id %>)">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Función para eliminar usuario
+        window.eliminarUsuario = function (id, usuario) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: `¿Quieres eliminar al usuario con ID: ${id}? Recuerda que no podrás revertir esta acción.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/admin/eliminar-usuario?deleteId=${id}`, { method: 'DELETE' })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Eliminación correcta',
+                                    `El usuario ${usuario} fue eliminado satisfactoriamente.`,
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Recargar la página para actualizar la lista
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Eliminación correcta',
+                                    'El usuario fue eliminado satisfactoriamente.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Recargar la página si el usuario ya fue eliminado o no existe
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire(
+                                'Error',
+                                'Ocurrió un error al intentar eliminar el usuario.',
+                                'error'
+                            );
+                        });
+                }
+            });
+        }
+
+        // Función para filtrar los usuarios
+        function buscarUsuario() {
+            // Obtener el valor del buscador
+            let input = document.getElementById('buscador').value.toLowerCase();
+            let table = document.getElementById('usuariosTableBody');
+            let rows = table.getElementsByTagName('tr');
+
+            // Iterar sobre las filas de la tabla
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let rowVisible = false;
+
+                // Iterar sobre las celdas de cada fila para verificar si alguna contiene el texto
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        let cellText = cells[j].textContent || cells[j].innerText;
+                        if (cellText.toLowerCase().indexOf(input) > -1) {
+                            rowVisible = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Mostrar o esconder la fila según si hay coincidencias
+                rows[i].style.display = rowVisible ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

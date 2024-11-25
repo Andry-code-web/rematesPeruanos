@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "fuentePrincipal";
   src: url("/fonts/Expressa-DemiBold.otf") format("opentype");
@@ -262,6 +263,15 @@
   font-family: "fuenteparrafos";
 }
 
+.tarjetas_subastas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* Espacios uniformes entre las cartas */
+  gap: 20px;
+  /* Espacio entre las cartas */
+}
+
 .carta {
   width: 450px;
   /* border-radius: 8px; */
@@ -360,8 +370,18 @@
   font-weight: 600;
 }
 
-.tarjetas_subastas {
-  display: inline-block;
+/* Media Queries */
+@media (max-width: 1024px) {
+  .carta {
+    width: 48%;
+    /* Dos cartas por fila en pantallas medianas */
+  }
+}
+@media (max-width: 768px) {
+  .carta {
+    width: 100%;
+    /* Una carta por fila en pantallas pequeñas */
+  }
 }
 
 /*# sourceMappingURL=inicio.css.map */

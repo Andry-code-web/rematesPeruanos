@@ -1,0 +1,57 @@
+@charset "UTF-8";
+body {
+  background-color: #f0f2f5;
+}
+
+.card {
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.btn-action {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
+/* Estilo para el buscador */
+#buscador {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+/* Estilo del botón de búsqueda cuando está en uso */
+#buscador:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+/*# sourceMappingURL=admin.css.map */

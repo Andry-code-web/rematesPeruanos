@@ -9,13 +9,14 @@
 
     "watch:css": "sass --watch public/styles:public/css",
 
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas && npm run build:subastas",
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas && npm run build:subastas && npm run build:admin",
 
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
     "build:contactos": "sass public/styles/contactos.scss public/css/contactos/contactos.css",
     "build:mapas": "sass public/styles/mapas.scss public/css/mapas/mapas.css",
     "build:subastas": "sass public/styles/subastas.scss public/css/subasta/subastas.css",
+    "build:admin": "sass public/styles/admin.scss public/css/admin/admin.css",
 
     "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",
 

@@ -15,8 +15,10 @@ const port = process.env.PORT || 5050;
 
 // Routers
 const cliente = require("./src/router/cliente");
+const admin = require("./src/router/admin");  // Añadido router para administración
 
 app.use("/", cliente);
+app.use("/admin", admin);  // Rutas de administración
 
 // Configuración de vistas
 app.set("view engine", "ejs");
