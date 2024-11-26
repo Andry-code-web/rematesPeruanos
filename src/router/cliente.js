@@ -70,7 +70,6 @@ router.get('/mapa', (req, res) => {
 
 
 
-
 /* RUTA ADMIN VER REMATES */
 router.get('/admin', async (req, res) => {
     try {
@@ -81,7 +80,7 @@ router.get('/admin', async (req, res) => {
             r.precios,
             r.descripcion,
             r.categoria,
-            r.N_baños,
+            r.N_banos,
             r.N_habitacion,
             r.pisina,
             r.patio,
@@ -146,11 +145,12 @@ router.delete('/admin/eliminar-remate', async (req, res) => {
 
 // Editar remates   
 router.get('/admin/editar-remate/:id', async (req, res) => {
-    const { id } = req.params;  // Usar req.params en lugar de req.query
+    const { id } = req.params;
     try {
         const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
         if (remates.length > 0) {
-            res.render('editar-remate', { remate: remates[0] });  // Renderizar la vista de edición
+            // Responder con los datos del remate en formato JSON
+            res.json({ remate: remates[0] });
         } else {
             res.json({ success: false, error: 'Remate no encontrado' });
         }
@@ -162,12 +162,13 @@ router.get('/admin/editar-remate/:id', async (req, res) => {
 
 
 
+
 // Añadir remate
 router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
     try {
         const {
             ubicacion, precios, descripcion, categoria,
-            N_baños, N_habitacion, pisina, patio,
+            N_banos, N_habitacion, pisina, patio,
             cocina, cochera, balcon, jardin, pisos,
             comedor, sala_start, studio, lavanderia,
             fecha_remate, hora_remate
@@ -182,7 +183,7 @@ router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
         const [result] = await pool.query(`
             INSERT INTO remates (
                 ubicacion, precios, descripcion, categoria,
-                N_baños, N_habitacion, pisina, patio,
+                N_banos, N_habitacion, pisina, patio,
                 cocina, cochera, balcon, jardin, pisos,
                 comedor, sala_start, studio, lavanderia,
                 fecha_remate, hora_remate, estado,
@@ -190,7 +191,7 @@ router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?)
         `, [
             ubicacion, precios, descripcion, categoria,
-            N_baños, N_habitacion, 
+            N_banos, N_habitacion, 
             processedFields.pisina, processedFields.patio,
             processedFields.cocina, processedFields.cochera, 
             processedFields.balcon, processedFields.jardin, 
@@ -232,7 +233,7 @@ router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
     try {
         const {
             ubicacion, precios, descripcion, categoria,
-            N_baños, N_habitacion, pisina, patio,
+            N_banos, N_habitacion, pisina, patio,
             cocina, cochera, balcon, jardin, pisos,
             comedor, sala_start, studio, lavanderia,
             fecha_remate, hora_remate, estado
@@ -247,14 +248,14 @@ router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
         const [result] = await pool.query(`
             UPDATE remates SET
                 ubicacion = ?, precios = ?, descripcion = ?, categoria = ?,
-                N_baños = ?, N_habitacion = ?, pisina = ?, patio = ?,
+                N_banos = ?, N_habitacion = ?, pisina = ?, patio = ?,
                 cocina = ?, cochera = ?, balcon = ?, jardin = ?, pisos = ?,
                 comedor = ?, sala_start = ?, studio = ?, lavanderia = ?,
                 fecha_remate = ?, hora_remate = ?, estado = ?
             WHERE id = ?
         `, [
             ubicacion, precios, descripcion, categoria,
-            N_baños, N_habitacion, 
+            N_banos, N_habitacion, 
             processedFields.pisina, processedFields.patio,
             processedFields.cocina, processedFields.cochera, 
             processedFields.balcon, processedFields.jardin, 
