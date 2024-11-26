@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
+
 <body>
     <div class="container">
         <header class="dashboard-header">
-            <h1 class="dashboard-title">Gestión de Remates</h1>
-            <p class="dashboard-subtitle">Sistema de administración de propiedades</p>
+            <div class="header-content">
+                <div>
+                    <h1 class="dashboard-title">Gestión de Remates</h1>
+                    <p class="dashboard-subtitle">Sistema de administración de propiedades</p>
+                </div>
+                <button onclick="abrirModalNuevoRemate()" class="btn-add-remate">
+                    <i class="bi bi-plus-circle"></i>
+                    Nuevo Remate
+                </button>
+            </div>
         </header>
 
         <div class="metrics-container">
@@ -46,9 +56,8 @@
 
         <div class="search-container">
             <i class="bi bi-search search-icon"></i>
-            <input type="text" id="buscador" class="search-input" 
-                   placeholder="Buscar por ubicación, precio o categoría..." 
-                   onkeyup="buscarRemate()">
+            <input type="text" id="buscador" class="search-input"
+                placeholder="Buscar por ubicación, precio o categoría..." onkeyup="buscarRemate()">
         </div>
 
         <div class="properties-grid" id="rematesGrid">
@@ -56,11 +65,15 @@
                 <div class="property-card" data-id="<%= remate.id %>">
                     <img src="/placeholder.svg?height=200&width=300" alt="Propiedad" class="property-image">
                     <div class="property-content">
-                        <span class="property-status <%= remate.estado === 'activo' ? 'status-active' : 'status-inactive' %>">
+                        <span
+                            class="property-status <%= remate.estado === 'activo' ? 'status-active' : 'status-inactive' %>">
                             <%= remate.estado %>
                         </span>
-                        <h3 class="property-title"><%= remate.ubicacion %></h3>
-                        <div class="property-price">$<%= remate.precios.toLocaleString() %></div>
+                        <h3 class="property-title">
+                            <%= remate.ubicacion %>
+                        </h3>
+                        <div class="property-price">$<%= remate.precios.toLocaleString() %>
+                        </div>
                         <div class="property-details">
                             <div class="detail-item">
                                 <i class="bi bi-building"></i>
@@ -79,76 +92,155 @@
                                 <%= new Date(remate.fecha_remate).toLocaleDateString() %>
                             </div>
                         </div>
-                        <p class="property-description"><%= remate.descripcion %></p>
+                        <p class="property-description">
+                            <%= remate.descripcion %>
+                        </p>
                         <div class="property-actions">
                             <button class="action-button" onclick="editarRemate(<%= remate.id %>)">
                                 <i class="bi bi-pencil"></i>
                                 Editar
                             </button>
-                            <button class="action-button" onclick="eliminarRemate(<%= remate.id %>, '<%= remate.ubicacion %>')">
+                            <button class="action-button"
+                                onclick="eliminarRemate(<%= remate.id %>, '<%= remate.ubicacion %>')">
                                 <i class="bi bi-trash"></i>
                                 Eliminar
                             </button>
                         </div>
                     </div>
                 </div>
-            <% }); %>
+                <% }); %>
         </div>
     </div>
 
 
-    <!-- Modal de edición -->
-    <div id="editModal" class="modal">
+    <!-- Add the new modal form -->
+    <div id="modalNuevoRemate" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Editar Remate</h2>
-                <button class="close-button" onclick="cerrarModal()">&times;</button>
+                <h2 class="modal-title">
+                    <i class="bi bi-house-add"></i>
+                    Nuevo Remate
+                </h2>
+                <button class="close-button" onclick="cerrarModalNuevoRemate()">
+                    <i class="bi bi-x"></i>
+                </button>
             </div>
-            <form id="editForm" onsubmit="guardarCambios(event)">
-                <input type="hidden" id="editId" name="id">
+            <form id="formNuevoRemate" onsubmit="guardarNuevoRemate(event)">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="editUbicacion">Ubicación</label>
-                        <input type="text" id="editUbicacion" name="ubicacion" required>
+                        <label for="ubicacion">
+                            <i class="bi bi-geo-alt"></i>
+                            Ubicación
+                        </label>
+                        <input type="text" id="ubicacion" name="ubicacion" required>
                     </div>
                     <div class="form-group">
-                        <label for="editPrecio">Precio</label>
-                        <input type="number" id="editPrecio" name="precios" required>
+                        <label for="precios">
+                            <i class="bi bi-currency-dollar"></i>
+                            Precio Base
+                        </label>
+                        <input type="number" id="precios" name="precios" required>
                     </div>
                     <div class="form-group">
-                        <label for="editCategoria">Categoría</label>
-                        <select id="editCategoria" name="categoria" required>
+                        <label for="categoria">
+                            <i class="bi bi-building"></i>
+                            Categoría
+                        </label>
+                        <select id="categoria" name="categoria" required>
                             <option value="departamento">Departamento</option>
-                            <option value="casa">Casa</option>
+                            <option value="cochera">Cochera</option>
                             <option value="terreno">Terreno</option>
+                            <option value="residencial">Residencial</option>
+                            <option value="casa">Casa</option>
                             <option value="local">Local</option>
-                            <option value="casa_playa">Casa Playa</option>
+                            <option value="casa_playa">Casa de Playa</option>
+                            <option value="terreno_urbano">Terreno Urbano</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="editHabitaciones">Habitaciones</label>
-                        <input type="number" id="editHabitaciones" name="N_habitacion" min="0">
+                        <label for="N_habitacion">
+                            <i class="bi bi-door-closed"></i>
+                            Número de Habitaciones
+                        </label>
+                        <input type="number" id="N_habitacion" name="N_habitacion">
                     </div>
                     <div class="form-group">
-                        <label for="editBanos">Baños</label>
-                        <input type="number" id="editBanos" name="N_baños" min="0">
+                        <label for="N_baños">
+                            <i class="bi bi-droplet"></i>
+                            Número de Baños
+                        </label>
+                        <input type="number" id="N_baños" name="N_baños">
                     </div>
                     <div class="form-group">
-                        <label for="editFechaRemate">Fecha de Remate</label>
-                        <input type="date" id="editFechaRemate" name="fecha_remate" required>
+                        <label for="fecha_remate">
+                            <i class="bi bi-calendar"></i>
+                            Fecha de Remate
+                        </label>
+                        <input type="date" id="fecha_remate" name="fecha_remate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hora_remate">
+                            <i class="bi bi-clock"></i>
+                            Hora de Remate
+                        </label>
+                        <input type="time" id="hora_remate" name="hora_remate" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="editDescripcion">Descripción</label>
-                    <textarea id="editDescripcion" name="descripcion" required></textarea>
+
+                <div class="amenities-grid">
+                    <div class="form-check">
+                        <input type="checkbox" id="pisina" name="pisina" value="si">
+                        <label for="pisina">
+                            <i class="bi bi-water"></i>
+                            Piscina
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="patio" name="patio" value="si">
+                        <label for="patio">
+                            <i class="bi bi-tree"></i>
+                            Patio
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="cocina" name="cocina" value="si">
+                        <label for="cocina">
+                            <i class="bi bi-cup-hot"></i>
+                            Cocina
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="cochera" name="cochera" value="si">
+                        <label for="cochera">
+                            <i class="bi bi-car-front"></i>
+                            Cochera
+                        </label>
+                    </div>
+                    <!-- Add more amenities checkboxes -->
                 </div>
+
+                <div class="form-group full-width">
+                    <label for="descripcion">
+                        <i class="bi bi-text-paragraph"></i>
+                        Descripción
+                    </label>
+                    <textarea id="descripcion" name="descripcion" required></textarea>
+                </div>
+
                 <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalNuevoRemate()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i>
+                        Guardar Remate
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -180,75 +272,16 @@
             remates.forEach(remate => {
                 const texto = remate.textContent.toLowerCase();
                 remate.style.display = texto.includes(input) ? 'block' : 'none';
-            }); 
+            });
 
             actualizarMetricas();
-        }
-
-        // Función para editar remate
-        function editarRemate(id) {
-            fetch(`/admin/remate/<% remates.id %>`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('editId').value = data.remate.id;
-                        document.getElementById('editUbicacion').value = data.remate.ubicacion;
-                        document.getElementById('editPrecio').value = data.remate.precios;
-                        document.getElementById('editCategoria').value = data.remate.categoria;
-                        document.getElementById('editHabitaciones').value = data.remate.N_habitacion;
-                        document.getElementById('editBanos').value = data.remate.N_baños;
-                        document.getElementById('editDescripcion').value = data.remate.descripcion;
-                        document.getElementById('editFechaRemate').value = data.remate.fecha_remate.split('T')[0];
-                        
-                        document.getElementById('editModal').style.display = 'block';
-                    } else {
-                        Swal.fire('Error', 'No se pudo cargar la información del remate', 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire('Error', 'Error al cargar los datos del remate', 'error');
-                });
-        }
-
-        // Función para guardar cambios
-        function guardarCambios(event) {
-            event.preventDefault();
-            const formData = new FormData(document.getElementById('editForm'));
-            const id = formData.get('id');
-
-            fetch('/admin/editar-remate', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(Object.fromEntries(formData))
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: 'Remate actualizado correctamente',
-                        icon: 'success'
-                    }).then(() => {
-                        location.reload();
-                    });
-                } else {
-                    throw new Error(data.error || 'Error al actualizar el remate');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire('Error', error.message, 'error');
-            });
         }
 
         // Función para eliminar remate
         function eliminarRemate(id, ubicacion, descripcion) {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: `¿Quieres eliminar el remate en ${id,ubicacion}?`,
+                text: `¿Quieres eliminar el remate en ${id, ubicacion}?`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -260,20 +293,20 @@
                     fetch(`/admin/eliminar-remate?deleteId=${id}`, {
                         method: 'DELETE'
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            document.querySelector(`.property-card[data-id="${id}"]`).remove();
-                            actualizarMetricas();
-                            Swal.fire('Eliminado', 'El remate ha sido eliminado', 'success');
-                        } else {
-                            throw new Error(data.error || 'Error al eliminar el remate');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire('Error', error.message, 'error');
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.querySelector(`.property-card[data-id="${id}"]`).remove();
+                                actualizarMetricas();
+                                Swal.fire('Eliminado', 'El remate ha sido eliminado', 'success');
+                            } else {
+                                throw new Error(data.error || 'Error al eliminar el remate');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire('Error', error.message, 'error');
+                        });
                 }
             });
         }
@@ -287,11 +320,74 @@
         document.addEventListener('DOMContentLoaded', actualizarMetricas);
 
         // Cerrar modal al hacer clic fuera
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == document.getElementById('editModal')) {
                 cerrarModal();
             }
         }
     </script>
+
+
+    <script>
+        function abrirModalNuevoRemate() {
+            document.getElementById('modalNuevoRemate').style.display = 'block';
+        }
+
+        function cerrarModalNuevoRemate() {
+            document.getElementById('modalNuevoRemate').style.display = 'none';
+        }
+
+        async function guardarNuevoRemate(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const checkboxFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
+
+            // Set default value 'no' for unchecked checkboxes
+            checkboxFields.forEach(field => {
+                if (!formData.has(field)) {
+                    formData.append(field, 'no');
+                }
+            });
+
+            try {
+                const response = await fetch('/admin/nuevo-remate', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: 'Remate creado correctamente',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    throw new Error(data.error || 'Error al crear el remate');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: error.message,
+                    icon: 'error'
+                });
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('modalNuevoRemate');
+            if (event.target === modal) {
+                cerrarModalNuevoRemate();
+            }
+        }
+
+    </script>
 </body>
+
 </html>

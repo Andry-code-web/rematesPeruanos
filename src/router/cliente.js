@@ -2,19 +2,21 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database/db')
 require('dotenv').config();
+const multer = require('multer');
+const upload = multer();
 
 /* LOGIN */
-router.post('/iniciar-session', (req, res) => {
-    res.render()
+router.post('/iniciar-sesion', (req, res) => {
+    res.render('login'); // Asegúrate de pasar un nombre de vista válido
 })
 
 /* REGISTRO */
-router.get('/registrar', (res, req) => {
-    res.render('registro')
+router.get('/registrar', (req, res) => {
+    res.render('registro');
 })
 
-router.post('/registrar', (res, req) => {
-
+router.post('/registrar', (req, res) => {
+    // Lógica para manejar el registro
 })
 
 /* RUTA INICIO */
@@ -31,7 +33,6 @@ router.get('/', async (req, res) => {
           r.categoria
         FROM remates r
       `);
-        // Mostrar los datos obtenidos en consola
         console.log("Datos de remates obtenidos:", remates);
 
         if (Array.isArray(remates)) {
@@ -66,6 +67,10 @@ router.get('/contacto', (req, res) => {
 router.get('/mapa', (req, res) => {
     res.render("mapa");
 });
+
+
+
+
 /* RUTA ADMIN VER REMATES */
 router.get('/admin', async (req, res) => {
     try {
@@ -108,25 +113,25 @@ router.get('/admin', async (req, res) => {
             console.log("Los datos de remates no están en el formato esperado.");
         }
 
-        // Pasar los remates a la vista
         res.render('admin', { remates });
     } catch (error) {
         console.error('Error fetching remates:', error);
         res.status(500).send('Error al cargar los datos');
     }
-}); 
+});
+
+
 
 // Ruta para eliminar un remate
 router.delete('/admin/eliminar-remate', async (req, res) => {
-    const { deleteId } = req.query;  // Obtenemos el ID del remate a eliminar
+    const { deleteId } = req.query;
     if (deleteId) {
         try {
-            // Eliminamos el remate de la tabla 'remates'
-            const result = await pool.query('DELETE FROM remates WHERE id = ?', [deleteId]);
+            const [result] = await pool.query('DELETE FROM remates WHERE id = ?', [deleteId]);
             if (result.affectedRows > 0) {
-                return res.json({ success: true });  // Respuesta de éxito en formato JSON
+                return res.json({ success: true });
             } else {
-                return res.json({ success: false, success: 'Remate eliminado.' });
+                return res.json({ success: false, error: 'Remate no encontrado.' });
             }
         } catch (error) {
             console.error('Error al eliminar el remate:', error);
@@ -137,13 +142,15 @@ router.delete('/admin/eliminar-remate', async (req, res) => {
     }
 });
 
-//editar remates   
+
+
+// Editar remates   
 router.get('/admin/editar-remate/:id', async (req, res) => {
-    const { id } = req.query;
+    const { id } = req.params;  // Usar req.params en lugar de req.query
     try {
         const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
         if (remates.length > 0) {
-            res.json({ success: true, remate: remates[0] });
+            res.render('editar-remate', { remate: remates[0] });  // Renderizar la vista de edición
         } else {
             res.json({ success: false, error: 'Remate no encontrado' });
         }
@@ -153,6 +160,121 @@ router.get('/admin/editar-remate/:id', async (req, res) => {
     }
 });
 
+
+
+// Añadir remate
+router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
+    try {
+        const {
+            ubicacion, precios, descripcion, categoria,
+            N_baños, N_habitacion, pisina, patio,
+            cocina, cochera, balcon, jardin, pisos,
+            comedor, sala_start, studio, lavanderia,
+            fecha_remate, hora_remate
+        } = req.body;
+
+        const booleanFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
+        const processedFields = booleanFields.reduce((acc, field) => {
+            acc[field] = req.body[field] === 'on' ? 'si' : 'no';
+            return acc;
+        }, {});
+
+        const [result] = await pool.query(`
+            INSERT INTO remates (
+                ubicacion, precios, descripcion, categoria,
+                N_baños, N_habitacion, pisina, patio,
+                cocina, cochera, balcon, jardin, pisos,
+                comedor, sala_start, studio, lavanderia,
+                fecha_remate, hora_remate, estado,
+                fecha_activacion, hora_activacion, usuario_admin_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?)
+        `, [
+            ubicacion, precios, descripcion, categoria,
+            N_baños, N_habitacion, 
+            processedFields.pisina, processedFields.patio,
+            processedFields.cocina, processedFields.cochera, 
+            processedFields.balcon, processedFields.jardin, 
+            pisos,
+            processedFields.comedor, processedFields.sala_start, 
+            processedFields.studio, processedFields.lavanderia,
+            fecha_remate, hora_remate,
+            1 // Reemplazar con el ID real del usuario administrador de la sesión
+        ]);
+
+        res.json({ success: true, id: result.insertId });
+    } catch (error) {
+        console.error('Error al crear remate:', error);
+        res.json({ success: false, error: error.message });
+    }
+});
+
+
+
+// Editar remates   
+router.get('/admin/editar-remate/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
+        if (remates.length > 0) {
+            res.json({ success: true, remate: remates[0] });
+        } else {
+            res.status(404).json({ success: false, error: 'Remate no encontrado' });
+        }
+    } catch (error) {
+        console.error('Error al obtener el remate:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Actualizar remate
+router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
+    const { id } = req.params;
+    try {
+        const {
+            ubicacion, precios, descripcion, categoria,
+            N_baños, N_habitacion, pisina, patio,
+            cocina, cochera, balcon, jardin, pisos,
+            comedor, sala_start, studio, lavanderia,
+            fecha_remate, hora_remate, estado
+        } = req.body;
+
+        const booleanFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
+        const processedFields = booleanFields.reduce((acc, field) => {
+            acc[field] = req.body[field] === 'on' ? 'si' : 'no';
+            return acc;
+        }, {});
+
+        const [result] = await pool.query(`
+            UPDATE remates SET
+                ubicacion = ?, precios = ?, descripcion = ?, categoria = ?,
+                N_baños = ?, N_habitacion = ?, pisina = ?, patio = ?,
+                cocina = ?, cochera = ?, balcon = ?, jardin = ?, pisos = ?,
+                comedor = ?, sala_start = ?, studio = ?, lavanderia = ?,
+                fecha_remate = ?, hora_remate = ?, estado = ?
+            WHERE id = ?
+        `, [
+            ubicacion, precios, descripcion, categoria,
+            N_baños, N_habitacion, 
+            processedFields.pisina, processedFields.patio,
+            processedFields.cocina, processedFields.cochera, 
+            processedFields.balcon, processedFields.jardin, 
+            pisos,
+            processedFields.comedor, processedFields.sala_start, 
+            processedFields.studio, processedFields.lavanderia,
+            fecha_remate, hora_remate, estado,
+            id
+        ]);
+
+        if (result.affectedRows > 0) {
+            res.json({ success: true, message: 'Remate actualizado correctamente' });
+        } else {
+            res.status(404).json({ success: false, error: 'Remate no encontrado' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar el remate:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
 
 
 module.exports = router;
