@@ -15,8 +15,10 @@ const port = process.env.PORT || 5050;
 
 // Routers
 const cliente = require("./src/router/cliente");
+const admin = require("./src/router/admin");
 
 app.use("/", cliente);
+app.use("/admin", admin);
 
 // Configuración de vistas
 app.set("view engine", "ejs");

@@ -54,4 +54,6 @@ router.get('/subasta', (req, res) => {
 router.get('/contacto', (req, res) => {
     res.render("contactos");
 });
+
+
 module.exports = router;
