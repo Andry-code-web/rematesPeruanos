@@ -27,4 +27,33 @@ router.get("/clientes_admin", async (req, res) => {
 });
 
 
+// Ruta para actualizar oportunidades
+router.post('/clientes_admin', async (req, res) => {
+    const clienteId = req.params.id;
+    
+    try {
+      const query = 'UPDATE usuarios SET oportunidades = 10 WHERE id = ?';
+      
+      connection.query(query, [clienteId], (error, results) => {
+        if (error) {
+          console.error('Error al actualizar oportunidades:', error);
+          return res.status(500).json({ 
+            success: false, 
+            message: 'Error al actualizar oportunidades' 
+          });
+        }
+        
+        res.json({ 
+          success: true, 
+          message: 'Oportunidades actualizadas correctamente' 
+        });
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: 'Error interno del servidor' 
+      });
+    }
+  });
 module.exports = router;
