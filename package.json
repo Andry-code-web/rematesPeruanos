@@ -6,11 +6,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run build:all\" \"npm run dev:server\"",
     "watch:css": "sass --watch public/styles:public/css",
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:subastas",
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:subastas && npm run build:mapa && npm run build:registro",
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
     "build:contactos": "sass public/styles/contactos.scss public/css/contactos/contactos.css",
     "build:subastas": "sass public/styles/subastas.scss public/css/subasta/subastas.css",
+    "build:registro": "sass public/styles/registro.scss public/css/registro/registro.css",
+    "build:mapa": "sass public/styles/mapa.scss public/css/mapa/mapa.css",
     "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",
     "dev:server": "nodemon app.js",
     "start": "npm run build:all && node app.js"
@@ -22,6 +24,7 @@
   "dependencies": {
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",

@@ -1,0 +1,37 @@
+<!-- Estado: Finalizado - Muestra resultados -->
+<div class="auction-card finished-state">
+    <div class="auction-header">
+      <h2>Subasta #<%= remate.id %></h2>
+      <span class="status-badge finished">Finalizado</span>
+    </div>
+  
+    <div class="winner-section">
+      <div class="trophy-icon">🏆</div>
+      <h3>Ganador de la Subasta</h3>
+      <div class="winner-info">
+        <p class="winner-name"><%= remate.ganador %></p>
+        <p class="final-amount">Monto final: $<%= remate.monto_venta.toLocaleString() %></p>
+      </div>
+    </div>
+  
+    <div class="auction-summary">
+      <h4>Resumen de la Subasta</h4>
+      <div class="summary-details">
+        <p><strong>Precio inicial:</strong> $<%= remate.precios.toLocaleString() %></p>
+        <p><strong>Total ofertas:</strong> <%= totalOfertas %></p>
+        <p><strong>Incremento total:</strong> <%= ((remate.monto_venta - remate.precios) / remate.precios * 100).toFixed(2) %>%</p>
+      </div>
+    </div>
+  
+    <div class="auction-history">
+      <h4>Historial de Pujas</h4>
+      <div class="bid-history">
+        <% ofertas.slice(-5).forEach(function(oferta) { %>
+          <div class="bid-entry">
+            <span class="bid-amount">$<%= oferta.monto_oferta.toLocaleString() %></span>
+            <span class="bid-time"><%= moment(oferta.fecha_subasta).format('DD/MM/YYYY HH:mm') %></span>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>

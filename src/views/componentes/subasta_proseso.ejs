@@ -1,0 +1,40 @@
+<!-- Estado: En Curso - Chat de subastas en vivo -->
+<div class="auction-card in-progress-state">
+    <div class="chat-header">
+      <div class="chat-title">
+        <img src="/img/auction-icon.png" alt="Auction Icon" class="avatar">
+        <span class="chat-name">Subasta #<%= remate.id %> en vivo</span>
+      </div>
+      <div class="chat-status">
+        <span class="status-badge in-progress">En Curso</span>
+        <span class="online-status">En línea</span>
+      </div>
+    </div>
+  
+    <div class="chat-messages" id="messageContainer">
+      <% mensajes.forEach(function(mensaje) { %>
+        <div class="message <%= mensaje.usuarios_id === currentUser.id ? 'sent' : 'received' %>">
+          <p><strong><%= mensaje.nombre_usuario %>:</strong> $<%= mensaje.monto.toLocaleString() %></p>
+          <span class="timestamp"><%= moment(mensaje.created_at).format('HH:mm') %></span>
+        </div>
+      <% }); %>
+    </div>
+  
+    <div class="chat-input">
+      <div class="bid-group">
+        <label class="input-label" for="lastBidInput">Última puja + $100</label>
+        <div class="input-wrapper">
+          <input type="text" id="lastBidInput" readonly>
+          <button class="send-button" id="sendLastBid">Enviar Puja</button>
+        </div>
+      </div>
+  
+      <div class="bid-group">
+        <label class="input-label" for="customBidInput">Tu puja personalizada</label>
+        <div class="input-wrapper">
+          <input type="number" id="customBidInput" placeholder="Ingresa tu oferta">
+          <button class="send-button" id="sendCustomBid">Enviar Puja</button>
+        </div>
+      </div>
+    </div>
+  </div>

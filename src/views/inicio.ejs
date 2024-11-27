@@ -119,33 +119,42 @@
     </section>
 
     <section class="subastas" id="subastas">
-      <h1>Lista de Remates</h1>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Ubicación</th>
-            <th>Precio</th>
-            <th>Fecha de Activación</th>
-            <th>Estado</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% remates.forEach(remate => { %>
-          <tr>
-            <td><%= remate.id %></td>
-            <td><%= remate.ubicacion %></td>
-            <td><%= remate.precios %></td>
-            <td><%= remate.fecha_activacion %></td>
-            <td><%= remate.estado %></td>
-            <td><%= remate.descripcion %></td>
-            <td><%= remate.categoria %></td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
+
+      <div class="contenedor_card_subastas">
+        <% remates.forEach(remate => {%>
+        <div class="carta">
+          <div class="imagen-contenedor">
+            <img src="/img/casa_1.jfif" alt="" class="imagen-propiedad">
+            <a href="/subasta/<%= remate.id %>" class="renta-button">Renta +</a>
+          </div>
+          <div class="contenido">
+            <div class="label"><%= remate.categoria %></div>
+            <h2 class="nombre_proyecto">Edificio los canarios</h2>
+
+            <div class="label">Dirección</div>
+            <p class="direccion"><%= remate.ubicacion %></p>
+
+            <div class="detalles">
+              <div class="detalles-item">
+                <div class="label">M2</div>
+                <div class="detalles-valor"><%= remate.tamaño_propiedad %></div>
+              </div>
+              <div class="detalles-item">
+                <div class="label">N° Pisos</div>
+                <div class="detalles-valor"><%= remate.pisos %></div>
+              </div>
+              <div class="detalles-item">
+                <div class="label">N° de cuartos</div>
+                <div class="detalles-valor"><%= remate.N_habitacion %></div>
+              </div>
+            </div>
+
+            <div class="label">Precio</div>
+            <div class="precio"><%= remate.precios %></div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
     </section>
 
   </main>
@@ -183,7 +192,7 @@
       } else if (categoriasBottom > 0) {
         header.style.color = '#0a0000';
       } else if (subastasTop < window.innerHeight) {
-        header.style.color = '#fffcfc';
+        header.style.color = '#0a0000';
       } else {
         header.style.color = 'black';
       }

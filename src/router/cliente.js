@@ -9,11 +9,11 @@ router.post('/iniciar-session', (req, res) => {
 })
 
 /* REGISTRO */
-router.get('/registrar', (res, req) => {
+router.get('/registro', (req, res) => {
     res.render('registro')
 })
 
-router.post('/registrar', (res, req) => {
+router.post('/registrar', (req, res) => {
 
 })
 
@@ -21,16 +21,9 @@ router.post('/registrar', (res, req) => {
 router.get('/', async (req, res) => {
     try {
         const [remates] = await pool.query(`
-        SELECT 
-          r.id AS id,
-          r.ubicacion,
-          r.precios,
-          r.fecha_activacion,
-          r.estado,
-          r.descripcion,
-          r.categoria
-        FROM remates r
-      `);
+            SELECT * FROM remates
+        `);
+
         // Mostrar los datos obtenidos en consola
         console.log("Datos de remates obtenidos:", remates);
 
@@ -48,19 +41,44 @@ router.get('/', async (req, res) => {
     }
 });
 
+/* s23 fe
+cuota inicial = 525
+cuotas seran de = 276 * 12
+*/
+
 
 /* RUTA REMATES */
 router.get('/remates', (req, res) => {
     res.render("remates");
 });
 
-/* RUTA SUBASTAS */
-router.get('/subasta', (req, res) => {
-    res.render("subasta");
+router.get('/subasta/:id', async (req, res) => {
+    const { id } = req.params; // Obtén el ID de la subasta desde la URL
+    try {
+        // Consulta a la base de datos para obtener la subasta por ID
+        const [result] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
+
+        if (result.length === 0) {
+            // Si no se encuentra ninguna subasta con ese ID, muestra un mensaje de error
+            return res.status(404).send('Subasta no encontrada');
+        }
+
+        const subasta = result[0]; // La subasta encontrada
+        res.render('subasta', { subasta }); // Renderiza la vista con los datos
+    } catch (error) {
+        console.error('Error al obtener la subasta:', error);
+        res.status(500).send('Error al cargar la subasta');
+    }
 });
+
 
 /* RUTA CONTACTOS */
 router.get('/contacto', (req, res) => {
     res.render("contactos");
 });
+
+/*RUTA MAPAS*/
+router.get('/mapa', (req, res) => {
+    res.render("mapa");
+})
 module.exports = router;

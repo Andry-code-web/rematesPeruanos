@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ESTILOS -->
-  <link rel="stylesheet" href="/css/inicio/inicio.css">
+  <link rel="stylesheet" href="/css/subasta/subastas.css">
   <!-- COMPONENTES -->
   <link rel="stylesheet" href="/css/globales/globales.css">
 
@@ -21,24 +21,32 @@
   <main>
 
     <section class="contenedor_titulo_subastas">
-      <h1 class="titulo">CASA PLAYA</h1>
+      <h1 class="titulo"><%= subasta.categoria %></h1>
       <div class="informacion_casa">
-        <h2>Av. Fray Antonio Alcalde 10, Camana</h2>
+        <h2><%= subasta.ubicacion %></h2>
       </div>
       <div class="info_inmueble">
         <div class="precio">
           <p>
-            <span>Precio</span>
+            <span>Precio base</span>
             <span>
-              $49.200
+              $<%= subasta.precios %>
             </span>
           </p>
         </div>
         <div class="distrito">
           <p>
-            <span>Distrito</span>
+            <span>Fecha del remate</span>
             <span>
-              5
+              <%= subasta.fecha_remate %>
+            </span>
+          </p>
+        </div>
+        <div class="pisos">
+          <p>
+            <span>Hora del remate</span>
+            <span>
+              <%= subasta.hora_remate %>
             </span>
           </p>
         </div>
@@ -46,18 +54,11 @@
           <p>
             <span>Mt2</span>
             <span>
-              200
+              <%= subasta.tamaño_propiedad %>
             </span>
           </p>
         </div>
-        <div class="pisos">
-          <p>
-            <span>Pisos</span>
-            <span>
-              2
-            </span>
-          </p>
-        </div>
+
       </div>
     </section>
 
@@ -112,9 +113,14 @@
     <section class=""></section>
 
     <section class=""></section>
-    
+
   </main>
-  <aside></aside>
+  <aside class="chat_online">
+    <%- include('componentes/subasta_active') %>
+  </aside>
+  
+  
+  
   <%- include('componentes/footer') %>
 </body>
 
