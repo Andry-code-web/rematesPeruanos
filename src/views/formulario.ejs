@@ -64,17 +64,17 @@
     <script>
         document.getElementById('file-upload').addEventListener('change', function (event) {
             const files = event.target.files;
-            const minFiles = 1; // Límite mínimo de archivos
-            const maxFiles = 10; // Límite máximo de archivos
+            const minFiles = 1; 
+            const maxFiles = 10; 
 
             if (files.length < minFiles || files.length > maxFiles) {
                 alert(`Debes subir entre ${minFiles} y ${maxFiles} fotos.`);
-                event.target.value = ""; // Resetea el campo de archivo
+                event.target.value = ""; 
                 return;
             }
 
             const imagePreviewContainer = document.getElementById('image-preview-container');
-            imagePreviewContainer.innerHTML = ""; // Limpia el contenedor de vistas previas
+            imagePreviewContainer.innerHTML = ""; 
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
