@@ -37,7 +37,7 @@ app.set("views", path.join(__dirname, "src", "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 /* CONFIGURACION SOCKET */
-io.on('coneccion', (socket) => {
+io.on('connection', (socket) => {
   console.log('Nuevo ciente conectado');
 
   socket.on('joinroom', async (room, userName) => {

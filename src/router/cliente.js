@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../database/db')
+const pool = require('../database/db');
+const subastaService = require('../servises/subastaService');
+const { determinarEstadoSubasta, formatearNumero, formatearFecha, formatearHora } = require('../utils/subastaUtils');
 require('dotenv').config();
 
 /* LOGIN */
@@ -24,10 +26,8 @@ router.get('/', async (req, res) => {
             SELECT * FROM remates
         `);
 
-        // Mostrar los datos obtenidos en consola
         console.log("Datos de remates obtenidos:", remates);
 
-        // Verifica el tipo de datos y estructura
         if (Array.isArray(remates)) {
             console.log(`Se obtuvieron ${remates.length} remates`);
         } else {
@@ -41,36 +41,51 @@ router.get('/', async (req, res) => {
     }
 });
 
-/* s23 fe
-cuota inicial = 525
-cuotas seran de = 276 * 12
-*/
-
-
 /* RUTA REMATES */
 router.get('/remates', (req, res) => {
     res.render("remates");
 });
 
 router.get('/subasta/:id', async (req, res) => {
-    const { id } = req.params; // Obtén el ID de la subasta desde la URL
+    const { id } = req.params;
     try {
-        // Consulta a la base de datos para obtener la subasta por ID
-        const [result] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
-
-        if (result.length === 0) {
-            // Si no se encuentra ninguna subasta con ese ID, muestra un mensaje de error
+        const subasta = await subastaService.obtenerSubasta(id);
+        
+        if (!subasta) {
             return res.status(404).send('Subasta no encontrada');
         }
 
-        const subasta = result[0]; // La subasta encontrada
-        res.render('subasta', { subasta }); // Renderiza la vista con los datos
+        const totalVisitas = await subastaService.obtenerTotalVisitas(id);
+        const ultimaOferta = await subastaService.obtenerUltimaOferta(id);
+
+        const estadoSubasta = determinarEstadoSubasta(
+            subasta.fecha_activacion,
+            subasta.fecha_remate,
+            subasta.hora_remate
+        );
+
+        const fechaRemate = new Date(subasta.fecha_remate);
+        fechaRemate.setHours(subasta.hora_remate.split(':')[0], subasta.hora_remate.split(':')[1], 0);
+
+        const viewData = {
+            subasta,
+            totalVisitas,
+            ...estadoSubasta,
+            ofertaActual: ultimaOferta || subasta.precios,
+            fechaHoraFinSubasta: fechaRemate,
+            fechaHoraAperturaSubasta: new Date(subasta.fecha_activacion),
+            initialPrice: subasta.precios,
+            formatNumber: formatearNumero,
+            fechaFormateadaEsp: formatearFecha(subasta.fecha_remate),
+            horaFormateada: formatearHora(subasta.hora_remate)
+        };
+
+        res.render('subasta', viewData);
     } catch (error) {
         console.error('Error al obtener la subasta:', error);
         res.status(500).send('Error al cargar la subasta');
     }
 });
-
 
 /* RUTA CONTACTOS */
 router.get('/contacto', (req, res) => {
@@ -81,4 +96,5 @@ router.get('/contacto', (req, res) => {
 router.get('/mapa', (req, res) => {
     res.render("mapa");
 })
+
 module.exports = router;
