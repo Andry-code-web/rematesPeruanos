@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../database/db')
+const pool = require('../database/db');
 require('dotenv').config();
 const multer = require('multer');
 const upload = multer();
@@ -8,31 +8,31 @@ const upload = multer();
 /* LOGIN */
 router.post('/iniciar-sesion', (req, res) => {
     res.render('login'); // Asegúrate de pasar un nombre de vista válido
-})
+});
 
 /* REGISTRO */
 router.get('/registrar', (req, res) => {
     res.render('registro');
-})
+});
 
 router.post('/registrar', (req, res) => {
     // Lógica para manejar el registro
-})
+});
 
 /* RUTA INICIO */
 router.get('/', async (req, res) => {
     try {
         const [remates] = await pool.query(`
-        SELECT 
-          r.id AS id,
-          r.ubicacion,
-          r.precios,
-          r.fecha_activacion,
-          r.estado,
-          r.descripcion,
-          r.categoria
-        FROM remates r
-      `);
+            SELECT
+                r.id AS id,
+                r.ubicacion,
+                r.precios,
+                r.fecha_activacion,
+                r.estado,
+                r.descripcion,
+                r.categoria
+            FROM remates r
+        `);
         console.log("Datos de remates obtenidos:", remates);
 
         if (Array.isArray(remates)) {
@@ -68,43 +68,50 @@ router.get('/mapa', (req, res) => {
     res.render("mapa");
 });
 
-
-
 /* RUTA ADMIN VER REMATES */
 router.get('/admin', async (req, res) => {
     try {
         const [remates] = await pool.query(`
-        SELECT
-            r.id AS id,
-            r.ubicacion,
-            r.precios,
-            r.descripcion,
-            r.categoria,
-            r.N_banos,
-            r.N_habitacion,
-            r.pisina,
-            r.patio,
-            r.cocina,
-            r.cochera,
-            r.balcon,
-            r.jardin,
-            r.pisos,
-            r.comedor,
-            r.sala_start,
-            r.studio,
-            r.lavanderia,
-            r.fecha_activacion,
-            r.fecha_remate,
-            r.hora_remate,
-            r.usuario_admin_id,
-            r.ganador,
-            r.like_count,
-            r.monto_venta,
-            r.estado
-        FROM remates r
+            SELECT
+                r.id AS id,
+                r.ubicacion,
+                r.precios,
+                r.descripcion,
+                r.categoria,
+                r.N_banos,
+                r.N_habitacion,
+                r.pisina,
+                r.patio,
+                r.cocina,
+                r.cochera,
+                r.balcon,
+                r.jardin,
+                r.pisos,
+                r.comedor,
+                r.sala_start,
+                r.studio,
+                r.lavanderia,
+                r.fecha_activacion,
+                r.fecha_remate,
+                r.hora_remate,
+                r.usuario_admin_id,
+                r.ganador,
+                r.like_count,
+                r.monto_venta,
+                r.estado
+            FROM remates r
+        `);
+
+        const [img_inmuebles] = await pool.query(`
+            SELECT
+                i.id AS id,
+                i.imagenes_inmueble,
+                i.remates_id
+            FROM img_inmuebles i
         `);
 
         console.log("Datos de remates obtenidos:", remates);
+        console.log("Datos de imágenes obtenidos:", img_inmuebles);
 
         if (Array.isArray(remates)) {
             console.log(`Se obtuvieron ${remates.length} remates`);
@@ -112,14 +119,27 @@ router.get('/admin', async (req, res) => {
             console.log("Los datos de remates no están en el formato esperado.");
         }
 
-        res.render('admin', { remates });
+        if (Array.isArray(img_inmuebles)) {
+            console.log(`Se obtuvieron ${img_inmuebles.length} imágenes`);
+        } else {
+            console.log("Los datos de imágenes no están en el formato esperado.");
+        }
+
+        // Mapear imágenes a remates
+        const rematesConImagenes = remates.map(remate => {
+            const imagen = img_inmuebles.find(img => img.remates_id === remate.id);
+            return {
+                ...remate,
+                imagen: imagen ? imagen.imagenes_inmueble : null
+            };
+        });
+
+        res.render('admin', { remates: rematesConImagenes });
     } catch (error) {
         console.error('Error fetching remates:', error);
         res.status(500).send('Error al cargar los datos');
     }
 });
-
-
 
 // Ruta para eliminar un remate
 router.delete('/admin/eliminar-remate', async (req, res) => {
@@ -141,30 +161,24 @@ router.delete('/admin/eliminar-remate', async (req, res) => {
     }
 });
 
-
-
-// Editar remates   
+// Editar remates
 router.get('/admin/editar-remate/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
         if (remates.length > 0) {
-            // Responder con los datos del remate en formato JSON
-            res.json({ remate: remates[0] });
+            res.json({ success: true, remate: remates[0] });
         } else {
-            res.json({ success: false, error: 'Remate no encontrado' });
+            res.status(404).json({ success: false, error: 'Remate no encontrado' });
         }
     } catch (error) {
         console.error('Error al obtener el remate:', error);
-        res.json({ success: false, error: error.message });
+        res.status(500).json({ success: false, error: error.message });
     }
 });
 
-
-
-
 // Añadir remate
-router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
+router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
     try {
         const {
             ubicacion, precios, descripcion, categoria,
@@ -173,6 +187,10 @@ router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
             comedor, sala_start, studio, lavanderia,
             fecha_remate, hora_remate
         } = req.body;
+
+        if (!ubicacion || !precios || !descripcion || !categoria || !fecha_remate || !hora_remate) {
+            return res.status(400).json({ success: false, error: 'Campos obligatorios faltantes' });
+        }
 
         const booleanFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
         const processedFields = booleanFields.reduce((acc, field) => {
@@ -188,41 +206,32 @@ router.post('/admin/nuevo-remate', upload.none(), async (req, res) => {
                 comedor, sala_start, studio, lavanderia,
                 fecha_remate, hora_remate, estado,
                 fecha_activacion, hora_activacion, usuario_admin_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?)
         `, [
             ubicacion, precios, descripcion, categoria,
-            N_banos, N_habitacion, 
+            N_banos, N_habitacion,
             processedFields.pisina, processedFields.patio,
-            processedFields.cocina, processedFields.cochera, 
-            processedFields.balcon, processedFields.jardin, 
+            processedFields.cocina, processedFields.cochera,
+            processedFields.balcon, processedFields.jardin,
             pisos,
-            processedFields.comedor, processedFields.sala_start, 
+            processedFields.comedor, processedFields.sala_start,
             processedFields.studio, processedFields.lavanderia,
             fecha_remate, hora_remate,
             1 // Reemplazar con el ID real del usuario administrador de la sesión
         ]);
 
-        res.json({ success: true, id: result.insertId });
+        const remateId = result.insertId;
+
+        // Guardar la imagen en la base de datos
+        if (req.file) {
+            const [imgResult] = await pool.query(`
+                INSERT INTO img_inmuebles (imagenes_inmueble, remates_id) VALUES (?, ?)
+            `, [req.file.buffer, remateId]);
+        }
+
+        res.json({ success: true, id: remateId });
     } catch (error) {
         console.error('Error al crear remate:', error);
-        res.json({ success: false, error: error.message });
-    }
-});
-
-
-
-// Editar remates   
-router.get('/admin/editar-remate/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        const [remates] = await pool.query('SELECT * FROM remates WHERE id = ?', [id]);
-        if (remates.length > 0) {
-            res.json({ success: true, remate: remates[0] });
-        } else {
-            res.status(404).json({ success: false, error: 'Remate no encontrado' });
-        }
-    } catch (error) {
-        console.error('Error al obtener el remate:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });
@@ -255,12 +264,12 @@ router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
             WHERE id = ?
         `, [
             ubicacion, precios, descripcion, categoria,
-            N_banos, N_habitacion, 
+            N_banos, N_habitacion,
             processedFields.pisina, processedFields.patio,
-            processedFields.cocina, processedFields.cochera, 
-            processedFields.balcon, processedFields.jardin, 
+            processedFields.cocina, processedFields.cochera,
+            processedFields.balcon, processedFields.jardin,
             pisos,
-            processedFields.comedor, processedFields.sala_start, 
+            processedFields.comedor, processedFields.sala_start,
             processedFields.studio, processedFields.lavanderia,
             fecha_remate, hora_remate, estado,
             id
@@ -276,6 +285,5 @@ router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-
 
 module.exports = router;

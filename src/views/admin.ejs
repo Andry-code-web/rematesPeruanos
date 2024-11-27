@@ -7,6 +7,12 @@
     <title>Gestión de Remates</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/admin/admin.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -63,50 +69,54 @@
         <div class="properties-grid" id="rematesGrid">
             <% remates.forEach(function(remate) { %>
                 <div class="property-card" data-id="<%= remate.id %>">
-                    <img src="/placeholder.svg?height=200&width=300" alt="Propiedad" class="property-image">
-                    <div class="property-content">
-                        <span
-                            class="property-status <%= remate.estado === 'activo' ? 'status-active' : 'status-inactive' %>">
-                            <%= remate.estado %>
-                        </span>
-                        <h3 class="property-title">
-                            <%= remate.ubicacion %>
-                        </h3>
-                        <div class="property-price">$<%= remate.precios %>
-                        </div>
-                        <div class="property-details">
-                            <div class="detail-item">
-                                <i class="bi bi-building"></i>
-                                <%= remate.categoria %>
-                            </div>
-                            <div class="detail-item">
-                                <i class="bi bi-door-closed"></i>
-                                <%= remate.N_habitacion %> hab.
-                            </div>
-                            <div class="detail-item">
-                                <i class="bi bi-droplet"></i>
-                                <%= remate.N_banos %> banos
-                            </div>
-                            <div class="detail-item">
-                                <i class="bi bi-calendar"></i>
-                                <%= new Date(remate.fecha_remate).toLocaleDateString() %>
-                            </div>
-                        </div>
-                        <p class="property-description">
-                            <%= remate.descripcion %>
-                        </p>
-                        <div class="property-actions">
-                            <button class="action-button" onclick="abrirModalEditar(<%= remate.id %>)">
-                                <i class="bi bi-pencil"></i>
-                                Editar
-                            </button>
-                            <button class="action-button"
-                                onclick="eliminarRemate(<%= remate.id %>, '<%= remate.ubicacion %>')">
-                                <i class="bi bi-trash"></i>
-                                Eliminar
-                            </button>
-                        </div>
-                    </div>
+                    <% if (remate.imagen) { %>
+                        <img src="data:image/jpeg;base64,<%= remate.imagen %>" alt="Propiedad" class="property-image">
+                        <% } else { %>
+                            <img src="/placeholder.svg?height=200&width=300" alt="Propiedad" class="property-image">
+                            <% } %>
+                                <div class="property-content">
+                                    <span
+                                        class="property-status <%= remate.estado === 'activo' ? 'status-active' : 'status-inactive' %>">
+                                        <%= remate.estado %>
+                                    </span>
+                                    <h3 class="property-title">
+                                        <%= remate.ubicacion %>
+                                    </h3>
+                                    <div class="property-price">$<%= remate.precios %>
+                                    </div>
+                                    <div class="property-details">
+                                        <div class="detail-item">
+                                            <i class="bi bi-building"></i>
+                                            <%= remate.categoria %>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="bi bi-door-closed"></i>
+                                            <%= remate.N_habitacion %> hab.
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="bi bi-droplet"></i>
+                                            <%= remate.N_banos %> baños
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="bi bi-calendar"></i>
+                                            <%= new Date(remate.fecha_remate).toLocaleDateString() %>
+                                        </div>
+                                    </div>
+                                    <p class="property-description">
+                                        <%= remate.descripcion %>
+                                    </p>
+                                    <div class="property-actions">
+                                        <button class="action-button" onclick="abrirModalEditar(<%= remate.id %>)">
+                                            <i class="bi bi-pencil"></i>
+                                            Editar
+                                        </button>
+                                        <button class="action-button"
+                                            onclick="eliminarRemate(<%= remate.id %>, '<%= remate.ubicacion %>')">
+                                            <i class="bi bi-trash"></i>
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
                 </div>
                 <% }); %>
         </div>
@@ -164,7 +174,7 @@
                         <input type="number" id="N_habitacion" name="N_habitacion" min="0" step="1">
                     </div>
                     <div class="form-group">
-                        <label for="N_baños">
+                        <label for="N_banos">
                             <i class="bi bi-droplet"></i>
                             Número de Baños
                         </label>
@@ -274,6 +284,17 @@
                     <textarea id="descripcion" name="descripcion" required></textarea>
                 </div>
 
+                <!-- Sección para subir imágenes -->
+                <div class="subir_img">
+                    <label for="file-upload" class="custom-file-upload">
+                        <i class="fas fa-upload"></i> Agrega una foto
+                    </label>
+                    <input type="file" id="file-upload" name="photo" accept="image/*" multiple>
+                </div>
+                <div id="image-preview">
+                    <div id="image-preview-container"></div>
+                </div>
+
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="cerrarModalNuevoRemate()">Cancelar</button>
                     <button type="submit" class="btn btn-primary">
@@ -284,7 +305,6 @@
             </form>
         </div>
     </div>
-
 
     <!-- Modal de edición -->
     <div id="editModal" class="modal" style="display: none;">
@@ -477,9 +497,6 @@
 
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- //eliminar remate y busqueda -->
 
     <script>
         // Funciones de utilidad
@@ -718,117 +735,180 @@
             }
         }
 
-
-        // Gestión de edición de remate
-        function abrirModalEditar(remateId) {
-            fetch(`/admin/editar-remate/${remateId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.remate) {
-                        const { remate } = data;
-
-                        // Llenar campos básicos
-                        document.getElementById('editId').value = remate.id;
-                        document.getElementById('editUbicacion').value = remate.ubicacion;
-                        document.getElementById('editPrecio').value = formatPrice(remate.precios);
-                        document.getElementById('editCategoria').value = remate.categoria;
-                        document.getElementById('editHabitaciones').value = remate.N_habitacion;
-                        document.getElementById('editBanos').value = remate.N_banos;
-                        document.getElementById('editPisos').value = remate.pisos;
-                        document.getElementById('editFechaRemate').value = remate.fecha_remate?.split('T')[0] || '';
-                        document.getElementById('editHoraRemate').value = remate.hora_remate?.split('T')[1]?.slice(0, 5) || '';
-                        document.getElementById('editDescripcion').value = remate.descripcion;
-                        document.getElementById('editEstado').value = remate.estado;
-
-                        // Manejar checkboxes
-                        const checkboxFields = [
-                            'pisina', 'patio', 'cocina', 'cochera', 'balcon',
-                            'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'
-                        ];
-
-                        checkboxFields.forEach(field => {
-                            const checkbox = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
-                            if (checkbox) {
-                                checkbox.checked = remate[field] === 'si';
-                            }
-                        });
-
-                        document.getElementById('editModal').style.display = 'block';
-                    } else {
-                        Swal.fire('Error', 'Remate no encontrado', 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire('Error', 'Error al cargar los datos del remate', 'error');
-                });
-        }
-
         function cerrarModal() {
             document.getElementById('editModal').style.display = 'none';
         }
 
-        async function guardarCambios(event) {
-            event.preventDefault();
-
-            const formData = new FormData(document.getElementById('editForm'));
-            const remateId = document.getElementById('editId').value;
-
-            // Convertir campos numéricos
-            ['precios', 'N_habitacion', 'N_banos', 'pisos'].forEach(field => {
-                const valor = formData.get(field);
-                if (valor) {
-                    formData.set(field, Number(valor));
-                }
-            });
-
-            // Manejar checkboxes
-            const checkboxFields = [
-                'pisina', 'patio', 'cocina', 'cochera', 'balcon',
-                'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'
-            ];
-
-            checkboxFields.forEach(field => {
-                const checkbox = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
-                formData.set(field, checkbox && checkbox.checked ? 'si' : 'no');
-            });
-
+        // Función para obtener datos de la base de datos
+        async function obtenerDatosRemates() {
             try {
-                const response = await fetch(`/admin/actualizar-remate/${remateId}`, {
-                    method: 'PUT',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error('Error en la solicitud: ' + response.statusText);
-                }
-
+                const response = await fetch('/admin');
                 const data = await response.json();
-
-                if (data.success) {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: 'Remate actualizado correctamente',
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.reload();
-                    });
-                } else {
-                    throw new Error(data.error || 'Error al actualizar el remate');
-                }
+                return data.remates;
             } catch (error) {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error',
-                    text: error.message,
-                    icon: 'error'
-                });
+                console.error('Error al obtener datos de remates:', error);
+                return [];
             }
+        }
+
+        // Función para crear gráficos
+        async function crearGraficos() {
+            const remates = await obtenerDatosRemates();
+
+            // Gráfico de Total de Remates
+            const totalRematesData = {
+                labels: ['Total de Remates'],
+                datasets: [{
+                    label: 'Total de Remates',
+                    data: [remates.length],
+                    backgroundColor: ['#4bc0c0'],
+                    hoverBackgroundColor: ['#4bc0c0'],
+                }]
+            };
+
+            const totalRematesConfig = {
+                type: 'bar',
+                data: totalRematesData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            const totalRematesCtx = document.getElementById('totalRematesChart').getContext('2d');
+            new Chart(totalRematesCtx, totalRematesConfig);
+
+            // Gráfico de Remates por Categoría
+            const categorias = remates.reduce((acc, remate) => {
+                if (!acc[remate.categoria]) {
+                    acc[remate.categoria] = 0;
+                }
+                acc[remate.categoria]++;
+                return acc;
+            }, {});
+
+            const rematesPorCategoriaData = {
+                labels: Object.keys(categorias),
+                datasets: [{
+                    label: 'Remates por Categoría',
+                    data: Object.values(categorias),
+                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
+                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
+                }]
+            };
+
+            const rematesPorCategoriaConfig = {
+                type: 'pie',
+                data: rematesPorCategoriaData,
+                options: {
+                    responsive: true,
+                }
+            };
+
+            const rematesPorCategoriaCtx = document.getElementById('rematesPorCategoriaChart').getContext('2d');
+            new Chart(rematesPorCategoriaCtx, rematesPorCategoriaConfig);
+
+            // Gráfico de Remates por Estado
+            const estados = remates.reduce((acc, remate) => {
+                if (!acc[remate.estado]) {
+                    acc[remate.estado] = 0;
+                }
+                acc[remate.estado]++;
+                return acc;
+            }, {});
+
+            const rematesPorEstadoData = {
+                labels: Object.keys(estados),
+                datasets: [{
+                    label: 'Remates por Estado',
+                    data: Object.values(estados),
+                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
+                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
+                }]
+            };
+
+            const rematesPorEstadoConfig = {
+                type: 'doughnut',
+                data: rematesPorEstadoData,
+                options: {
+                    responsive: true,
+                }
+            };
+
+            const rematesPorEstadoCtx = document.getElementById('rematesPorEstadoChart').getContext('2d');
+            new Chart(rematesPorEstadoCtx, rematesPorEstadoConfig);
+
+            // Gráfico de Remates por Precio
+            const precios = remates.map(remate => remate.precios);
+            const rematesPorPrecioData = {
+                labels: ['Bajo', 'Medio', 'Alto'],
+                datasets: [{
+                    label: 'Remates por Precio',
+                    data: [
+                        precios.filter(precio => precio < 100000).length,
+                        precios.filter(precio => precio >= 100000 && precio < 500000).length,
+                        precios.filter(precio => precio >= 500000).length
+                    ],
+                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
+                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
+                }]
+            };
+
+            const rematesPorPrecioConfig = {
+                type: 'bar',
+                data: rematesPorPrecioData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            const rematesPorPrecioCtx = document.getElementById('rematesPorPrecioChart').getContext('2d');
+            new Chart(rematesPorPrecioCtx, rematesPorPrecioConfig);
+
+            // Gráfico de Remates por Ubicación
+            const ubicaciones = remates.reduce((acc, remate) => {
+                if (!acc[remate.ubicacion]) {
+                    acc[remate.ubicacion] = 0;
+                }
+                acc[remate.ubicacion]++;
+                return acc;
+            }, {});
+
+            const rematesPorUbicacionData = {
+                labels: Object.keys(ubicaciones),
+                datasets: [{
+                    label: 'Remates por Ubicación',
+                    data: Object.values(ubicaciones),
+                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
+                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
+                }]
+            };
+
+            const rematesPorUbicacionConfig = {
+                type: 'pie',
+                data: rematesPorUbicacionData,
+                options: {
+                    responsive: true,
+                }
+            };
+
+            const rematesPorUbicacionCtx = document.getElementById('rematesPorUbicacionChart').getContext('2d');
+            new Chart(rematesPorUbicacionCtx, rematesPorUbicacionConfig);
         }
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             actualizarMetricas();
+            crearGraficos();
 
             // Manejador para cerrar modales al hacer clic fuera
             window.onclick = function (event) {
@@ -841,11 +921,42 @@
                     cerrarModal();
                 }
             };
+
+            // Manejador para la carga de imágenes
+            document.getElementById('file-upload').addEventListener('change', function (event) {
+                const files = event.target.files;
+                const minFiles = 1;
+                const maxFiles = 10;
+
+                if (files.length < minFiles || files.length > maxFiles) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: `Debes subir entre ${minFiles} y ${maxFiles} fotos.`,
+                    });
+                    event.target.value = "";
+                    return;
+                }
+
+                const imagePreviewContainer = document.getElementById('image-preview-container');
+                imagePreviewContainer.innerHTML = "";
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'preview-img';
+                        imagePreviewContainer.appendChild(img);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
         });
-
     </script>
-
-
 </body>
 
 </html>

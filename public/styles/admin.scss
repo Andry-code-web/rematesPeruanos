@@ -8,7 +8,28 @@
 body {
     background-color: #f8f9fa;
     color: #1a1a1a;
-    line-height: 1.5; 
+    line-height: 1.5;
+}
+
+
+.dashboard-container {
+    padding: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 300px;
+    width: 100%;
 }
 
 .container {
@@ -46,7 +67,7 @@ body {
     padding: 1.5rem;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .metric-icon {
@@ -119,7 +140,7 @@ body {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
 }
 
@@ -220,7 +241,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
 
@@ -293,7 +314,7 @@ body {
     gap: 1rem;
     margin-top: 1.5rem;
 }
- 
+
 .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -405,3 +426,65 @@ body {
     color: #4285f4;
 }
 
+
+.subir_img {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 15px 30px;
+    cursor: pointer;
+    background-color: #0048e4;
+    color: #fffcfc;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #0b0eb9;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.custom-file-upload i {
+    margin-right: 10px;
+    color: #ffffff;
+}
+
+.custom-file-upload:active {
+    background-color: #0532af;
+    transform: scale(0.98);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+#image-preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 15vh;
+    overflow-y: auto;
+}
+
+.preview-img {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 10px;
+    border: 2px solid #0a0000;
+    border-radius: 10px;
+}
