@@ -1,7 +1,9 @@
 import NetworkAnimation from "./network.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("particleCanvas");
   const networkAnimation = new NetworkAnimation(canvas);
+
   const secciones = document.querySelectorAll(".seccion");
   const botonesSiguiente = document.querySelectorAll(".siguiente");
   const botonesAnterior = document.querySelectorAll(".anterior");
@@ -37,9 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.style.setProperty('--glow-color', '#FFE5D0');
     }
   };
+
   const animateTransition = (index) => {
     secciones[currentIndex].classList.remove("active");
     currentIndex = index;
+
     if (currentIndex < secciones.length) {
       const nextSection = secciones[currentIndex];
       nextSection.classList.add("active");
@@ -52,10 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
       subtitle.style.animation = "glitchAnimation 0.5s ease-out forwards";
     }
   };
+
   const isFormValid = (form) => {
     const inputs = form.querySelectorAll("input[required], select[required]");
     let isValid = true;
+
     form.querySelectorAll(".error-message").forEach((msg) => msg.remove());
+
     inputs.forEach((input) => {
       if (input.value.trim() === "") {
         isValid = false;
@@ -83,8 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
+
     return isValid;
   };
+
   botonesSiguiente.forEach((boton) => {
     boton.addEventListener("click", () => {
       const currentForm = secciones[currentIndex].querySelector("form");

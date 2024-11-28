@@ -271,12 +271,14 @@
 .inputBox {
   position: relative;
   width: 250px;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
 }
 
 .inputBox input {
   width: 100%;
-  height: 50px;
-  padding: 12px;
+  height: 56px;
+  padding: 13px;
   outline: none;
   border: none;
   color: #fffcfc;
@@ -324,6 +326,7 @@
   background: transparent;
 }
 
+/* Estilos de enlace */
 .enlace_subrayado {
   font-family: "fuenteparrafos";
   font-size: 16px;
@@ -332,10 +335,12 @@
   position: relative;
   font-weight: bold;
   letter-spacing: 1px;
-  margin-bottom: -30px;
+  margin-bottom: -35px;
   display: inline-block;
+  margin-top: -1rem;
 }
 
+/* Subrayado doble con separación y estilo más delgado */
 .enlace_subrayado::after {
   content: "";
   position: absolute;
@@ -362,16 +367,19 @@
   transition: transform 0.3s ease-out;
 }
 
+/* Efecto en hover, el subrayado aparece con separación */
 .enlace_subrayado:hover::after,
 .enlace_subrayado:hover::before {
   transform: scaleX(1);
   transform-origin: center center;
 }
 
+/* Para separar los enlaces y darles un margen entre ellos */
 .card_formulario .enlace_subrayado + .enlace_subrayado {
   margin-top: 1em;
 }
 
+/* Opcional: Animación de los subrayados */
 .enlace_subrayado:hover::after {
   animation: growLine 0.5s forwards;
 }
@@ -380,12 +388,13 @@
   animation: growLine 0.5s forwards;
 }
 
+/* Animación que hace crecer la línea */
 @keyframes growLine {
   from {
     width: 0;
   }
   to {
-    width: 50%;
+    width: 50%; /* El subrayado crece hacia el centro */
   }
 }
 .titulo_dinamico {
@@ -397,7 +406,7 @@
   font-family: "fuenteSecundaria";
   font-size: 50px;
   color: #fffcfc;
-  margin-bottom: 3.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .flecha-regreso {
@@ -429,16 +438,16 @@
 }
 
 .g-recaptcha {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: block;
-  transform: scale(0.9);
-  transform-origin: 0 0;
-  margin-left: auto;
-  z-index: 2;
-  margin-right: auto;
+  width: 103%;
+  transform: scale(0.75);
+  transform-origin: center;
+  margin: -8px auto;
+  display: flex;
+  justify-content: center;
 }
 
+/* HEADER */
+/* BOTON MENU */
 /* FOOTER */
 footer {
   width: 100%;
@@ -517,13 +526,6 @@ footer {
   gap: 0 1em;
   justify-content: flex-end;
   max-width: calc(50% - 45px - 30px);
-}
-
-.politicas a {
-  font-size: 1.5rem;
-  color: #fffcfc;
-  font-family: "fuenteSecundaria";
-  text-decoration: none;
 }
 
 .politicas a {
