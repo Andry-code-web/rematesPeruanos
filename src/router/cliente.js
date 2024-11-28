@@ -3,7 +3,8 @@ const router = express.Router();
 const pool = require('../database/db');
 require('dotenv').config();
 const multer = require('multer');
-const upload = multer();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 /* LOGIN */
 router.post('/iniciar-sesion', (req, res) => {
@@ -205,8 +206,9 @@ router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
                 cocina, cochera, balcon, jardin, pisos,
                 comedor, sala_start, studio, lavanderia,
                 fecha_remate, hora_remate, estado,
-                fecha_activacion, hora_activacion, usuario_admin_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?)
+                fecha_activacion, hora_activacion, usuario_admin_id,
+                ganador, like_count, monto_venta
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo', CURDATE(), CURTIME(), ?, NULL, 0, NULL)
         `, [
             ubicacion, precios, descripcion, categoria,
             N_banos, N_habitacion,
@@ -235,6 +237,7 @@ router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
 
 // Actualizar remate
 router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {

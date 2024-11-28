@@ -133,7 +133,7 @@
                     <i class="bi bi-x"></i>
                 </button>
             </div>
-            <form id="formNuevoRemate" onsubmit="guardarNuevoRemate(event)">
+            <form id="formNuevoRemate" enctype="multipart/form-data" onsubmit="guardarNuevoRemate(event)">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="ubicacion">
@@ -363,7 +363,7 @@
                             <i class="bi bi-droplet"></i>
                             Baños
                         </label>
-                        <input type="number" id="editBanos" name="N_baños" min="0">
+                        <input type="number" id="editBanos" name="N_banos" min="0">
                     </div>
                     <div class="form-group">
                         <label for="editFechaRemate">
@@ -495,9 +495,6 @@
         </div>
     </div>
 
-
-
-
     <script>
         // Funciones de utilidad
         const formatPrice = (price) => Number(String(price).replace(/[^0-9.-]+/g, '')) || 0;
@@ -576,6 +573,8 @@
 
         function cerrarModalNuevoRemate() {
             document.getElementById('modalNuevoRemate').style.display = 'none';
+            document.getElementById('formNuevoRemate').reset();
+            document.getElementById('image-preview-container').innerHTML = '';
         }
 
         async function guardarNuevoRemate(event) {
@@ -737,6 +736,8 @@
 
         function cerrarModal() {
             document.getElementById('editModal').style.display = 'none';
+            document.getElementById('editForm').reset();
+            document.getElementById('image-preview-container').innerHTML = '';
         }
 
         // Función para obtener datos de la base de datos
@@ -749,160 +750,6 @@
                 console.error('Error al obtener datos de remates:', error);
                 return [];
             }
-        }
-
-        // Función para crear gráficos
-        async function crearGraficos() {
-            const remates = await obtenerDatosRemates();
-
-            // Gráfico de Total de Remates
-            const totalRematesData = {
-                labels: ['Total de Remates'],
-                datasets: [{
-                    label: 'Total de Remates',
-                    data: [remates.length],
-                    backgroundColor: ['#4bc0c0'],
-                    hoverBackgroundColor: ['#4bc0c0'],
-                }]
-            };
-
-            const totalRematesConfig = {
-                type: 'bar',
-                data: totalRematesData,
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            };
-
-            const totalRematesCtx = document.getElementById('totalRematesChart').getContext('2d');
-            new Chart(totalRematesCtx, totalRematesConfig);
-
-            // Gráfico de Remates por Categoría
-            const categorias = remates.reduce((acc, remate) => {
-                if (!acc[remate.categoria]) {
-                    acc[remate.categoria] = 0;
-                }
-                acc[remate.categoria]++;
-                return acc;
-            }, {});
-
-            const rematesPorCategoriaData = {
-                labels: Object.keys(categorias),
-                datasets: [{
-                    label: 'Remates por Categoría',
-                    data: Object.values(categorias),
-                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
-                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
-                }]
-            };
-
-            const rematesPorCategoriaConfig = {
-                type: 'pie',
-                data: rematesPorCategoriaData,
-                options: {
-                    responsive: true,
-                }
-            };
-
-            const rematesPorCategoriaCtx = document.getElementById('rematesPorCategoriaChart').getContext('2d');
-            new Chart(rematesPorCategoriaCtx, rematesPorCategoriaConfig);
-
-            // Gráfico de Remates por Estado
-            const estados = remates.reduce((acc, remate) => {
-                if (!acc[remate.estado]) {
-                    acc[remate.estado] = 0;
-                }
-                acc[remate.estado]++;
-                return acc;
-            }, {});
-
-            const rematesPorEstadoData = {
-                labels: Object.keys(estados),
-                datasets: [{
-                    label: 'Remates por Estado',
-                    data: Object.values(estados),
-                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
-                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
-                }]
-            };
-
-            const rematesPorEstadoConfig = {
-                type: 'doughnut',
-                data: rematesPorEstadoData,
-                options: {
-                    responsive: true,
-                }
-            };
-
-            const rematesPorEstadoCtx = document.getElementById('rematesPorEstadoChart').getContext('2d');
-            new Chart(rematesPorEstadoCtx, rematesPorEstadoConfig);
-
-            // Gráfico de Remates por Precio
-            const precios = remates.map(remate => remate.precios);
-            const rematesPorPrecioData = {
-                labels: ['Bajo', 'Medio', 'Alto'],
-                datasets: [{
-                    label: 'Remates por Precio',
-                    data: [
-                        precios.filter(precio => precio < 100000).length,
-                        precios.filter(precio => precio >= 100000 && precio < 500000).length,
-                        precios.filter(precio => precio >= 500000).length
-                    ],
-                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
-                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347'],
-                }]
-            };
-
-            const rematesPorPrecioConfig = {
-                type: 'bar',
-                data: rematesPorPrecioData,
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            };
-
-            const rematesPorPrecioCtx = document.getElementById('rematesPorPrecioChart').getContext('2d');
-            new Chart(rematesPorPrecioCtx, rematesPorPrecioConfig);
-
-            // Gráfico de Remates por Ubicación
-            const ubicaciones = remates.reduce((acc, remate) => {
-                if (!acc[remate.ubicacion]) {
-                    acc[remate.ubicacion] = 0;
-                }
-                acc[remate.ubicacion]++;
-                return acc;
-            }, {});
-
-            const rematesPorUbicacionData = {
-                labels: Object.keys(ubicaciones),
-                datasets: [{
-                    label: 'Remates por Ubicación',
-                    data: Object.values(ubicaciones),
-                    backgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
-                    hoverBackgroundColor: ['#4bc0c0', '#98FB98', '#FF6347', '#FFD700', '#8A2BE2'],
-                }]
-            };
-
-            const rematesPorUbicacionConfig = {
-                type: 'pie',
-                data: rematesPorUbicacionData,
-                options: {
-                    responsive: true,
-                }
-            };
-
-            const rematesPorUbicacionCtx = document.getElementById('rematesPorUbicacionChart').getContext('2d');
-            new Chart(rematesPorUbicacionCtx, rematesPorUbicacionConfig);
         }
 
         // Event Listeners
