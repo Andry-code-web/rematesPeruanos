@@ -13,7 +13,6 @@
             <h1>Gestión de Clientes</h1>
             <p>Sistema de administración de compradores</p>
         </header>
-
         <div class="stats-container">
             <div class="stat-box">
                 <div class="stat-icon">👥</div>
@@ -22,7 +21,6 @@
                     <p id="totalClientes"><%= clientes.length %></p>
                 </div>
             </div>
-
             <div class="stat-box" id="clientesActivosBox">
                 <div class="stat-icon">✅</div>
                 <div class="stat-info">
@@ -30,7 +28,6 @@
                     <p id="clientesActivos"><%= clientes.filter(c => parseInt(c.oportunidades) > 0).length %></p>
                 </div>
             </div>
-
             <div class="stat-box" id="nuevosClientesBox">
                 <div class="stat-icon">📅</div>
                 <div class="stat-info">
@@ -39,16 +36,13 @@
                 </div>
             </div>
         </div>
-
         <div id="nuevosClientesChartContainer" class="chart-container hidden">
             <canvas id="nuevosClientesChart"></canvas>
         </div>
-
         <div id="searchContainer" class="search-container">
             <input type="text" id="searchInput" placeholder="Buscar por nombre, email o ID...">
             <span class="search-icon">🔍</span>
         </div>
-
         <div id="tableView">
             <div class="table-container">
                 <table class="clients-table">
@@ -85,8 +79,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="opportunities-badge <%= parseInt(cliente.oportunidades) === 1 ? 'danger' : '' %>" 
-                                         onclick="handleOpportunityClick('<%= cliente.id %>', <%= cliente.oportunidades %>)">
+                                    <div class="opportunities-badge <%= parseInt(cliente.oportunidades) === 1 ? 'danger' : '' %>"
+                                        onclick="handleOpportunityClick('<%= cliente.id %>', <%= cliente.oportunidades %>)">
                                         Oportunidades
                                         <span class="opportunities-count"><%= cliente.oportunidades %></span>
                                     </div>
@@ -97,30 +91,35 @@
                 </table>
             </div>
         </div>
-
         <div id="cardsView" class="cards-container hidden">
             <% clientes.forEach(cliente => { %>
                 <div class="client-card">
                     <div class="card-header">
-                        <div class="opportunities-badge <%= parseInt(cliente.oportunidades) === 1 ? 'danger' : '' %>"
-                             onclick="handleOpportunityClick('<%= cliente.id %>', <%= cliente.oportunidades %>)">
+                        <div class="opportunities-badge <%= parseInt(cliente.oportunidades) === 1  ? 'danger' : '' %>"
+                            onclick="handleOpportunityClick('<%= cliente.id %>', <%= cliente.oportunidades %>)">
                             Oportunidades: <%= cliente.oportunidades %>
                         </div>
                         <img src="/img/casa2.jfif" alt="<%= cliente.nombres_apellidos %>" class="card-avatar">
                     </div>
                     <div class="card-body">
                         <h3><%= cliente.nombres_apellidos %></h3>
-                        <p class="client-id">ID: <%= cliente.id %></p>
                         <div class="contact-info">
-                            <div class="contact-email">Email: <%= cliente.correo %></div>
-                            <div class="contact-phone">Teléfono: <%= cliente.celular %></div>
+                            <div class="contact-email">
+                                📧 <%= cliente.correo %>
+                            </div>
+                            <div class="contact-phone">
+                                📱 <%= cliente.celular %>
+                            </div>
                         </div>
                         <div class="additional-info">
                             <div class="info-item">
-                                <span>DNI: <%= cliente.dni %></span>
+                                🆔 ID: <%= cliente.id %>
                             </div>
                             <div class="info-item">
-                                <span>Usuario: <%= cliente.usuario %></span>
+                                📄 DNI: <%= cliente.dni %>
+                            </div>
+                            <div class="info-item">
+                                👤 Usuario: <%= cliente.usuario %>
                             </div>
                         </div>
                     </div>
@@ -131,21 +130,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        async function handleOpportunityClick(clientId, currentOpportunities) {
+        async function handleOpportunityClick(clienteId, currentOpportunities) {
+            if (currentOpportunities !== 1) {
+                return;
+            }
+
             const result = await Swal.fire({
                 title: '¿Aumentar oportunidades?',
-                text: 'El cliente tiene ' + currentOpportunities + ' oportunidad(es). ¿Desea aumentar sus oportunidades a 10?',
+                text: 'El cliente tiene 1 oportunidad. ¿Desea aumentar sus oportunidades a 10?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar',
-                cancelButtonText: 'Denegar'
+                confirmButtonText: 'Sí, aumentar',
+                cancelButtonText: 'Cancelar'
             });
 
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch(`/actualizar-oportunidades/${clientId}`, {
+                    const response = await fetch(`/actualizar-oportunidades/${clienteId}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -153,13 +156,13 @@
                     });
 
                     const data = await response.json();
-
                     if (data.success) {
                         await Swal.fire({
-                            title: '¡Completado!',
-                            text: 'Se han aumentado las oportunidades correctamente.',
+                            title: '¡Éxito!',
+                            text: 'Las oportunidades han sido actualizadas a 10',
                             icon: 'success'
                         });
+                        // Recargar la página para mostrar los cambios actualizados
                         window.location.reload();
                     } else {
                         throw new Error(data.message);
@@ -168,7 +171,7 @@
                     console.error('Error:', error);
                     await Swal.fire({
                         title: 'Error',
-                        text: 'Hubo un error al actualizar las oportunidades.',
+                        text: 'Hubo un error al actualizar las oportunidades',
                         icon: 'error'
                     });
                 }
@@ -185,14 +188,14 @@
             const chartContainer = document.getElementById('nuevosClientesChartContainer');
             let chart = null;
 
-            // Initialize views
-            searchContainer.style.display = 'block';
+            // Inicializar vistas
             tableView.classList.remove('hidden');
             cardsView.classList.add('hidden');
             chartContainer.classList.add('hidden');
-            
+            searchContainer.classList.remove('hidden');
+
+            // Eventos de click para cambiar vistas
             clientesActivosBox.addEventListener('click', function() {
-                searchContainer.style.display = 'block';
                 if (tableView.classList.contains('hidden')) {
                     tableView.classList.remove('hidden');
                     cardsView.classList.add('hidden');
@@ -201,18 +204,20 @@
                     cardsView.classList.remove('hidden');
                 }
                 chartContainer.classList.add('hidden');
+                searchContainer.classList.remove('hidden');
             });
 
             nuevosClientesBox.addEventListener('click', function() {
-                searchContainer.style.display = 'none';
                 chartContainer.classList.remove('hidden');
                 tableView.classList.add('hidden');
                 cardsView.classList.add('hidden');
+                searchContainer.classList.add('hidden');
                 if (!chart) {
                     createChart();
                 }
             });
 
+            // Búsqueda
             searchInput.addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase();
                 const tableRows = document.querySelectorAll('#clientesTableBody tr');
@@ -229,6 +234,7 @@
                 });
             });
 
+            // Función para crear el gráfico
             function createChart() {
                 const ctx = document.getElementById('nuevosClientesChart').getContext('2d');
                 chart = new Chart(ctx, {

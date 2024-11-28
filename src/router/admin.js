@@ -26,34 +26,38 @@ router.get("/clientes_admin", async (req, res) => {
     }
 });
 
+/*Actualizar oportunidades*/  
+router.post("/actualizar-oportunidades/:id", async (req, res) => { 
+  try { 
+      const clienteId = req.params.id; 
+      // Primero verificamos las oportunidades actuales 
+      const [cliente] = await pool.query( 
+          'SELECT oportunidades FROM usuarios WHERE id = ?',  
+          [clienteId] 
+      ); 
+      if (cliente[0].oportunidades === 1) { 
+          // Actualizamos a 10 oportunidades 
+          await pool.query( 
+              'UPDATE usuarios SET oportunidades = 10 WHERE id = ?', 
+              [clienteId] 
+          ); 
+          res.json({  
+              success: true,  
+              message: 'Oportunidades actualizadas correctamente'  
+          }); 
+      } else { 
+          res.json({  
+              success: false,  
+              message: 'El cliente no es elegible para actualizar oportunidades'  
+          }); 
+      } 
+  } catch (error) { 
+      console.error('Error al actualizar oportunidades:', error); 
+      res.status(500).json({  
+          success: false,  
+          message: 'Error al actualizar oportunidades'  
+      }); 
+  } 
+}); 
 
-// Ruta para actualizar oportunidades
-router.post('/clientes_admin', async (req, res) => {
-    const clienteId = req.params.id;
-    
-    try {
-      const query = 'UPDATE usuarios SET oportunidades = 10 WHERE id = ?';
-      
-      connection.query(query, [clienteId], (error, results) => {
-        if (error) {
-          console.error('Error al actualizar oportunidades:', error);
-          return res.status(500).json({ 
-            success: false, 
-            message: 'Error al actualizar oportunidades' 
-          });
-        }
-        
-        res.json({ 
-          success: true, 
-          message: 'Oportunidades actualizadas correctamente' 
-        });
-      });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ 
-        success: false, 
-        message: 'Error interno del servidor' 
-      });
-    }
-  });
 module.exports = router;
