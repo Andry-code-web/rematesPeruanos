@@ -122,6 +122,7 @@
         </div>
     </div>
 
+    <!-- añadir nuevo remate -->
     <div id="modalNuevoRemate" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -201,78 +202,119 @@
                         </label>
                         <input type="time" id="hora_remate" name="hora_remate" required>
                     </div>
+                    <div class="form-group">
+                        <label for="estado">
+                            <i class="bi bi-toggle-on"></i>
+                            Estado
+                        </label>
+                        <select id="estado" name="estado" required>
+                            <option value="activo">Activo</option>
+                            <option value="en_curso">En Curso</option>
+                            <option value="finalizado">Finalizado</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="amenities-grid">
-                    <div class="form-check">
-                        <input type="checkbox" id="pisina" name="pisina">
+                    <div class="form-group">
                         <label for="pisina">
                             <i class="bi bi-water"></i>
                             Piscina
                         </label>
+                        <select id="pisina" name="pisina">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="patio" name="patio">
+                    <div class="form-group">
                         <label for="patio">
                             <i class="bi bi-tree"></i>
                             Patio
                         </label>
+                        <select id="patio" name="patio">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="cocina" name="cocina">
+                    <div class="form-group">
                         <label for="cocina">
                             <i class="bi bi-cup-hot"></i>
                             Cocina
                         </label>
+                        <select id="cocina" name="cocina">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="cochera" name="cochera">
+                    <div class="form-group">
                         <label for="cochera">
                             <i class="bi bi-car-front"></i>
                             Cochera
                         </label>
+                        <select id="cochera" name="cochera">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="balcon" name="balcon">
+                    <div class="form-group">
                         <label for="balcon">
                             <i class="bi bi-door-open"></i>
                             Balcón
                         </label>
+                        <select id="balcon" name="balcon">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="jardin" name="jardin">
+                    <div class="form-group">
                         <label for="jardin">
                             <i class="bi bi-flower1"></i>
                             Jardín
                         </label>
+                        <select id="jardin" name="jardin">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="comedor" name="comedor">
+                    <div class="form-group">
                         <label for="comedor">
                             <i class="bi bi-table"></i>
                             Comedor
                         </label>
+                        <select id="comedor" name="comedor">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="sala_start" name="sala_start">
+                    <div class="form-group">
                         <label for="sala_start">
                             <i class="bi bi-house-heart"></i>
                             Sala
                         </label>
+                        <select id="sala_start" name="sala_start">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="studio" name="studio">
+                    <div class="form-group">
                         <label for="studio">
                             <i class="bi bi-briefcase"></i>
                             Estudio
                         </label>
+                        <select id="studio" name="studio">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="lavanderia" name="lavanderia">
+                    <div class="form-group">
                         <label for="lavanderia">
                             <i class="bi bi-water"></i>
                             Lavandería
                         </label>
+                        <select id="lavanderia" name="lavanderia">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
                 </div>
 
@@ -393,75 +435,105 @@
                 </div>
 
                 <div class="amenities-grid">
-                    <div class="form-check">
-                        <input type="checkbox" id="editPisina" name="pisina" value="si">
+                    <div class="form-group">
                         <label for="editPisina">
                             <i class="bi bi-water"></i>
                             Piscina
                         </label>
+                        <select id="editPisina" name="pisina">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editPatio" name="patio" value="si">
+                    <div class="form-group">
                         <label for="editPatio">
                             <i class="bi bi-tree"></i>
                             Patio
                         </label>
+                        <select id="editPatio" name="patio">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editCocina" name="cocina" value="si">
+                    <div class="form-group">
                         <label for="editCocina">
                             <i class="bi bi-cup-hot"></i>
                             Cocina
                         </label>
+                        <select id="editCocina" name="cocina">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editCochera" name="cochera" value="si">
+                    <div class="form-group">
                         <label for="editCochera">
                             <i class="bi bi-car-front"></i>
                             Cochera
                         </label>
+                        <select id="editCochera" name="cochera">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editBalcon" name="balcon" value="si">
+                    <div class="form-group">
                         <label for="editBalcon">
                             <i class="bi bi-door-open"></i>
                             Balcón
                         </label>
+                        <select id="editBalcon" name="balcon">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editJardin" name="jardin" value="si">
+                    <div class="form-group">
                         <label for="editJardin">
                             <i class="bi bi-flower1"></i>
                             Jardín
                         </label>
+                        <select id="editJardin" name="jardin">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editComedor" name="comedor" value="si">
+                    <div class="form-group">
                         <label for="editComedor">
                             <i class="bi bi-cup-straw"></i>
                             Comedor
                         </label>
+                        <select id="editComedor" name="comedor">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editSalaStart" name="sala_start" value="si">
+                    <div class="form-group">
                         <label for="editSalaStart">
                             <i class="bi bi-house-heart"></i>
                             Sala Star
                         </label>
+                        <select id="editSalaStart" name="sala_start">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editStudio" name="studio" value="si">
+                    <div class="form-group">
                         <label for="editStudio">
                             <i class="bi bi-book"></i>
                             Estudio
                         </label>
+                        <select id="editStudio" name="studio">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="editLavanderia" name="lavanderia" value="si">
+                    <div class="form-group">
                         <label for="editLavanderia">
                             <i class="bi bi-water"></i>
                             Lavandería
                         </label>
+                        <select id="editLavanderia" name="lavanderia">
+                            <option value="no">No</option>
+                            <option value="si">Sí</option>
+                        </select>
                     </div>
                 </div>
 
@@ -591,16 +663,20 @@
                 }
             });
 
-            // Manejar checkboxes
-            const checkboxFields = [
+            // Manejar selects
+            const selectFields = [
                 'pisina', 'patio', 'cocina', 'cochera', 'balcon',
                 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'
             ];
 
-            checkboxFields.forEach(field => {
-                const checkbox = document.getElementById(field);
-                formData.set(field, checkbox && checkbox.checked ? 'si' : 'no');
+            selectFields.forEach(field => {
+                const select = document.getElementById(field);
+                formData.set(field, select ? select.value : 'no');
             });
+
+            // Manejar el estado
+            const estado = document.getElementById('estado').value;
+            formData.set('estado', estado);
 
             try {
                 const response = await fetch('/admin/nuevo-remate', {
@@ -651,16 +727,16 @@
                         document.getElementById('editDescripcion').value = remate.descripcion;
                         document.getElementById('editEstado').value = remate.estado;
 
-                        // Manejar checkboxes
-                        const checkboxFields = [
+                        // Manejar selects
+                        const selectFields = [
                             'pisina', 'patio', 'cocina', 'cochera', 'balcon',
                             'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'
                         ];
 
-                        checkboxFields.forEach(field => {
-                            const checkbox = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
-                            if (checkbox) {
-                                checkbox.checked = remate[field] === 'si';
+                        selectFields.forEach(field => {
+                            const select = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
+                            if (select) {
+                                select.value = remate[field] === 'si' ? 'si' : 'no';
                             }
                         });
 
@@ -690,16 +766,20 @@
                 }
             });
 
-            // Manejar checkboxes
-            const checkboxFields = [
+            // Manejar selects
+            const selectFields = [
                 'pisina', 'patio', 'cocina', 'cochera', 'balcon',
                 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'
             ];
 
-            checkboxFields.forEach(field => {
-                const checkbox = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
-                formData.set(field, checkbox && checkbox.checked ? 'si' : 'no');
+            selectFields.forEach(field => {
+                const select = document.getElementById('edit' + field.charAt(0).toUpperCase() + field.slice(1));
+                formData.set(field, select ? select.value : 'no');
             });
+
+            // Manejar el estado
+            const estado = document.getElementById('editEstado').value;
+            formData.set('estado', estado);
 
             try {
                 const response = await fetch(`/admin/actualizar-remate/${remateId}`, {

@@ -186,16 +186,16 @@ router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
             N_banos, N_habitacion, pisina, patio,
             cocina, cochera, balcon, jardin, pisos,
             comedor, sala_start, studio, lavanderia,
-            fecha_remate, hora_remate
+            fecha_remate, hora_remate, estado
         } = req.body;
 
-        if (!ubicacion || !precios || !descripcion || !categoria || !fecha_remate || !hora_remate) {
+        if (!ubicacion || !precios || !descripcion || !categoria || !fecha_remate || !hora_remate || !estado) {
             return res.status(400).json({ success: false, error: 'Campos obligatorios faltantes' });
         }
 
         const booleanFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
         const processedFields = booleanFields.reduce((acc, field) => {
-            acc[field] = req.body[field] === 'on' ? 'si' : 'no';
+            acc[field] = req.body[field] === 'si' ? 'si' : 'no';
             return acc;
         }, {});
 
@@ -218,7 +218,7 @@ router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
             pisos,
             processedFields.comedor, processedFields.sala_start,
             processedFields.studio, processedFields.lavanderia,
-            fecha_remate, hora_remate,
+            fecha_remate, hora_remate, estado,
             1 // Reemplazar con el ID real del usuario administrador de la sesión
         ]);
 
@@ -226,7 +226,7 @@ router.post('/admin/nuevo-remate', upload.single('photo'), async (req, res) => {
 
         // Guardar la imagen en la base de datos
         if (req.file) {
-            const [imgResult] = await pool.query(`
+            const [img_inmuebles] = await pool.query(`
                 INSERT INTO img_inmuebles (imagenes_inmueble, remates_id) VALUES (?, ?)
             `, [req.file.buffer, remateId]);
         }
@@ -253,7 +253,7 @@ router.put('/admin/actualizar-remate/:id', upload.none(), async (req, res) => {
 
         const booleanFields = ['pisina', 'patio', 'cocina', 'cochera', 'balcon', 'jardin', 'comedor', 'sala_start', 'studio', 'lavanderia'];
         const processedFields = booleanFields.reduce((acc, field) => {
-            acc[field] = req.body[field] === 'on' ? 'si' : 'no';
+            acc[field] = req.body[field] === 'si' ? 'si' : 'no';
             return acc;
         }, {});
 
