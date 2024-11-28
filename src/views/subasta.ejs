@@ -2,120 +2,172 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ESTILOS -->
-  <link rel="stylesheet" href="/css/inicio/inicio.css">
-  <!-- COMPONENTES -->
-  <link rel="stylesheet" href="/css/globales/globales.css">
+    <!-- ESTILOS -->
+    <!-- <link rel="stylesheet" href="/css/subasta/subastas.css"> -->
+    <!-- COMPONENTES -->
+    <link rel="stylesheet" href="/css/globales/globales.css">
 
-  <!-- CDN DE ICONOS REMIX -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- CDN DE ICONOS REMIX -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
-  <title>Remates Peru || SUBASTAS</title>
+    <title>Remates Peru || SUBASTAS</title>
+
+    <script src="http://localhost:5050/socket.io/socket.io.js"></script>
+
 </head>
 
 <body>
-  <%- include('componentes/header') %>
-  <main>
+    <%- include('componentes/header') %>
+        <main>
+            <section class="contenedor_titulo_subastas">
+                <h1 class="titulo"><%= subasta.categoria %></h1>
+                <div class="informacion_casa">
+                    <h2><%= subasta.ubicacion %></h2>
+                </div>
+                <div class="info_inmueble">
+                    <div class="precio">
+                        <p>
+                            <span>Precio base</span>
+                            <span>
+                                $<%= formatNumber(subasta.precios) %>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="distrito">
+                        <p>
+                            <span>Fecha del remate</span>
+                            <span>
+                                <%= fechaFormateadaEsp %>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="pisos">
+                        <p>
+                            <span>Hora del remate</span>
+                            <span>
+                                <%= horaFormateada %>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="tamaño">
+                        <p>
+                            <span>Mt2</span>
+                            <span>
+                                <%= subasta.tamaño_propiedad %>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-    <section class="contenedor_titulo_subastas">
-      <h1 class="titulo">CASA PLAYA</h1>
-      <div class="informacion_casa">
-        <h2>Av. Fray Antonio Alcalde 10, Camana</h2>
-      </div>
-      <div class="info_inmueble">
-        <div class="precio">
-          <p>
-            <span>Precio</span>
-            <span>
-              $49.200
-            </span>
-          </p>
-        </div>
-        <div class="distrito">
-          <p>
-            <span>Distrito</span>
-            <span>
-              5
-            </span>
-          </p>
-        </div>
-        <div class="tamaño">
-          <p>
-            <span>Mt2</span>
-            <span>
-              200
-            </span>
-          </p>
-        </div>
-        <div class="pisos">
-          <p>
-            <span>Pisos</span>
-            <span>
-              2
-            </span>
-          </p>
-        </div>
-      </div>
-    </section>
+            <section class="imagen">
+                <div class="contenendor_img">
+                    <img src="/img/casa3.jfif" alt="">
+                    <img src="/img/casa3.jfif" alt="">
+                </div>
+            </section>
 
-    <section class="imagen">
-      <div class="contenendor_img">
-        <img src="/img/casa3.jfif" alt="">
-        <img src="/img/casa3.jfif" alt="">
-      </div>
-    </section>
+            <section class="descripcion">
+                <div class="contenedor_descripcion">
+                    <div class="texto_info">
+                        <p class="about_subtitle"></p>
+                        <p class="about_descripcion"><%= subasta.descripcion %></p>
+                    </div>
+                    <div class="info_casa">
+                        <% if(subasta.cocina === 'si') { %>
+                            <div class="info">
+                                <span>
+                                    <i class="ri-home-2-line"></i>
+                                    <p>cocina</p>
+                                </span>
+                            </div>
+                        <% } %>
+                        <% if(subasta.patio === 'si') { %>
+                            <div class="info">
+                                <span>
+                                    <i class="ri-home-2-line"></i>
+                                    <p>patio</p>
+                                </span>
+                            </div>
+                        <% } %>
+                        <% if(subasta.pisina === 'si') { %>
+                            <div class="info">
+                                <span>
+                                    <i class="ri-home-2-line"></i>
+                                    <p>piscina</p>
+                                </span>
+                            </div>
+                        <% } %>
+                        <% if(subasta.comedor === 'si') { %>
+                            <div class="info">
+                                <span>
+                                    <i class="ri-home-2-line"></i>
+                                    <p>comedor</p>
+                                </span>
+                            </div>
+                        <% } %>
+                        <% if(subasta.lavanderia === 'si') { %>
+                            <div class="info">
+                                <span>
+                                    <i class="ri-home-2-line"></i>
+                                    <p>lavandería</p>
+                                </span>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <aside class="chat_online">
+            <%- include('componentes/subasta_chat', {
+                estaEnCurso,
+                estaTerminada,
+                estaActiva,
+                subasta,
+                totalVisitas,
+                ofertaActual,
+                fechaHoraFinSubasta,
+                fechaHoraAperturaSubasta,
+                initialPrice,
+                formatNumber,
+                fechaFormateadaEsp,
+                horaFormateada
+            }) %>
+        </aside>
 
-    <section class="descripcion">
-      <div class="contenedor_descripcion">
-        <div class="texto_info">
-          <p class="about_subtitle"></p>
-          <p class="about_descripcion"></p>
-        </div>
-        <div class="info_casa">
-          <div class="info">
-            <span>
-              <i class="ri-home-2-line"></i>
-              <p>cosina</p>
-            </span>
-          </div>
-          <div class="info">
-            <span>
-              <i class="ri-home-2-line"></i>
-              <p>patio</p>
-            </span>
-          </div>
-          <div class="info">
-            <span>
-              <i class="ri-home-2-line"></i>
-              <p>pisina</p>
-            </span>
-          </div>
-          <div class="info">
-            <span>
-              <i class="ri-home-2-line"></i>
-              <p>comedor</p>
-            </span>
-          </div>
-          <div class="info">
-            <span>
-              <i class="ri-home-2-line"></i>
-              <p>labanderia</p>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
+        <%- include('componentes/footer') %>
 
-    <section class=""></section>
-
-    <section class=""></section>
-    
-  </main>
-  <aside></aside>
-  <%- include('componentes/footer') %>
+        <script>
+          const socket = io('http://localhost:5050'); // Asegúrate de usar la misma URL que tu servidor.
+        
+          socket.on('connect', () => {
+            console.log('Conectado al servidor');
+            socket.emit('joinroom', subastaId);
+          });
+        
+          socket.on('auctionState', (state) => {
+            updateAuctionInterface(state);
+          });
+        
+          function updateAuctionInterface(state) {
+            if (state.countdownRunning) {
+              document.getElementById('countdown-timer').textContent = formatTimeLeft(state.timeLeft);
+            }
+          }
+        
+          function formatTimeLeft(ms) {
+            const seconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+        
+            return `${days}d ${hours % 24}h ${minutes % 60}m ${seconds % 60}s`;
+          }
+        </script>
+        
 </body>
 
 </html>

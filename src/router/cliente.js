@@ -12,28 +12,21 @@ router.post('/iniciar-sesion', (req, res) => {
 });
 
 /* REGISTRO */
-router.get('/registrar', (req, res) => {
-    res.render('registro');
-});
+router.get('/registro', (req, res) => {
+    res.render('registro')
+})
 
 router.post('/registrar', (req, res) => {
-    // Lógica para manejar el registro
-});
+
+})
 
 /* RUTA INICIO */
 router.get('/', async (req, res) => {
     try {
         const [remates] = await pool.query(`
-            SELECT
-                r.id AS id,
-                r.ubicacion,
-                r.precios,
-                r.fecha_activacion,
-                r.estado,
-                r.descripcion,
-                r.categoria
-            FROM remates r
+            SELECT * FROM remates
         `);
+
         console.log("Datos de remates obtenidos:", remates);
 
         if (Array.isArray(remates)) {
@@ -54,9 +47,45 @@ router.get('/remates', (req, res) => {
     res.render("remates");
 });
 
-/* RUTA SUBASTAS */
-router.get('/subasta', (req, res) => {
-    res.render("subasta");
+router.get('/subasta/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const subasta = await subastaService.obtenerSubasta(id);
+        
+        if (!subasta) {
+            return res.status(404).send('Subasta no encontrada');
+        }
+
+        const totalVisitas = await subastaService.obtenerTotalVisitas(id);
+        const ultimaOferta = await subastaService.obtenerUltimaOferta(id);
+
+        const estadoSubasta = determinarEstadoSubasta(
+            subasta.fecha_activacion,
+            subasta.fecha_remate,
+            subasta.hora_remate
+        );
+
+        const fechaRemate = new Date(subasta.fecha_remate);
+        fechaRemate.setHours(subasta.hora_remate.split(':')[0], subasta.hora_remate.split(':')[1], 0);
+
+        const viewData = {
+            subasta,
+            totalVisitas,
+            ...estadoSubasta,
+            ofertaActual: ultimaOferta || subasta.precios,
+            fechaHoraFinSubasta: fechaRemate,
+            fechaHoraAperturaSubasta: new Date(subasta.fecha_activacion),
+            initialPrice: subasta.precios,
+            formatNumber: formatearNumero,
+            fechaFormateadaEsp: formatearFecha(subasta.fecha_remate),
+            horaFormateada: formatearHora(subasta.hora_remate)
+        };
+
+        res.render('subasta', viewData);
+    } catch (error) {
+        console.error('Error al obtener la subasta:', error);
+        res.status(500).send('Error al cargar la subasta');
+    }
 });
 
 /* RUTA CONTACTOS */
