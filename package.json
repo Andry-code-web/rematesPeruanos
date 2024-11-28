@@ -9,7 +9,7 @@
 
     "watch:css": "sass --watch public/styles:public/css",
 
-    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas && npm run build:subastas && npm run build:admin && npm run build:registro && npm run build:clientes_admin",
+    "build:all": "npm run build:inicio && npm run build:remates && npm run build:contactos && npm run build:globales && npm run build:mapas && npm run build:subastas && npm run build:admin && npm run build:registro && npm run build:clientes_admin && npm run build:chat",
 
     "build:inicio": "sass public/styles/inicio.scss public/css/inicio/inicio.css",
     "build:remates": "sass public/styles/remates.scss public/css/remates/remates.css",
@@ -19,6 +19,7 @@
     "build:admin": "sass public/styles/admin.scss public/css/admin/admin.css",
     "build:registro": "sass public/styles/registro.scss public/css/registro/registro.css",
     "build:clientes_admin": "sass public/styles/clientes_admin.scss public/css/clientes_admin/clientes_admin.css",
+    "build:chat":"sass public/styles/chatsubasta.scss public/css/chatsubasta/chatsubasta.css",
     
     "build:globales": "sass public/styles/globales.scss public/css/globales/globales.css",
 

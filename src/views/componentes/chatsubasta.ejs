@@ -1,0 +1,196 @@
+<head>
+    <link rel="stylesheet" href="/public/styles/cartas.scss">
+</head>
+
+<!-- activos -->
+
+<body>
+    <div class="content">
+        <h1>Contenido Principal</h1>
+        <p>Desplázate hacia abajo para ver la posición fija de la tarjeta de subasta.</p>
+        <div style="height: 200vh;"></div>
+    </div>
+    <div class="auction-card">
+        <div class="timer">
+            <div class="timer-label">INICIA EN:</div>
+            <h1 id="tiempo" class="timer-value">00h 00m 00s</h1>
+        </div>
+        <div class="carta_general">
+            <div class="stats">
+                <div class="vistas">
+                    <p><span>vistas</span>
+                        <span>52</span>
+                    </p>
+                </div>
+                <div class="megusta">
+                    <p><span>me gusta</span>
+                        <span>5</span>
+                    </p>
+                </div>
+            </div>
+            <div class="price-info">
+                <div class="final-price">
+                    <div class="status">¡Subasta Inicia En:!</div>
+
+                    <p class="amount">
+                        <span>Oferta Final:</span>
+                        <span>US$ 50,400.00</span>
+                    </p>
+                </div>
+                <p class="base-price">
+                    <span class="money-icon">💰</span>
+                    <span>Precio inicial: US$37,300.00</span>
+                </p>
+            </div>
+            <button class="auction-status-btn" id="auctionStatusBtn">SUBASTA INICIA </button>
+            <div class="features">
+                <div class="feature">Mínimo de participantes 2</div>
+                <div class="feature">Con Precio Reserva</div>
+                <div class="feature">Opción a Visitas previa cita</div>
+                <div class="feature">Sin Comisión</div>
+                <div class="oportunidades">
+                    <a href="#" class="participation-note">
+                        <span class="warning">⚠</span>
+                        <span>Participa en 10 subastas por $500.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function iniciarContadorRegresivo(duracion) {
+            let tiempoRestante = duracion;
+
+            const intervalo = setInterval(() => {
+                const horas = String(Math.floor(tiempoRestante / 3600)).padStart(2, '0');
+                const minutos = String(Math.floor((tiempoRestante % 3600) / 60)).padStart(2, '0');
+                const segundos = String(tiempoRestante % 60).padStart(2, '0');
+
+                document.getElementById('tiempo').textContent = `${horas}:${minutos}:${segundos}`;
+
+                if (tiempoRestante <= 0) {
+                    clearInterval(intervalo);
+                } else {
+                    tiempoRestante--;
+                }
+            }, 1000);
+        }
+
+        iniciarContadorRegresivo(60);
+
+    </script>
+</body>
+
+<!-- en curso -->
+
+<body>
+    <div class="content">
+      <h1>Contenido Principal</h1>
+      <p>Desplázate hacia abajo para ver la posición fija de la tarjeta de subasta.</p>
+      <div style="height: 200vh;"></div>
+    </div>
+    <div class="auction-card">
+      <div class="timer">
+        <div class="timer-label">EN CURSO:</div>
+        <div class="timer-value">00h 00m 00s</div>
+      </div>
+      <div class="carta_general">
+        <div class="stats">
+          <div class="vistas">
+            <p><span>vistas</span>
+              <span>52</span>
+            </p>
+          </div>
+          <div class="megusta">
+            <p><span>me gusta</span>
+              <span>5</span>
+            </p>
+          </div>
+        </div>
+        <div class="price-info">
+          <div class="final-price">
+            <div class="status">¡Subasta En Curso!</div>
+  
+            <p class="amount">
+              <span>Oferta Final:</span>
+              <span>US$ 50,400.00</span>
+            </p>
+          </div>
+          <p class="base-price">
+            <span class="money-icon">💰</span>
+            <span>Precio base: US$37,300.00</span>
+          </p>
+        </div>
+        <a class="auction-status-btn" id="auctionStatusBtn">SUBASTA EN CURSO</a>
+        <div class="features">
+          <div class="feature">Mínimo de participantes 2</div>
+          <div class="feature">Con Precio Reserva</div>
+          <div class="feature">Opción a Visitas previa cita</div>
+          <div class="feature">Sin Comisión</div>
+          <div class="oportunidades">
+            <a href="#" class="participation-note">
+              <span class="warning">⚠</span>
+              <span>Participa en 10 subastas por $500.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- finalizados -->
+
+  <body>
+    <div class="content">
+      <h1>Contenido Principal</h1>
+      <p>Desplázate hacia abajo para ver la posición fija de la tarjeta de subasta.</p>
+      <div style="height: 200vh;"></div>
+    </div>
+    <div class="auction-card">
+      <div class="timer">
+        <div class="timer-label">CIERRA EN:</div>
+        <div class="timer-value">00h 00m 00s</div>
+      </div>
+      <div class="carta_general">
+        <div class="stats">
+          <div class="vistas">
+            <p><span>vistas</span>
+              <span>52</span>
+            </p>
+          </div>
+          <div class="megusta">
+            <p><span>me gusta</span>
+              <span>5</span>
+            </p>
+          </div>
+        </div>
+        <div class="price-info">
+          <div class="final-price">
+            <div class="status">¡Subasta Finalizada!</div>
+  
+            <p class="amount">
+              <span>Oferta Final:</span>
+              <span>US$ 50,400.00</span>
+            </p>
+          </div>
+          <p class="base-price">
+            <span class="money-icon">💰</span>
+            <span>Precio base: US$37,300.00</span>
+          </p>
+        </div>
+        <button class="auction-status-btn" id="auctionStatusBtn">SUBASTA FINALIZADA</button>
+        <div class="features">
+          <div class="feature">Mínimo de participantes 2</div>
+          <div class="feature">Con Precio Reserva</div>
+          <div class="feature">Opción a Visitas previa cita</div>
+          <div class="feature">Sin Comisión</div>
+          <div class="oportunidades">
+            <a href="#" class="participation-note">
+              <span class="warning">⚠</span>
+              <span>Participa en 10 subastas por $500.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>

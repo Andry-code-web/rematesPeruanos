@@ -13,6 +13,8 @@
     <!-- CDN DE ICONOS REMIX -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="/public/css/chatsubasta/chatsubasta.css">
+
     <title>Remates Peru || SUBASTAS</title>
 
     <script src="http://localhost:5050/socket.io/socket.io.js"></script>
@@ -122,20 +124,7 @@
             </section>
         </main>
         <aside class="chat_online">
-            <%- include('componentes/subasta_chat', {
-                estaEnCurso,
-                estaTerminada,
-                estaActiva,
-                subasta,
-                totalVisitas,
-                ofertaActual,
-                fechaHoraFinSubasta,
-                fechaHoraAperturaSubasta,
-                initialPrice,
-                formatNumber,
-                fechaFormateadaEsp,
-                horaFormateada
-            }) %>
+            <%- include('componentes/chatsubastas')%>
         </aside>
 
         <%- include('componentes/footer') %>
