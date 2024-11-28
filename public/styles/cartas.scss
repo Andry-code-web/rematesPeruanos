@@ -1,0 +1,183 @@
+/* carta inicio */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f3f4f6;
+    line-height: 1.5;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.carta_general {
+    padding: 1rem;
+}
+
+.auction-card {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 370px;
+    height: 715px;
+    background: #fffcfc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.timer {
+    background-color: #d00000;
+    color: #fffcfc;
+    padding: 1rem; 
+
+}
+
+.timer-label {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.timer-value {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.stats {
+    border-top: 1px solid #0a0000;
+    display: flex;
+    justify-content: center;
+    padding: 0.1rem 1rem;
+    border-bottom: 1px solid #0a0000;
+    color: #4b5563;
+    font-size: 0.875rem;
+    gap: 2rem;
+
+}
+
+.price-info {
+    padding: 0.1rem;
+}
+
+.final-price {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.final-price {
+    border-bottom: 1px solid #0a0000;
+    padding: 15px;
+}
+
+.status {
+    color: #d00000;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.amount {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.base-price {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #00665e;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.auction-status-btn {
+    display: block;
+    width: 100%;
+    background-color: #1f2937;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: not-allowed;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.auction-status-btn:hover {
+    background-color: #0a0000;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0rem;
+    margin-top: 1rem;
+}
+
+.feature {
+    background-color: #0a0000;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+}
+
+.features .oportunidades {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.participation-note {
+    display: block;
+    padding: 0.4rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #d00000;
+    text-decoration: none;
+}
+
+.participation-note:hover {
+    background-color: #f3f4f6;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: #4b5563;
+}
+
+.oportunidades {
+    border-radius: 1rem;
+    border: 1px solid black;
+    margin-top: 1rem;
+}
+
+.contador {
+    background-color: #fff;
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #fffdfd;
+    text-align: center;
+}
+
+#tiempo {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
